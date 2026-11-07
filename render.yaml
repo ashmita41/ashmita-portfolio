@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: ashmita-portfolio
+    name: ashmita-dev
     runtime: static
     buildCommand: ""
     staticPublishPath: ./
