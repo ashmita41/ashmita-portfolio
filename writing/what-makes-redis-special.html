@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Makes Redis Special? Understanding Why a Single-Threaded Database Can Handle Massive Scale · Ashmita Pandey</title>
+<meta name="description" content="A closer look at how Redis handles work at scale.">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/writing/what-makes-redis-special.html">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell header-inner">
+<a class="brand" href="../index.html">Ashmita Pandey</a>
+<nav aria-label="Main"><a href="../index.html#work">Work</a><a href="../index.html#speaking">Speaking</a><a href="../writing.html" aria-current="page">Writing</a><a href="../index.html#leadership">Leadership</a></nav>
+</div></header>
+<main id="main" tabindex="-1">
+<article class="article-shell">
+<header class="read-header">
+<a class="back-link" href="../writing.html">← All writing</a>
+<p class="kicker">Technical article</p>
+<h1>What Makes Redis Special? Understanding Why a Single-Threaded Database Can Handle Massive Scale</h1>
+<p class="article-meta">Originally published <time datetime="2026-06-12">Jun 12, 2026</time></p>
+<ul class="article-tags" aria-label="Topics"><li>Redis</li><li>Databases</li><li>System Design</li></ul>
+</header>
+<div class="article-content">
+<aside class="edition-note">An on-site adaptation of Ashmita’s earlier article, not a verbatim republication.</aside>
+
+<p>Redis gets much of its speed from keeping working data in memory and exposing commands that operate on that data directly. For many operations, serialized command execution also gives callers a simple rule for reasoning about concurrency.</p>
+<h2>Move a read–modify–write into one command</h2>
+<p>Imagine two workers updating a shared counter. If both read 7 and both write 8, one increment is lost. With INCR, Redis performs each increment as a single command, so the two increments take the total to 9. The guarantee does not carry over to an arbitrary sequence of commands; another client can run a command between a separate GET and SET. Choose an atomic command when you can, and use an appropriate transaction or short script when several steps must run together.</p>
+<h2>A fast path can still be blocked</h2>
+<p>Redis also does work beyond its main command execution path, including background persistence and, depending on the version and settings, threaded network I/O. A slow command can still hold up other clients. Keep work per request bounded, pay attention to memory use and eviction, and choose persistence settings around the data you can afford to lose. A disposable cache and a critical job queue do not have the same durability requirements.</p>
+</div>
+</article>
+</main>
+<footer class="shell site-footer"><p>© Ashmita Pandey</p><a href="../index.html#contact">Contact</a></footer>
+</body>
+</html>

@@ -1,16 +1,18 @@
 # Ashmita Pandey: Personal Website
 
-Static portfolio and writing archive (HTML/CSS and a little vanilla JavaScript). Hosting requires no build step.
+A static portfolio with a writing archive and individual article pages. Render serves these files as-is; no production build step is needed.
 
-- Open `index.html` in a browser, or run `python3 -m http.server` and open http://localhost:8000.
-- `index.html` is the portfolio; `writing.html` is the topic-filterable archive.
-- Images are in `assets/` with WebP and JPG fallbacks.
-- Render uses `render.yaml` to publish the static site (path `./`).
+- Start with `index.html`. Use `writing.html` to filter the article index by topic.
+- Individual reports and articles live under `writing/`. All reading works without JavaScript; topic filters are optional.
+- To test locally, open `index.html` directly or run `python3 -m http.server`.
+- When you update `writing/articles.json`, run `python3 writing/build.py` to regenerate the archive and article pages. Use `python3 writing/build.py --check` to check freshness.
 
-## Update the writing archive
+## Practical article schema
 
-1. Add an entry to `writing/articles.json` with a unique lower-case slug (`id`), title, source, original HTTPS URL, type (`Article` or `Interview`), and one or more topic tags. The date (`YYYY-MM-DD`) and summary are optional.
-2. Leave `body` out for link-only items. If you have permission to republish the text, `body` is an array containing one string per paragraph.
-3. Run `python3 writing/build.py` to update the static page. Run `python3 writing/build.py --check` to check for stale output.
+Required fields: unique lowercase-hyphenated `id`, `title`, `source`, original HTTPS `url` for provenance, `type` ("Article" or "Interview"), and `tags`. Date and summary are optional.
 
-All entries remain visible without JavaScript. Topic filters use `writing/filter.js` and need no network calls.
+- `edition: "adapted"`: distinct, condensed site edition; not a word-for-word copy.
+- `edition: "original"`: original or permission-cleared full text for republication.
+- `edition: "notes"`: interview synopsis, not a transcript.
+- `body` can contain plain paragraph strings or objects with `p`, `h2`, `code` (plus optional `language`), or `list`.
+- The generated pages don't send visitors to the original platform. The source link is kept in the manifest for editorial reference.

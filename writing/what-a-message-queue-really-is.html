@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What a Message Queue Really Is · Ashmita Pandey</title>
+<meta name="description" content="A plain-language look at message queues and where they fit in a distributed system.">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/writing/what-a-message-queue-really-is.html">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell header-inner">
+<a class="brand" href="../index.html">Ashmita Pandey</a>
+<nav aria-label="Main"><a href="../index.html#work">Work</a><a href="../index.html#speaking">Speaking</a><a href="../writing.html" aria-current="page">Writing</a><a href="../index.html#leadership">Leadership</a></nav>
+</div></header>
+<main id="main" tabindex="-1">
+<article class="article-shell">
+<header class="read-header">
+<a class="back-link" href="../writing.html">← All writing</a>
+<p class="kicker">Technical article</p>
+<h1>What a Message Queue Really Is</h1>
+<p class="article-meta">Originally published <time datetime="2026-02-07">Feb 7, 2026</time></p>
+<ul class="article-tags" aria-label="Topics"><li>System Design</li><li>Distributed Systems</li><li>Messaging</li></ul>
+</header>
+<div class="article-content">
+<aside class="edition-note">An on-site adaptation of Ashmita’s earlier article, not a verbatim republication.</aside>
+
+<p>A queue looks simple when both sides are healthy: a producer puts a message in, a consumer takes it out. The useful design decisions show up when one side crashes, stalls, or responds late.</p>
+<h2>Receiving is not the same as completing</h2>
+<p>In a basic in-memory queue, taking an item removes it. If a worker crashes just before it finishes, the job is lost. A more reliable design tracks an item as in flight and removes it only after acknowledgment. If the worker does not acknowledge it by a deadline, the queue can make it available for another attempt. This introduces the opposite risk: a worker might finish the action but fail before sending the acknowledgment.</p>
+<h2>Plan for repeats, overload, and stuck jobs</h2>
+<p>When a delivery can repeat, make the consumer&#x27;s action safe to repeat too. A durable job identifier can help a worker recognize an event it already processed. Limit retries and send repeated failures somewhere they can be inspected, rather than letting one bad message loop forever. And if producers outrun consumers, use prefetch limits, bounded concurrency, or admission control. A queue can absorb a burst; it cannot resolve a permanent gap between arrival rate and processing capacity.</p>
+</div>
+</article>
+</main>
+<footer class="shell site-footer"><p>© Ashmita Pandey</p><a href="../index.html#contact">Contact</a></footer>
+</body>
+</html>

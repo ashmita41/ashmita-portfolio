@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding Apache Kafka and Its Role in Modern System Design · Ashmita Pandey</title>
+<meta name="description" content="An introduction to Apache Kafka and its place in modern system design.">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/writing/understanding-apache-kafka.html">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell header-inner">
+<a class="brand" href="../index.html">Ashmita Pandey</a>
+<nav aria-label="Main"><a href="../index.html#work">Work</a><a href="../index.html#speaking">Speaking</a><a href="../writing.html" aria-current="page">Writing</a><a href="../index.html#leadership">Leadership</a></nav>
+</div></header>
+<main id="main" tabindex="-1">
+<article class="article-shell">
+<header class="read-header">
+<a class="back-link" href="../writing.html">← All writing</a>
+<p class="kicker">Technical article</p>
+<h1>Understanding Apache Kafka and Its Role in Modern System Design</h1>
+<p class="article-meta">Originally published <time datetime="2026-01-23">Jan 23, 2026</time></p>
+<ul class="article-tags" aria-label="Topics"><li>System Design</li><li>Distributed Systems</li><li>Kafka</li></ul>
+</header>
+<div class="article-content">
+<aside class="edition-note">An on-site adaptation of Ashmita’s earlier article, not a verbatim republication.</aside>
+
+<p>Kafka stores events as logs that consumers can read at their own pace. The key difference from a work queue is that reading an event does not automatically remove it, allowing other applications to read it independently.</p>
+<h2>Find the unit of order</h2>
+<p>A topic is split into partitions. Each partition has its own order, and offsets identify positions within that partition. Events about the same customer or order can share a key so that they are routed together under a consistent partitioning scheme. Do not assume order across the whole topic. Adding partitions improves potential parallelism, but a hot key can still concentrate load on a single partition.</p>
+<h2>Give each use case its own progress</h2>
+<p>An order event might drive notifications and analytics. Separate consumer groups can track their progress independently, so a delay in analytics need not stop notifications. Consumers in the same group share partitions to divide work, and a group can reread retained events when it needs to rebuild derived state. For external side effects, decide whether the consumer can safely repeat an operation before choosing when to commit its offset. An offset records progress; it does not prove that a separate database write or notification succeeded.</p>
+</div>
+</article>
+</main>
+<footer class="shell site-footer"><p>© Ashmita Pandey</p><a href="../index.html#contact">Contact</a></footer>
+</body>
+</html>

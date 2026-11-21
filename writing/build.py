@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the no-build portfolio's Writing page from the article manifest."""
+"""Generate the linkable on-site Writing archive and article pages."""
 from datetime import date
 from html import escape
 from pathlib import Path
@@ -10,120 +10,204 @@ import re
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-TARGET = ROOT / "writing.html"
+MANIFEST = HERE / "articles.json"
 SITE = "https://ashmita-dev.onrender.com"
-ID = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
+SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
+COVERS = {
+    "sarwat-bano-interview": ("assets/interview_bano.webp", "Cover for the conversation with Ms. Sarwat Bano"),
+    "chandan-talreja-interview": ("assets/interview_talreja.webp", "Cover for the conversation with Mr. Chandan Talreja"),
+}
 
-def slug(s):
-    return re.sub(r"[^a-z0-9]+", "-", s.casefold()).strip("-")
+def tag_id(label):
+    return re.sub(r"[^a-z0-9]+", "-", label.casefold()).strip("-")
+
+def clean(text):
+    assert isinstance(text, str) and text.strip()
+    return escape(text.strip())
+
+def render_body(blocks):
+    assert isinstance(blocks, list)
+    output = []
+    for block in blocks:
+        if isinstance(block, str):
+            output.append(f"<p>{clean(block)}</p>")
+        elif set(block) == {"h2"}:
+            output.append(f'<h2>{clean(block["h2"])}</h2>')
+        elif set(block) == {"p"}:
+            output.append(f'<p>{clean(block["p"])}</p>')
+        elif "code" in block and set(block).issubset({"code", "language"}):
+            code = escape(block["code"].rstrip())
+            assert code.strip()
+            lang = clean(block.get("language", "text"))
+            output.append(f'<pre tabindex="0" aria-label="Code example: {lang}"><code>{code}</code></pre>')
+        elif set(block) == {"list"}:
+            assert isinstance(block["list"], list) and block["list"]
+            items = "".join(f"<li>{clean(item)}</li>" for item in block["list"])
+            output.append(f"<ul>{items}</ul>")
+        else:
+            raise ValueError(f"Unknown article block: {block!r}")
+    return "\n".join(output)
 
 def load():
-    articles = json.loads((HERE / "articles.json").read_text())
-    ids, links, tags = set(), set(), {}
-    for entry in articles:
-        key = entry["id"]
-        assert ID.fullmatch(key) and key not in ids, key
-        ids.add(key)
-        source = entry["url"]
-        u = urlparse(source)
-        assert u.scheme == "https" and u.netloc and not u.username and not u.password and source not in links, source
-        links.add(source)
-        assert all(entry[f].strip() for f in ("title", "type", "source"))
-        date.fromisoformat(entry["date"]) if entry.get("date") else None
-        assert entry["tags"] and isinstance(entry["tags"], list), key
-        assert not entry.get("body") or isinstance(entry["body"], list) and all(isinstance(p, str) and p.strip() for p in entry["body"]), key
+    source = json.loads(MANIFEST.read_text())
+    by_id, links, tags = set(), set(), {}
+    for entry in source:
+        eid = entry["id"]
+        assert SLUG.fullmatch(eid) and eid not in by_id, eid
+        by_id.add(eid)
+        url = urlparse(entry["url"])
+        assert url.scheme == "https" and url.netloc and not url.username and not url.password
+        assert entry["url"] not in links, entry["url"]
+        links.add(entry["url"])
+        assert all(entry[label].strip() for label in ("title", "type", "source"))
+        if entry.get("date"):
+            date.fromisoformat(entry["date"])
+        assert entry["tags"] and len(set(entry["tags"])) == len(entry["tags"])
         for tag in entry["tags"]:
-            name = slug(tag)
-            assert name and (name not in tags or tags[name] == tag), tag
-            tags[name] = tag
-        assert len(set(entry["tags"])) == len(entry["tags"]), key
-    return sorted(articles, key=lambda e: e.get("date", ""), reverse=True), tags
+            slug = tag_id(tag)
+            assert slug and (slug not in tags or tags[slug] == tag)
+            tags[slug] = tag
+        if entry.get("body"):
+            assert entry.get("edition", "adapted") in {"adapted", "original", "notes"}, eid
+            render_body(entry["body"])
+    return source, tags
 
-def card(entry):
-    eid = entry["id"]
-    body = entry.get("body", [])
-    source = escape(entry["source"])
-    title = escape(entry["title"])
-    link = escape(entry["url"])
-    tag_ids = " ".join(slug(t) for t in entry["tags"])
-    tag_html = "".join(f"<li>{escape(t)}</li>" for t in entry["tags"])
-    formatted_date = ""
-    if entry.get("date"):
-        day = date.fromisoformat(entry["date"])
-        month = day.strftime("%B")
-        formatted_date = f' · <time datetime="{day}">{month} {day.day}, {day.year}</time>'
-    summary = f'<p>{escape(entry["summary"])}</p>' if entry.get("summary") else ""
-    content = (
-        '<details class="article-body"><summary>Read on this site</summary>'
-        + "".join(f"<p>{escape(p)}</p>" for p in body)
-        + "</details>"
-    ) if body else ""
-    location = "Republished here" if body else "External link"
-    return f'''<article id="{eid}" class="card article-card" data-tags="{tag_ids}" aria-labelledby="{eid}-title">
-<p class="isrc">{escape(entry["type"])} · {source}{formatted_date}</p>
-<h4 id="{eid}-title">{title}</h4>
-{summary}
-<ul class="article-tags" aria-label="Tags">{tag_html}</ul>
-{content}
-<p class="article-links"><a href="{link}" aria-label="Read original: {title}">Read original</a><span>{location}</span></p>
-</article>'''
+def format_date(entry, fallback=""):
+    if not entry.get("date"):
+        return fallback
+    day = date.fromisoformat(entry["date"])
+    return f'<time datetime="{day}">{day.strftime("%b")} {day.day}, {day.year}</time>'
 
-def render():
-    entries, tags = load()
-    by_name = sorted(tags, key=lambda key: tags[key].casefold())
-    filters = ['<button type="button" data-filter="all" aria-pressed="true">All topics</button>']
-    filters += [f'<button type="button" data-filter="{key}" aria-pressed="false">{escape(tags[key])}</button>' for key in by_name]
-    def group(group_id, title, cards):
-        if not cards:
-            return ""
-        articles = "\n".join(card(e) for e in cards)
-        return f'<section class="archive-group" aria-labelledby="{group_id}"><h3 id="{group_id}">{title}</h3><div class="archive-grid">{articles}</div></section>'
-    articles = group("technical-articles", "Technical articles", [e for e in entries if e["type"] != "Interview"])
-    articles += group("studybase-interviews", "Studybase interviews", [e for e in entries if e["type"] == "Interview"])
-    return f'''<!DOCTYPE html>
+def show_tags(entry):
+    links = "".join(f"<li>{clean(tag)}</li>" for tag in entry["tags"])
+    return f'<ul class="article-tags" aria-label="Topics">{links}</ul>'
+
+def document(*, title, description, slug, prefix, body, script=""):
+    return f'''<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Writing | Ashmita Pandey</title>
-<meta name="description" content="An archive of articles and interviews by Ashmita Pandey. Browse by topic and find the original sources.">
-<link rel="canonical" href="{SITE}/writing.html">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<script src="writing/filter.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{clean(title)} · Ashmita Pandey</title>
+<meta name="description" content="{clean(description)}">
+<link rel="canonical" href="{SITE}/{slug}">
+<link rel="icon" href="{prefix}favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="{prefix}styles.css">
+{script}
 </head>
 <body>
-<a class="skip" href="#main">Skip to writing</a>
-<header class="nav"><div class="wrap nav-in writing-nav">
-<a href="index.html" class="brand">Ashmita Pandey</a>
-<nav aria-label="Main"><a href="index.html#speaking">Speaking</a><a href="writing.html" aria-current="page">Writing</a><a href="index.html#contact">Contact</a></nav>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell header-inner">
+<a class="brand" href="{prefix}index.html">Ashmita Pandey</a>
+<nav aria-label="Main"><a href="{prefix}index.html#work">Work</a><a href="{prefix}index.html#speaking">Speaking</a><a href="{prefix}writing.html" aria-current="page">Writing</a><a href="{prefix}index.html#leadership">Leadership</a></nav>
 </div></header>
 <main id="main" tabindex="-1">
-<section class="hero writing-hero"><div class="wrap">
-<p class="eyebrow">Ashmita’s archive</p>
-<h1>Writing</h1>
-<p class="sub hero-intro">Articles and interviews I’ve written. Pick a topic below, or open the original from any entry.</p>
-</div></section>
-<section class="writing-list" aria-labelledby="archive-title"><div class="wrap">
-<h2 id="archive-title">Browse articles</h2>
-<div class="article-filters" role="group" aria-label="Filter by topic" hidden>{"".join(filters)}</div>
-<p id="archive-status" class="archive-status" aria-live="polite" hidden></p>
-<div id="article-list">{articles}</div>
-</div></section>
+{body}
 </main>
-<footer><div class="wrap"><a href="index.html">Back to portfolio</a></div></footer>
+<footer class="shell site-footer"><p>© Ashmita Pandey</p><a href="{prefix}index.html#contact">Contact</a></footer>
 </body>
 </html>
 '''
 
+def index_entry(entry):
+    eid = entry["id"]
+    tag_ids = " ".join(tag_id(t) for t in entry["tags"])
+    return f'''<article class="article-card archive-entry" data-tags="{tag_ids}" aria-labelledby="{eid}-title">
+<p class="entry-date">{format_date(entry, clean(entry["type"]))}</p>
+<div><h3 id="{eid}-title"><a href="writing/{eid}.html">{clean(entry["title"])}</a></h3>
+{show_tags(entry)}</div>
+</article>'''
+
+def render_index(entries, tags):
+    buttons = ['<button type="button" data-filter="all" aria-pressed="true">All topics</button>']
+    for tid in sorted(tags, key=lambda key: tags[key].casefold()):
+        buttons.append(f'<button type="button" data-filter="{tid}" aria-pressed="false">{clean(tags[tid])}</button>')
+    def group(eid, title, selected):
+        if not selected:
+            return ""
+        cards = "\n".join(index_entry(entry) for entry in selected)
+        return f'<section id="{eid}" class="archive-group" aria-labelledby="{eid}-heading"><h2 id="{eid}-heading">{title}</h2>{cards}</section>'
+    body = f'''<div class="shell">
+<header class="read-header">
+<p class="kicker">Ashmita Pandey</p>
+<h1>Writing</h1>
+<p class="intro">Plain-language explainers on backend systems, AI, and software design, plus conversations with educators.</p>
+</header>
+<div class="article-filters" role="group" aria-label="Filter by topic" hidden>{"".join(buttons)}</div>
+<p id="archive-status" class="archive-status" aria-live="polite" hidden></p>
+{group("technical-articles", "Technical articles", [e for e in entries if e["type"] != "Interview"])}
+{group("studybase-interviews", "Studybase interviews", [e for e in entries if e["type"] == "Interview"])}
+</div>'''
+    return document(title="Writing", description="On-site articles and interviews from Ashmita Pandey.", slug="writing.html", prefix="", body=body, script='<script src="writing/filter.js" defer></script>')
+
+def read_article(entry):
+    blocks = entry.get("body", [])
+    eid = entry["id"]
+    edition = entry.get("edition", "adapted") if blocks else "overview"
+    source_note = {
+        "adapted": "An on-site adaptation of Ashmita’s earlier article, not a verbatim republication.",
+        "original": "",
+        "notes": "Notes from a Studybase interview, not a transcript.",
+        "overview": "A short overview; the full article is not reproduced here."
+    }[edition]
+    note = f'<aside class="edition-note">{source_note}</aside>' if source_note else ""
+    formatted_date = format_date(entry)
+    meta = f'<p class="article-meta">Originally published {formatted_date}</p>' if formatted_date else ""
+    image = ""
+    if eid in COVERS:
+        file, alt = COVERS[eid]
+        assert (ROOT / file).is_file()
+        image = f'<figure><img src="../{file}" alt="{escape(alt)}" loading="lazy" decoding="async"></figure>'
+    body = f'''<article class="article-shell">
+<header class="read-header">
+<a class="back-link" href="../writing.html">← All writing</a>
+<p class="kicker">{"Studybase interview" if entry["type"] == "Interview" else "Technical article"}</p>
+<h1>{clean(entry["title"])}</h1>
+{meta}
+{show_tags(entry)}
+</header>
+<div class="article-content">
+{note}
+{image}
+{render_body(blocks) if blocks else f'<p>{clean(entry.get("summary") or entry["title"])}</p>'}
+</div>
+</article>'''
+    return document(title=entry["title"], description=entry.get("summary") or entry["title"], slug=f"writing/{eid}.html", prefix="../", body=body)
+
+def import_bodies(path):
+    entries, _ = load()
+    bodies = json.loads(path.read_text())
+    assert isinstance(bodies, dict)
+    assert set(bodies) <= {e["id"] for e in entries}, set(bodies) - {e["id"] for e in entries}
+    for entry in entries:
+        if entry["id"] in bodies:
+            blocks = bodies[entry["id"]]
+            if isinstance(blocks, dict):
+                edition, blocks = blocks["edition"], blocks["body"]
+            else:
+                edition = "notes" if entry["type"] == "Interview" else "adapted"
+            assert edition in {"original", "notes", "adapted"}
+            assert blocks and render_body(blocks)
+            entry["edition"] = edition
+            entry["body"] = blocks
+    MANIFEST.write_text(json.dumps(entries, indent=2, ensure_ascii=False) + "\n")
+
 if __name__ == "__main__":
     cli = argparse.ArgumentParser(description=__doc__)
-    cli.add_argument("--check", action="store_true", help="fail if writing.html is stale")
+    cli.add_argument("--check", action="store_true", help="fail if generated files are stale")
+    cli.add_argument("--import-bodies", type=Path, help="merge article bodies before generating")
     args = cli.parse_args()
-    content = render()
-    if args.check:
-        if not TARGET.is_file() or TARGET.read_text() != content:
-            cli.exit(1, "writing.html is stale; run python3 writing/build.py\n")
-    else:
-        TARGET.write_text(content)
+    if args.import_bodies:
+        if args.check:
+            cli.error("--check cannot be used with --import-bodies")
+        import_bodies(args.import_bodies)
+    entries, tags = load()
+    entries.sort(key=lambda entry: entry.get("date", ""), reverse=True)
+    generated = {ROOT / "writing.html": render_index(entries, tags)}
+    generated.update({HERE / f'{entry["id"]}.html': read_article(entry) for entry in entries})
+    for path, content in generated.items():
+        if args.check:
+            if not path.is_file() or path.read_text() != content:
+                cli.exit(1, f"{path.name} is stale; run python3 writing/build.py\n")
+        else:
+            path.write_text(content)

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Load Balancing Algorithms with Real-World Examples · Ashmita Pandey</title>
+<meta name="description" content="Load-balancing algorithms explained through real-world examples.">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/writing/load-balancing-algorithms.html">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell header-inner">
+<a class="brand" href="../index.html">Ashmita Pandey</a>
+<nav aria-label="Main"><a href="../index.html#work">Work</a><a href="../index.html#speaking">Speaking</a><a href="../writing.html" aria-current="page">Writing</a><a href="../index.html#leadership">Leadership</a></nav>
+</div></header>
+<main id="main" tabindex="-1">
+<article class="article-shell">
+<header class="read-header">
+<a class="back-link" href="../writing.html">← All writing</a>
+<p class="kicker">Technical article</p>
+<h1>Load Balancing Algorithms with Real-World Examples</h1>
+<p class="article-meta">Originally published <time datetime="2025-07-22">Jul 22, 2025</time></p>
+<ul class="article-tags" aria-label="Topics"><li>System Design</li><li>Infrastructure</li></ul>
+</header>
+<div class="article-content">
+<aside class="edition-note">An on-site adaptation of Ashmita’s earlier article, not a verbatim republication.</aside>
+
+<p>Three healthy servers can sit behind the same load balancer and still see very different workloads. An even request count tells you little when one request finishes in milliseconds and another holds a connection for a minute.</p>
+<h2>Start with what you know about the fleet</h2>
+<p>Round robin cycles through the available backends. It is a good baseline when servers have similar capacity and requests cost about the same. Weighted round robin sends more traffic to larger backends, but the weights are configuration, not a view of current load. Least connections routes toward backends with fewer active connections; that signal is more useful when connections roughly represent the work still in progress.</p>
+<h2>Watch for the cases your signal misses</h2>
+<p>Latency-aware routing can steer traffic away from a slower backend if measurements are fresh enough. A client-IP hash can offer affinity for sessions, but many clients behind the same proxy can land on one server. Whatever strategy you choose, test with uneven requests and a failed backend. The routing rule only helps if health checks can first remove the server that should receive nothing.</p>
+</div>
+</article>
+</main>
+<footer class="shell site-footer"><p>© Ashmita Pandey</p><a href="../index.html#contact">Contact</a></footer>
+</body>
+</html>

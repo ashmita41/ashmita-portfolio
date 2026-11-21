@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stop Vibe Coding. Start Writing Specifications. · Ashmita Pandey</title>
+<meta name="description" content="Why a clear specification matters when you write code with AI.">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/writing/writing-specifications.html">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell header-inner">
+<a class="brand" href="../index.html">Ashmita Pandey</a>
+<nav aria-label="Main"><a href="../index.html#work">Work</a><a href="../index.html#speaking">Speaking</a><a href="../writing.html" aria-current="page">Writing</a><a href="../index.html#leadership">Leadership</a></nav>
+</div></header>
+<main id="main" tabindex="-1">
+<article class="article-shell">
+<header class="read-header">
+<a class="back-link" href="../writing.html">← All writing</a>
+<p class="kicker">Technical article</p>
+<h1>Stop Vibe Coding. Start Writing Specifications.</h1>
+<p class="article-meta">Originally published <time datetime="2026-07-13">Jul 13, 2026</time></p>
+<ul class="article-tags" aria-label="Topics"><li>AI</li><li>Engineering Practices</li></ul>
+</header>
+<div class="article-content">
+<aside class="edition-note">An on-site adaptation of Ashmita’s earlier article, not a verbatim republication.</aside>
+
+<p>A quick prompt can be enough to find out whether an idea is worth building. Once the code has to fit an existing system, the challenge changes: the assistant needs to know which decisions are already made, which behavior must remain, and what success looks like.</p>
+<h2>Write down the decisions before generating code</h2>
+<p>Start with the user outcome, then define inputs, outputs, permissions, failure paths, and explicit non-goals. For a pagination task, for example, record the sort order, the tie-breaker, and what happens when the first page is empty. These details give the assistant something concrete to implement and the reviewer something concrete to check. Use examples and expected results wherever a sentence could reasonably be read two ways.</p>
+<h2>Keep the spec with the implementation</h2>
+<p>Review the proposed approach before asking for the patch. Then use the agreed examples as acceptance tests. When you change a requirement, update the document and tests along with the code so the next person or tool can tell which behavior is intentional. The point is not a long document. It is a short, durable record of the decisions you would otherwise have to explain again.</p>
+</div>
+</article>
+</main>
+<footer class="shell site-footer"><p>© Ashmita Pandey</p><a href="../index.html#contact">Contact</a></footer>
+</body>
+</html>
