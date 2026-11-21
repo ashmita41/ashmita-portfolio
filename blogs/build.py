@@ -205,23 +205,89 @@ def render_original(item):
     content = re.sub(r"[ \t]+(?=\n)", lambda m: "".join(f"&#{ord(c)};" for c in m[0]), content)
     return shell(item["title"],item.get("summary") or item["title"],f'blogs/{item["id"]}.html',content,prefix="../",css_version="archive-originals")
 
+def archive_image(item, *, eager=False):
+    original = item.get("original") or {}
+    cover = original.get("cover")
+    if not cover and kind(item) == "post":
+        cover = next(
+            (block["figure"] for block in original.get("blocks", [])
+             if isinstance(block, dict) and "figure" in block), None
+        )
+    if not cover:
+        return ""
+    # Thumbnails are decorative in the same link as the title. Originals
+    # retain their authored/descriptive alt text on each detail page.
+    image = render_image(cover).replace('src="../', 'src="', 1)
+    image = re.sub(r' alt="[^"]*"', ' alt=""', image, count=1)
+    if eager:
+        image = image.replace('loading="lazy"', 'fetchpriority="high"', 1)
+    return f'<span class="archive-image">{image}</span>'
+
+
+def archive_excerpt(item):
+    text = item.get("summary") or ""
+    if not text and kind(item) == "post":
+        from itertools import islice
+        for block in islice((item.get("original") or {}).get("blocks", []), 3):
+            if isinstance(block, str):
+                paragraphs = re.split(r"\n\s*\n", block.strip())
+                text = next(
+                    (p for p in paragraphs if p.strip() and p.strip() != item["title"].strip()),
+                    ""
+                )
+            if text:
+                break
+    snippet = " ".join(text.split())
+    if len(snippet) > 150:
+        snippet = snippet[:148].rsplit(" ", 1)[0].rstrip(".,:;") + "…"
+    return f'<p class="archive-excerpt">{t(snippet)}</p>' if snippet else ""
+
+
+def archive_card(item):
+    eid = item["id"]
+    k = kind(item)
+    label = "Article" if k == "article" else "Post"
+    tags = "".join(f'<li>{t(tag)}</li>' for tag in item["tags"][:2])
+    topics = escape(json.dumps(item["tags"], ensure_ascii=False))
+    image = archive_image(item)
+    excerpt = archive_excerpt(item)
+    heading_id = f"{eid}-heading"
+    content = f'''{image}<div class="archive-card-copy">
+      <p class="archive-card-meta"><span class="archive-card-kind">{label}</span>{date_label(item)}</p>
+      <h3 id="{heading_id}">{t(item["title"])}</h3>{excerpt}
+      <div class="archive-card-footer"><ul aria-label="Topics">{tags}</ul>
+      <span class="archive-arrow" aria-hidden="true">→</span></div>
+    </div>'''
+    if item.get("original"):
+        card = f'<a class="archive-card" href="blogs/{eid}.html" aria-labelledby="{heading_id}">{content}</a>'
+    else:
+        card = f'<div class="archive-card archive-card-unavailable">{content}</div>'
+    return f'<li class="archive-item" id="{eid}" data-kind="{k}" data-topics="{topics}">{card}</li>'
+
+
+def archive_feature(item):
+    if not item:
+        return ""
+    heading = "featured-blog-heading"
+    return f'''<a class="archive-feature" href="blogs/{item["id"]}.html" aria-labelledby="{heading}">
+  <div class="archive-feature-copy">
+    <p class="archive-feature-label">Featured article</p>
+    <h2 id="{heading}">{t(item["title"])}</h2>
+    <p class="archive-feature-action" aria-hidden="true">Read article <span>→</span></p>
+  </div>
+  {archive_image(item, eager=True)}
+</a>'''
+
+
 def to_index(entries):
     articles = [entry for entry in entries if kind(entry) == "article"]
     posts = [entry for entry in entries if kind(entry) == "post" and entry.get("original")]
     entries = [entry for entry in entries if kind(entry) == "article" or entry.get("original")]
-    tags=sorted({tag for e in entries for tag in e["tags"]},key=str.casefold)
-    options='<option value="">All topics</option>'+''.join(f'<option value="{t(tag)}">{t(tag)}</option>' for tag in tags)
-    results=[]
-    for item in entries:
-        eid=item["id"]
-        title=t(item["title"])
-        if item.get("original"):
-            title=f'<a href="blogs/{eid}.html">{title}</a>'
-        tags_html=" · ".join(t(tag) for tag in item["tags"])
-        tags_data=escape(json.dumps(item["tags"],ensure_ascii=False))
-        k = kind(item)
-        meta = f'<span class="archive-kind">{"Article" if k == "article" else "Post"}</span> · ' if posts else ""
-        results.append(f'<li class="archive-item" id="{eid}" data-kind="{k}" data-topics="{tags_data}">{date_label(item)}<div><h2>{title}</h2><p class="topic">{meta}{tags_html}</p></div></li>')
+    tags = sorted({tag for e in entries for tag in e["tags"]}, key=str.casefold)
+    options = '<option value="">All topics</option>' + ''.join(
+        f'<option value="{t(tag)}">{t(tag)}</option>' for tag in tags
+    )
+    cards = "\n".join(archive_card(item) for item in entries)
     original_count = sum(bool(entry.get("original")) for entry in articles)
     if not articles and not posts:
         note = "No articles are listed yet."
@@ -232,13 +298,65 @@ def to_index(entries):
     else:
         note = ""
     notice = f'<p class="archive-note">{t(note)}</p>' if note else ""
-    type_filter = '<label for="kind-filter">Type</label><select id="kind-filter"><option value="">All</option><option value="article">Articles</option><option value="post">Posts</option></select>' if posts else ""
-    header = "Articles and posts" if posts else "Articles"
-    body=f'''<header class="archive-head"><p class="eyebrow"><span class="status-dot"></span> Blog archive</p><h1>Blogs<span class="accent-dot">.</span></h1><p>{header} on distributed systems, databases, and AI.</p></header>
+    with_covers = [article for article in articles if (article.get("original") or {}).get("cover")]
+    featured = next(
+        (article for article in with_covers if article["id"] == "what-a-message-queue-really-is"),
+        next(iter(with_covers), None)
+    )
+    types = (
+        '<div id="kind-filter" class="archive-types" role="group" aria-label="Content type">'
+        '<button type="button" data-kind="article" aria-pressed="true">Articles</button>'
+        '<button type="button" data-kind="post" aria-pressed="false">Posts</button></div>'
+        if posts else ""
+    )
+    intro = "Long-form articles and shorter posts" if posts else "Articles"
+    body = f'''<div class="blog-archive">
+<header class="archive-hero">
+  <div class="archive-intro">
+    <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Engineering blog</p>
+    <h1>Blogs<span class="accent-dot">.</span></h1>
+    <p class="archive-description">{intro} on backend engineering, system design, and AI.</p>
+  </div>
+  {archive_feature(featured)}
+</header>
 {notice}
-<div class="controls" hidden>{type_filter}<label for="filter">Filter by topic</label><select id="filter">{options}</select><span id="result-count" aria-live="polite"></span></div>
-<ul class="archive-list">{"".join(results)}</ul>'''
-    return shell("Blogs",f"Technical {header.lower()} by Ashmita Pandey: browse distributed systems, databases, system design, and practical AI.","blogs.html",body,script='<script src="blogs/filter.js?v=2" defer></script>')
+<section class="archive-library" aria-labelledby="archive-heading">
+  <h2 id="archive-heading">Browse the archive</h2>
+  <form class="archive-controls" role="search" aria-label="Filter blogs" hidden>
+    {types}
+    <div class="archive-fields">
+      <label class="archive-search">
+        <span class="archive-sr-only">Search by title or topic</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10.5" cy="10.5" r="5.8"/><path d="m15 15 4 4"/></svg>
+        <input id="archive-search" type="search" placeholder="Search titles or topics" autocomplete="off">
+      </label>
+      <label class="archive-topic"><span class="archive-sr-only">Filter by topic</span>
+        <select id="filter">{options}</select>
+      </label>
+    </div>
+  </form>
+  <div class="archive-results-bar" hidden>
+    <p id="result-count" aria-live="polite"></p>
+    <button class="archive-clear" type="button" hidden>Clear filters</button>
+  </div>
+  <ul class="archive-grid" id="archive-grid">
+{cards}
+  </ul>
+  <div class="archive-empty" hidden>
+    <h3>No matches</h3><p>Try a different search or clear the topic filter.</p>
+  </div>
+  <div class="archive-more" hidden>
+    <button type="button" aria-controls="archive-grid">Show more</button>
+  </div>
+</section>
+</div>'''
+    return shell(
+        "Blogs",
+        "Technical writing by Ashmita Pandey on backend engineering, system design, and AI.",
+        "blogs.html", body,
+        script='<link rel="stylesheet" href="blogs/archive.css?v=editorial-1">\n<script src="blogs/filter.js?v=editorial-1" defer></script>'
+    )
+
 
 def home_previews(entries):
     output=[]

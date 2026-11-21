@@ -97,11 +97,30 @@ class BuildTests(TestCase):
         complete["kind"] = "post"
         html = build.to_index([complete, article(), pending])
         self.assertIn('id="kind-filter"', html)
-        self.assertIn('<option value="post">Posts</option>', html)
+        self.assertIn('data-kind="post" aria-pressed="false">Posts</button>', html)
         self.assertIn('data-kind="post"', html)
         self.assertIn('href="blogs/post-complete.html"', html)
         self.assertNotIn('post-pending', html)
         self.assertNotIn('post-complete', build.home_previews([complete, article()]))
+
+    def test_archive_cards_link_whole_item_and_use_local_thumbnails(self):
+        with temp_site() as (_, media):
+            item = article(blocks=["Full original."])
+            item["original"]["cover"] = {"path": media, "alt": "Cover alt"}
+            html = build.to_index([item])
+            self.assertIn('class="archive-card" href="blogs/example.html"', html)
+            self.assertIn('src="assets/blogs/Synthetic%20%231%20%26%20chart.png" alt=""', html)
+            self.assertIn('id="archive-search" type="search"', html)
+            self.assertNotIn('<li class="archive-item" hidden', html)
+            self.assertNotIn("../assets/", html)
+
+    def test_image_free_post_has_no_fabricated_thumbnail(self):
+        item = article("short-post", ["Synthetic fixture\n\nActual post excerpt."])
+        item["kind"] = "post"
+        item["summary"] = None
+        html = build.to_index([item])
+        self.assertIn("Actual post excerpt.", html)
+        self.assertNotIn("<img ", html)
 
     def test_multiple_media_and_original_text_order(self):
         with temp_site() as (_, media):
