@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>𝗛𝗼𝘄 𝗣𝗼𝘀𝘁𝗴𝗿𝗲𝗦𝗤𝗟 𝗪𝗼𝗿𝗸𝘀: 𝗜𝗻𝘁𝗲𝗿𝗻𝗮𝗹 𝗔𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲 · Ashmita Pandey</title>
+<meta name="description" content="𝗛𝗼𝘄 𝗣𝗼𝘀𝘁𝗴𝗿𝗲𝗦𝗤𝗟 𝗪𝗼𝗿𝗸𝘀: 𝗜𝗻𝘁𝗲𝗿𝗻𝗮𝗹 𝗔𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7338441447211225088.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>𝗛𝗼𝘄 𝗣𝗼𝘀𝘁𝗴𝗿𝗲𝗦𝗤𝗟 𝗪𝗼𝗿𝗸𝘀: 𝗜𝗻𝘁𝗲𝗿𝗻𝗮𝗹 𝗔𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲</h1>
+<p>Ashmita Pandey · <time datetime="2025-06-11">Jun 11, 2025</time> · PostgreSQL · Databases</p>
+<div class="original-body"><p>𝗛𝗼𝘄 𝗣𝗼𝘀𝘁𝗴𝗿𝗲𝗦𝗤𝗟 𝗪𝗼𝗿𝗸𝘀: 𝗜𝗻𝘁𝗲𝗿𝗻𝗮𝗹 𝗔𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲
+
+If you are using PostgreSQL in your application, understanding what happens behind the scenes will help in making smarter, faster, and more reliable decisions.
+
+Hi everyone, I am Ashmita 👋
+Today, I am sharing a breakdown of how PostgreSQL works internally. This post covers the core components of its architecture and why developers around the world trust it for everything from simple applications to large-scale enterprise systems.
+
+𝗛𝗲𝗿𝗲 𝗮𝗿𝗲 𝘁𝗵𝗲 𝗸𝗲𝘆 𝘁𝗮𝗸𝗲𝗮𝘄𝗮𝘆𝘀:
+
+𝟭. 𝗣𝗿𝗼𝗰𝗲𝘀𝘀-𝗕𝗮𝘀𝗲𝗱 𝗔𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲
+PostgreSQL uses a process-per-connection model. Each client connection is handled by its own operating system process, increasing isolation and system stability. Unlike thread-based systems, this design reduces shared memory risks. Tools like PgBouncer help scale connections efficiently.
+
+𝟮. 𝗪𝗿𝗶𝘁𝗲 𝗔𝗵𝗲𝗮𝗱 𝗟𝗼𝗴𝗴𝗶𝗻𝗴 (𝗪𝗔𝗟)
+Before any changes are written to the main database, PostgreSQL records them in a log file. This guarantees durability and crash recovery. WAL also enables replication and point-in-time recovery.
+
+𝟯. 𝗠𝘂𝗹𝘁𝗶-𝗩𝗲𝗿𝘀𝗶𝗼𝗻 𝗖𝗼𝗻𝗰𝘂𝗿𝗿𝗲𝗻𝗰𝘆 𝗖𝗼𝗻𝘁𝗿𝗼𝗹 (𝗠𝗩𝗖𝗖)
+PostgreSQL avoids locking by maintaining multiple versions of a row. Readers and writers can work simultaneously without blocking each other. Every transaction works on a consistent snapshot, ensuring high concurrency and performance.
+
+𝟰. 𝗤𝘂𝗲𝗿𝘆 𝗘𝘅𝗲𝗰𝘂𝘁𝗶𝗼𝗻 𝗣𝗶𝗽𝗲𝗹𝗶𝗻𝗲
+Every query goes through a five-stage pipeline: parsing, rewriting, planning, execution, and result delivery. PostgreSQL evaluates multiple execution plans and chooses the most efficient one using internal statistics.
+
+𝟱. 𝗔𝗱𝘃𝗮𝗻𝗰𝗲𝗱 𝗜𝗻𝗱𝗲𝘅𝗶𝗻𝗴 𝗢𝗽𝘁𝗶𝗼𝗻𝘀
+PostgreSQL supports multiple index types beyond standard B-trees, including GiST, SP-GiST, GIN, and BRIN. Each is tailored for specific use cases like geospatial queries, prefix matching, or time-series data.
+
+𝟲. 𝗗𝗲𝗰𝗹𝗮𝗿𝗮𝘁𝗶𝘃𝗲 𝗧𝗮𝗯𝗹𝗲 𝗣𝗮𝗿𝘁𝗶𝘁𝗶𝗼𝗻𝗶𝗻𝗴
+Large tables can be split into smaller partitions using range, list, or hash strategies. PostgreSQL automatically routes data to the appropriate partition, improving query performance through partition pruning.
+
+Understanding PostgreSQL’s internals will help in designing better schemas, writing optimized queries, and building systems that scale reliably.
+
+If you&#x27;re using PostgreSQL or planning to adopt it, I highly recommend exploring these concepts further. Feel free to reach out if you&#x27;d like to discuss more about its use cases or implementation strategies.
+
+#PostgreSQL #DatabaseArchitecture #LearningInPublic</p><figure><img src="../assets/blogs/post-7338441447211225088-01.jpg" alt="PostgreSQL product logo." loading="lazy" decoding="async"></figure></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

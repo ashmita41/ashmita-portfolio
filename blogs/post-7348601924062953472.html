@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Business logics and brainstorming the edge cases, · Ashmita Pandey</title>
+<meta name="description" content="Business logics and brainstorming the edge cases,">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7348601924062953472.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>Business logics and brainstorming the edge cases,</h1>
+<p>Ashmita Pandey · <time datetime="2025-07-09">Jul 9, 2025</time> · System Design · Engineering Practices</p>
+<div class="original-body"><p>Business logics and brainstorming the edge cases,
+asking what really matters,
+iterating again and again not just to make it work, but to make it right,
+fascinates me more than just writing code.
+It&#x27;s about digging deeper, understanding the why behind every decision.
+
+Some patterns I’ve learned while building and solving real problems:
+
+𝗜𝗳 𝗳𝗮𝘀𝘁 𝗹𝗼𝗼𝗸𝘂𝗽𝘀 𝗮𝗿𝗲 𝗻𝗲𝗲𝗱𝗲𝗱 𝗶𝗻 𝗹𝗮𝗿𝗴𝗲 𝗱𝗮𝘁𝗮𝘀𝗲𝘁𝘀
+→ 𝗨𝘀𝗲 𝗵𝗮𝘀𝗵 𝗺𝗮𝗽𝘀 𝗼𝗿 𝗵𝗮𝘀𝗵 𝘁𝗮𝗯𝗹𝗲𝘀 𝗳𝗼𝗿 𝗢(𝟭) 𝗮𝗰𝗰𝗲𝘀𝘀.
+This helps avoid scanning entire lists by giving you constant time access using keys. It&#x27;s one of the most effective ways to improve performance when dealing with large volumes of data.
+
+𝗙𝗼𝗿 𝗲𝗳𝗳𝗶𝗰𝗶𝗲𝗻𝘁 𝘀𝘁𝗿𝗶𝗻𝗴 𝗺𝗮𝘁𝗰𝗵𝗶𝗻𝗴 𝗶𝗻 𝗹𝗮𝗿𝗴𝗲 𝘁𝗲𝘅𝘁-𝗯𝗮𝘀𝗲𝗱 𝗱𝗮𝘁𝗮
+→ 𝗦𝘂𝗳𝗳𝗶𝘅 𝗮𝗿𝗿𝗮𝘆𝘀 𝘄𝗼𝗿𝗸 𝘄𝗲𝗹𝗹.
+They allow for fast pattern matching in long texts without consuming the heavy memory that comes with suffix trees. Useful in search features or plagiarism detection.
+
+𝗪𝗵𝗲𝗻 𝗱𝗲𝗮𝗹𝗶𝗻𝗴 𝘄𝗶𝘁𝗵 𝗿𝗲𝗽𝗲𝗮𝘁𝗲𝗱 𝗮𝗰𝗰𝗲𝘀𝘀 𝘁𝗼 𝘁𝗵𝗲 𝘀𝗮𝗺𝗲 𝗱𝗮𝘁𝗮
+→ 𝗖𝗮𝗰𝗵𝗶𝗻𝗴 𝗵𝗲𝗹𝗽𝘀.
+By storing frequently accessed data in memory, it reduces repeated computations or database calls, making your system significantly faster and more responsive.
+
+𝗜𝗳 𝘁𝗵𝗲 𝘀𝘆𝘀𝘁𝗲𝗺 𝗶𝗻𝘃𝗼𝗹𝘃𝗲𝘀 𝗷𝗼𝗯 𝗾𝘂𝗲𝘂𝗲𝘀 𝗼𝗿 𝗮𝗹𝗴𝗼𝗿𝗶𝘁𝗵𝗺𝘀 𝗹𝗶𝗸𝗲 𝗗𝗶𝗷𝗸𝘀𝘁𝗿𝗮’𝘀
+→ 𝗛𝗲𝗮𝗽𝘀 𝗮𝗿𝗲 𝗶𝗱𝗲𝗮𝗹.
+They help maintain priority efficiently, allowing quick access to the minimum or maximum element. Useful in scheduling, simulations, or any task that depends on priority order.
+
+𝗧𝗼 𝗶𝗺𝗽𝗿𝗼𝘃𝗲 𝘀𝗹𝗼𝘄 𝘀𝗲𝗮𝗿𝗰𝗵𝗲𝘀
+→ 𝗦𝗼𝗿𝘁 𝘆𝗼𝘂𝗿 𝗱𝗮𝘁𝗮 𝗮𝗻𝗱 𝗯𝘂𝗶𝗹𝗱 𝗶𝗻𝗱𝗲𝘅𝗲𝘀.
+Instead of scanning every item, indexed and sorted data structures like binary search trees allow much faster lookups, reducing search time from linear to logarithmic.
+
+𝗙𝗼𝗿 𝗳𝗲𝗮𝘁𝘂𝗿𝗲𝘀 𝘁𝗵𝗮𝘁 𝗿𝗲𝗾𝘂𝗶𝗿𝗲 𝗽𝗿𝗲𝗳𝗶𝘅 𝗼𝗿 𝗿𝗮𝗻𝗴𝗲 𝗹𝗼𝗼𝗸𝘂𝗽𝘀
+→ 𝗧𝗿𝗶𝗲𝘀 𝗼𝗿 𝘀𝗲𝗴𝗺𝗲𝗻𝘁 𝘁𝗿𝗲𝗲𝘀 𝘄𝗼𝗿𝗸 𝘄𝗲𝗹𝗹.
+They allow fast retrieval and updates, especially when dealing with autocomplete, filtering, or range queries. These structures stay performant as the data grows.
+
+None of these decisions came from following tutorials.
+They came from building, breaking things, fixing them, and going through that cycle over and over.
+
+And with every iteration, the decisions became more instinctive.
+That’s the part of building I love most.</p></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

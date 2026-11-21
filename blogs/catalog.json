@@ -24686,5 +24686,723 @@
         "𝗛𝗼𝘄 𝗔𝗿𝗲 𝗖𝗼𝗺𝗽𝘂𝘁𝗲𝗿𝘀 𝗮𝗻𝗱 𝗣𝗿𝗼𝗴𝗿𝗮𝗺𝗺𝗶𝗻𝗴 𝗔𝗰𝘁𝘂𝗮𝗹𝗹𝘆 𝗥𝗲𝗹𝗮𝘁𝗲𝗱?\n\nThink of a computer as a machine, like a car engine. On its own, it just sits there. To make it do something, you need to give it instructions.\n\nThat’s where programming comes in.\n\nProgramming is like writing a recipe that the computer follows step by step. Whether it’s:\n • Showing a website\n • Running a mobile app\n • Calculating your expenses\n\nEvery task happens because someone wrote code to tell the computer how to do it.\n\nA simple real-world example:\nWhen you click ‘Pay Now’ on a shopping site, the computer doesn’t automatically know what to do. A programmer wrote the logic behind what happens next i.e. verifying payment, sending confirmation, updating inventory, and more.\n\nAt the core:\nComputer = Machine\nProgramming = Instructions for the Machine\n\nIt’s as simple and as powerful as that.\n\nIf you're starting out, remember:\nComputers aren’t “smart” until you tell them what to do."
       ]
     }
+  },
+  {
+    "id": "post-7350360578424553472",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-07-14",
+    "tags": [
+      "Writing"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\nIf your app serves users across different regions, your database architecture can either empower your product or hold it back.\n\nIn this article, I’ve broken down Distributed Database Architectures, how they work, why they matter, and what trade-offs come with different models like multi-master, sharded, and distributed transaction systems.\n\n",
+            {
+              "text": "Read the full breakdown here:",
+              "href": "https://ashmita-dev.onrender.com/blogs/distributed-database-architectures-active-active-architecture-application.html"
+            },
+            ""
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7349679286271803392",
+    "kind": "post",
+    "title": "You open LinkedIn or Instagram for a quick break, just 2 minutes.",
+    "date": "2025-07-12",
+    "tags": [
+      "Engineering Practices",
+      "Career"
+    ],
+    "original": {
+      "blocks": [
+        "You open LinkedIn or Instagram for a quick break, just 2 minutes.\nSuddenly it's 30 minutes later and you're still scrolling.\nSounds familiar, right?\n\nThat's 𝗶𝗻𝗳𝗶𝗻𝗶𝘁𝗲 𝘀𝗰𝗿𝗼𝗹𝗹 𝗾𝘂𝗶𝗲𝘁𝗹𝘆 𝗱𝗼𝗶𝗻𝗴 𝗶𝘁𝘀 𝗷𝗼𝗯. It’s one of the most addictive and smartly implemented features in modern apps.\n\nWhat feels like a simple endless feed is actually a well-orchestrated system handling a lot under the hood:\n• Loading new content smoothly without interrupting the user experience\n• Using lazy loading to fetch just enough data at the right time\n• Managing pagination, memory, and caching to keep things efficient\n• Avoiding duplicate API calls to reduce unnecessary load on the server\n• Handling network errors or slow connections without breaking the flow\n• Keeping the UI state consistent while users scroll continuously\n• Minimizing unnecessary re-renders to improve performance\n• Using request throttling and debouncing to avoid overwhelming the system\n• Ensuring fast responses even when millions of users are scrolling at once\n\nWhether it's social media platforms or e-commerce apps, infinite scroll plays a major role in keeping users engaged. But implementing it well requires solid coordination between frontend logic and backend performance.\n\nThe most seamless user experiences often come from systems that work silently in the background. And you truly understand their complexity only when you try building them yourself."
+      ]
+    }
+  },
+  {
+    "id": "post-7349074541672869888",
+    "kind": "post",
+    "title": "You open an app. The button says \"Buy Now\"",
+    "date": "2025-07-10",
+    "tags": [
+      "Backend Engineering",
+      "System Design"
+    ],
+    "original": {
+      "blocks": [
+        "You open an app. The button says \"Buy Now\"\nYour friend opens the same app. The button says \"Get Started\"\n\nWhy does this happen?\n\nThis is a common example of A/B testing. It is a method used by product teams to test different versions of a feature, design, or message on different user groups. The goal is to see which version performs better before rolling it out to everyone.\n\nWhat A/B Testing helps with:\n • Improving sign-ups, clicks, purchases through small but impactful tweaks\n • Testing new features without risking the entire system\n • Understanding how users actually behave, not how we assume they do\n • Gradually rolling out changes with more confidence and less risk\n • But it's not as simple as just changing a button and seeing what happens.\n\nReal-world A/B testing involves:\n • Building proper control and variation groups\n • Using feature flags to manage rollouts safely\n • Tracking user metrics through analytics tools\n • Avoiding bias in how user groups are selected\n • Validating the results statistically before making decisions\n\nSo next time you and your friend see different versions of the same app, you are likely part of a product experiment in progress."
+      ]
+    }
+  },
+  {
+    "id": "post-7348961073267388417",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-07-10",
+    "tags": [
+      "Writing"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\nWe often experience fast-loading websites, smooth video playback, and responsive applications without thinking twice. But the reason behind this seamless experience is something called a Content Delivery Network (CDN). \n\nWhether you're streaming a movie, shopping online, or reading the news, chances are your request is being handled by a CDN behind the scenes.\nCDNs are crucial because they help deliver web content quickly and efficiently, regardless of where a user is located. Without them, users far away from the server hosting the content would face delays, buffering, and failed requests. In a digital world where speed and reliability shape user experience, CDNs have become foundational to how the internet works.\n\nIn this article, I’ve explored what a CDN is, how it works with real-world analogies, the core benefits it offers, common use cases across industries, the challenges involved in using one, and some of the most popular CDN providers today.\n\n",
+            {
+              "text": "Give it a read and let me know your thoughts!",
+              "href": "https://ashmita-dev.onrender.com/blogs/what-is-a-content-delivery-network-cdn.html"
+            },
+            ""
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7348601924062953472",
+    "kind": "post",
+    "title": "Business logics and brainstorming the edge cases,",
+    "date": "2025-07-09",
+    "tags": [
+      "System Design",
+      "Engineering Practices"
+    ],
+    "original": {
+      "blocks": [
+        "Business logics and brainstorming the edge cases,\nasking what really matters,\niterating again and again not just to make it work, but to make it right,\nfascinates me more than just writing code.\nIt's about digging deeper, understanding the why behind every decision.\n\nSome patterns I’ve learned while building and solving real problems:\n\n𝗜𝗳 𝗳𝗮𝘀𝘁 𝗹𝗼𝗼𝗸𝘂𝗽𝘀 𝗮𝗿𝗲 𝗻𝗲𝗲𝗱𝗲𝗱 𝗶𝗻 𝗹𝗮𝗿𝗴𝗲 𝗱𝗮𝘁𝗮𝘀𝗲𝘁𝘀\n→ 𝗨𝘀𝗲 𝗵𝗮𝘀𝗵 𝗺𝗮𝗽𝘀 𝗼𝗿 𝗵𝗮𝘀𝗵 𝘁𝗮𝗯𝗹𝗲𝘀 𝗳𝗼𝗿 𝗢(𝟭) 𝗮𝗰𝗰𝗲𝘀𝘀.\nThis helps avoid scanning entire lists by giving you constant time access using keys. It's one of the most effective ways to improve performance when dealing with large volumes of data.\n\n𝗙𝗼𝗿 𝗲𝗳𝗳𝗶𝗰𝗶𝗲𝗻𝘁 𝘀𝘁𝗿𝗶𝗻𝗴 𝗺𝗮𝘁𝗰𝗵𝗶𝗻𝗴 𝗶𝗻 𝗹𝗮𝗿𝗴𝗲 𝘁𝗲𝘅𝘁-𝗯𝗮𝘀𝗲𝗱 𝗱𝗮𝘁𝗮\n→ 𝗦𝘂𝗳𝗳𝗶𝘅 𝗮𝗿𝗿𝗮𝘆𝘀 𝘄𝗼𝗿𝗸 𝘄𝗲𝗹𝗹.\nThey allow for fast pattern matching in long texts without consuming the heavy memory that comes with suffix trees. Useful in search features or plagiarism detection.\n\n𝗪𝗵𝗲𝗻 𝗱𝗲𝗮𝗹𝗶𝗻𝗴 𝘄𝗶𝘁𝗵 𝗿𝗲𝗽𝗲𝗮𝘁𝗲𝗱 𝗮𝗰𝗰𝗲𝘀𝘀 𝘁𝗼 𝘁𝗵𝗲 𝘀𝗮𝗺𝗲 𝗱𝗮𝘁𝗮\n→ 𝗖𝗮𝗰𝗵𝗶𝗻𝗴 𝗵𝗲𝗹𝗽𝘀.\nBy storing frequently accessed data in memory, it reduces repeated computations or database calls, making your system significantly faster and more responsive.\n\n𝗜𝗳 𝘁𝗵𝗲 𝘀𝘆𝘀𝘁𝗲𝗺 𝗶𝗻𝘃𝗼𝗹𝘃𝗲𝘀 𝗷𝗼𝗯 𝗾𝘂𝗲𝘂𝗲𝘀 𝗼𝗿 𝗮𝗹𝗴𝗼𝗿𝗶𝘁𝗵𝗺𝘀 𝗹𝗶𝗸𝗲 𝗗𝗶𝗷𝗸𝘀𝘁𝗿𝗮’𝘀\n→ 𝗛𝗲𝗮𝗽𝘀 𝗮𝗿𝗲 𝗶𝗱𝗲𝗮𝗹.\nThey help maintain priority efficiently, allowing quick access to the minimum or maximum element. Useful in scheduling, simulations, or any task that depends on priority order.\n\n𝗧𝗼 𝗶𝗺𝗽𝗿𝗼𝘃𝗲 𝘀𝗹𝗼𝘄 𝘀𝗲𝗮𝗿𝗰𝗵𝗲𝘀\n→ 𝗦𝗼𝗿𝘁 𝘆𝗼𝘂𝗿 𝗱𝗮𝘁𝗮 𝗮𝗻𝗱 𝗯𝘂𝗶𝗹𝗱 𝗶𝗻𝗱𝗲𝘅𝗲𝘀.\nInstead of scanning every item, indexed and sorted data structures like binary search trees allow much faster lookups, reducing search time from linear to logarithmic.\n\n𝗙𝗼𝗿 𝗳𝗲𝗮𝘁𝘂𝗿𝗲𝘀 𝘁𝗵𝗮𝘁 𝗿𝗲𝗾𝘂𝗶𝗿𝗲 𝗽𝗿𝗲𝗳𝗶𝘅 𝗼𝗿 𝗿𝗮𝗻𝗴𝗲 𝗹𝗼𝗼𝗸𝘂𝗽𝘀\n→ 𝗧𝗿𝗶𝗲𝘀 𝗼𝗿 𝘀𝗲𝗴𝗺𝗲𝗻𝘁 𝘁𝗿𝗲𝗲𝘀 𝘄𝗼𝗿𝗸 𝘄𝗲𝗹𝗹.\nThey allow fast retrieval and updates, especially when dealing with autocomplete, filtering, or range queries. These structures stay performant as the data grows.\n\nNone of these decisions came from following tutorials.\nThey came from building, breaking things, fixing them, and going through that cycle over and over.\n\nAnd with every iteration, the decisions became more instinctive.\nThat’s the part of building I love most."
+      ]
+    }
+  },
+  {
+    "id": "post-7347943626800312323",
+    "kind": "post",
+    "title": "𝗪𝗵𝗮𝘁’𝘀 𝘁𝗵𝗲 𝗵𝘆𝗽𝗲 𝗮𝗯𝗼𝘂𝘁 𝗖𝗹𝗲𝗮𝗻 𝗖𝗼𝗱𝗲 𝘄𝗵𝗲𝗻 𝗲𝘃𝗲𝗿𝘆𝘁𝗵𝗶𝗻𝗴 𝘄𝗼𝗿𝗸𝘀 𝗲𝘃𝗲𝗻 𝘄𝗶𝘁𝗵𝗼𝘂𝘁 𝗶𝘁?",
+    "date": "2025-07-07",
+    "tags": [
+      "Engineering Practices",
+      "Clean Code"
+    ],
+    "original": {
+      "blocks": [
+        "𝗪𝗵𝗮𝘁’𝘀 𝘁𝗵𝗲 𝗵𝘆𝗽𝗲 𝗮𝗯𝗼𝘂𝘁 𝗖𝗹𝗲𝗮𝗻 𝗖𝗼𝗱𝗲 𝘄𝗵𝗲𝗻 𝗲𝘃𝗲𝗿𝘆𝘁𝗵𝗶𝗻𝗴 𝘄𝗼𝗿𝗸𝘀 𝗲𝘃𝗲𝗻 𝘄𝗶𝘁𝗵𝗼𝘂𝘁 𝗶𝘁?\n\nThat’s a fair question. If the code runs and gives correct output, why bother making it “clean”?\n\nBut here’s the catch:\nCode is read far more than it’s written. Your future self or your teammate will have to understand it, debug it, or build on top of it.\n\nThat’s where Clean Code comes in. It helps you write code that is:\n- Easy to understand\n- Easy to change\n- Easy to maintain\n- Less prone to bugs\n\nHere are some habits I try to follow while writing clean code:\n• 𝗨𝘀𝗲 𝗺𝗲𝗮𝗻𝗶𝗻𝗴𝗳𝘂𝗹 𝗻𝗮𝗺𝗲𝘀 – Your variable or function name should describe its purpose. Avoid vague names like data or temp.\n\n• 𝗢𝗻𝗲 𝗳𝘂𝗻𝗰𝘁𝗶𝗼𝗻, 𝗼𝗻𝗲 𝗷𝗼𝗯 – Functions should do one thing only. If you’re adding too many things into one block, break it down.\n\n• 𝗔𝘃𝗼𝗶𝗱 𝗱𝗲𝗲𝗽 𝗻𝗲𝘀𝘁𝗶𝗻𝗴 – Too many levels of if, else, or loops make the logic harder to follow. Flatten where possible.\n\n• 𝗗𝗼𝗻’𝘁 𝗿𝗲𝗽𝗲𝗮𝘁 𝘆𝗼𝘂𝗿𝘀𝗲𝗹𝗳 – Repeated logic should be moved into reusable functions. Duplication leads to inconsistencies and bugs.\n\n• 𝗞𝗲𝗲𝗽 𝗶𝘁 𝘀𝗵𝗼𝗿𝘁 – Long functions often try to do too much. Small focused units are easier to test and reuse.\n\n• 𝗪𝗿𝗶𝘁𝗲 𝗳𝗼𝗿 𝗵𝘂𝗺𝗮𝗻𝘀 – Write code as if someone else will read it tomorrow. Because they probably will.\n\n• 𝗖𝗼𝗺𝗺𝗲𝗻𝘁 𝘄𝗵𝘆, 𝗻𝗼𝘁 𝘄𝗵𝗮𝘁 – Don’t comment obvious things. Use comments to explain intent or edge cases.\n\nClean code doesn’t mean perfection. It means clarity.\nIt’s not just about aesthetics. It’s about writing code that’s easier to maintain and scale.\n\nWhat’s your take on clean code? Do you follow any specific habits?"
+      ]
+    }
+  },
+  {
+    "id": "post-7347836793200766976",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-07-07",
+    "tags": [
+      "Writing"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\nWhether you're building REST APIs, designing frontend error states, or monitoring backend systems, understanding HTTP status codes is essential.\n\nIn this article, I’ve broken down every category from 1xx to 5xx, complete with practical examples, use cases, and tips for applying them effectively in real-world projects.\n\n",
+            {
+              "text": "Give it a read and bookmark it",
+              "href": "https://ashmita-dev.onrender.com/blogs/http-status-codes-the-language-between-clients-and-servers.html"
+            },
+            " for your next debugging session or API design."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7347165184823570432",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-07-05",
+    "tags": [
+      "Databases"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\nUnderstanding how database indexes work can drastically improve your query performance.\n\nIn this article, I’ve broken down how indexes function, real-world analogies, different types (clustered, composite, bitmap), and smart indexing strategies for high-performance systems.\n\n",
+            {
+              "text": "Give it a read and let me know your thoughts!",
+              "href": "https://ashmita-dev.onrender.com/blogs/database-indexes.html"
+            },
+            ""
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7345834489442369537",
+    "kind": "post",
+    "title": "Now I’ve started to understand the beauty of a curious mind.",
+    "date": "2025-07-01",
+    "tags": [
+      "Career",
+      "Engineering Practices"
+    ],
+    "original": {
+      "blocks": [
+        "Now I’ve started to understand the beauty of a curious mind.\n\nI feel like I’m in that phase where I want to explore everything.\nStartups fascinate me.\nI dream of building my own business empire.\nDevelopment is something I enjoy and feel confident in.\nAnd over the years, I’ve been part of so many events, growth initiatives, and communities that shaped how I think.\n\nPeople often say we should focus on one thing.\nBut maybe this is the phase to try more, learn faster, and let curiosity guide the way.\n\nNot everything needs to be figured out early.\nSometimes, the best clarity comes from experience and not just planning."
+      ]
+    }
+  },
+  {
+    "id": "post-7345472055141662721",
+    "kind": "post",
+    "title": "𝗦𝗤𝗟 𝘃𝘀 𝗡𝗼𝗦𝗤𝗟: 𝗪𝗵𝗶𝗰𝗵 𝗢𝗻𝗲 𝗦𝗵𝗼𝘂𝗹𝗱 𝗬𝗼𝘂 𝗖𝗵𝗼𝗼𝘀𝗲?",
+    "date": "2025-06-30",
+    "tags": [
+      "Databases"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "𝗦𝗤𝗟 𝘃𝘀 𝗡𝗼𝗦𝗤𝗟: 𝗪𝗵𝗶𝗰𝗵 𝗢𝗻𝗲 𝗦𝗵𝗼𝘂𝗹𝗱 𝗬𝗼𝘂 𝗖𝗵𝗼𝗼𝘀𝗲?\n\nChoosing the right database is a critical decision in backend architecture.\n\nIn this detailed guide, I’ve broken down 7 key differences between SQL and NoSQL databases with real-world examples, schema structures, query formats, and when to use which.\n\nUnderstand how they differ in terms of data models, schema flexibility, scalability, transaction handling, and more.\n\n",
+            {
+              "text": "Give it a read and let me know your thoughts!",
+              "href": "https://ashmita-dev.onrender.com/blogs/sql-vs-nosql-key-differences-you-must-know.html"
+            },
+            "\n\n#SystemDesign #BackendDevelopment #Databases #SQL #NoSQL"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7344676508340215808",
+    "kind": "post",
+    "title": "𝗨𝗻𝗱𝗲𝗿𝘀𝘁𝗮𝗻𝗱𝗶𝗻𝗴 𝗗𝗮𝘁𝗮𝗯𝗮𝘀𝗲𝘀: 𝗖𝗵𝗼𝗼𝘀𝗶𝗻𝗴 𝘁𝗵𝗲 𝗥𝗶𝗴𝗵𝘁 𝗢𝗻𝗲 𝗳𝗼𝗿 𝗬𝗼𝘂𝗿 𝗦𝘆𝘀𝘁𝗲𝗺",
+    "date": "2025-06-28",
+    "tags": [
+      "Databases"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "𝗨𝗻𝗱𝗲𝗿𝘀𝘁𝗮𝗻𝗱𝗶𝗻𝗴 𝗗𝗮𝘁𝗮𝗯𝗮𝘀𝗲𝘀: 𝗖𝗵𝗼𝗼𝘀𝗶𝗻𝗴 𝘁𝗵𝗲 𝗥𝗶𝗴𝗵𝘁 𝗢𝗻𝗲 𝗳𝗼𝗿 𝗬𝗼𝘂𝗿 𝗦𝘆𝘀𝘁𝗲𝗺\n\nPicking the right database is a critical decision in any system design. Each type, from relational to vector to ledger databases, solves a unique problem and fits specific use cases.\n\nIn this article, I have explained 15 types of databases with real-world examples and when to use them. Whether you're building scalable applications or improving your backend knowledge, ",
+            {
+              "text": "this guide",
+              "href": "https://ashmita-dev.onrender.com/blogs/types-of-databases-and-when-to-use-them.html"
+            },
+            " will help you make better architectural choices.\n\n#SystemDesign #Databases #SoftwareArchitecture"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7344394189377318913",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-06-27",
+    "tags": [
+      "Engineering Practices"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\n\nHere’s a quick breakdown of the 𝗕𝗶𝗻𝗮𝗿𝘆 𝗦𝗲𝗮𝗿𝗰𝗵 𝗔𝗹𝗴𝗼𝗿𝗶𝘁𝗵𝗺. It’s one of the most efficient ways to search for an element in a sorted array by repeatedly dividing the search interval in half.\n\nBinary Search reduces the time complexity from O(n) to 𝗢(𝗹𝗼𝗴 𝗻), making it much faster than linear search for large datasets.\n\nIt works only on sorted data and is widely used in real-world applications like search engines, databases, and system-level optimizations.\n\nI’ve added a clean Java implementation along with explanation and pseudocode.\n\nCheck it out here: ",
+            {
+              "text": "https://lnkd.in/dzr48NDb",
+              "href": "https://github.com/ashmita41/Java-Algorithms/tree/36b910fa0804177d756d29242efc7f5f080fb080/BinarySearch"
+            },
+            "\n\nFeel free to explore and share your thoughts!"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7343993838299983872",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-06-26",
+    "tags": [
+      "Backend Engineering",
+      "APIs"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\n\nAPI Gateways play a critical role in modern backend architecture. They act as a central point for handling authentication, rate limiting, caching, service discovery, request transformation, and more.\n\nIn this detailed article, I have broken down how API Gateways work with real-world examples like food delivery apps and step-by-step request handling. If you're building or scaling distributed systems, understanding API Gateways is a must. \n\n",
+            {
+              "text": "Read the full piece",
+              "href": "https://ashmita-dev.onrender.com/blogs/api-architecture-what-is-an-api-gateway-and-why-it-matters.html"
+            },
+            " to gain clarity and practical insight.\n\n#APIGateways #SystemDesign #APIArchitecture"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7343629064424886272",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-06-25",
+    "tags": [
+      "Backend Engineering",
+      "APIs"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\nAPI Architecture plays a critical role in how modern applications communicate, scale, and stay maintainable over time.\n\nThis article breaks down REST API design principles, common mistakes to avoid, and real-world practices for building clean and efficient APIs.\n\n",
+            {
+              "text": "Give it a read and let me know your thoughts!",
+              "href": "https://ashmita-dev.onrender.com/blogs/api-architecture-rest-api-design-best-practices.html"
+            },
+            "\n\n#APIArchitecture #SystemDesign #CleanCode"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7343240799448367104",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-06-24",
+    "tags": [
+      "Backend Engineering",
+      "APIs"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\nAPIs are the backbone of modern applications. From booking a ride to checking the weather, they make everything work smoothly by enabling systems to connect and exchange data.\n\nThis article explains what an API is, how it works, different types of APIs, and the various methods used for communication, all with real-world examples.\n\n",
+            {
+              "text": "Give it a read and let me know your thoughts.",
+              "href": "https://ashmita-dev.onrender.com/blogs/what-is-an-api-a-fundamental-bridge-in-modern-software.html"
+            },
+            "\n\n#APIExplained #SoftwareDevelopment #SystemDesign"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7342782151584550912",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-06-23",
+    "tags": [
+      "Operating Systems"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\nProcess and States of Process in an Operating System form the foundation of how computers manage multiple tasks efficiently.\n\nThis explains how passive programs turn into active tasks and how the operating system transitions them through various stages such as ready, running, and waiting to ensure smooth execution.\n\n",
+            {
+              "text": "Give this article a read",
+              "href": "https://ashmita-dev.onrender.com/blogs/process-and-states-of-process-in-an-operating-system.html"
+            },
+            " and feel free to share your thoughts!\n\n#OperatingSystems #ProcessManagement #TechConcepts"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7342441471322595328",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-06-22",
+    "tags": [
+      "Operating Systems"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\nDeadlocks are a critical concept in operating systems, often leading to system inefficiency or complete standstill when not handled properly.\n\nIn this article, I have explained Deadlocks in Operating Systems in detail, including how they occur, the conditions required for them to exist, and various methods for prevention, avoidance, detection, and recovery. Real-world analogies have also been included to make the topic easier to understand.\n\nI invite you to ",
+            {
+              "text": "read the article",
+              "href": "https://ashmita-dev.onrender.com/blogs/deadlocks-in-operating-systems.html"
+            },
+            " and share your insights.\n\n#OperatingSystems #DeadlockHandling"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7342031012157186048",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-06-21",
+    "tags": [
+      "Operating Systems"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\n\nCheck out this brief explanation of the 𝗦𝗹𝗶𝗱𝗶𝗻𝗴 𝗪𝗶𝗻𝗱𝗼𝘄 𝗔𝗹𝗴𝗼𝗿𝗶𝘁𝗵𝗺. It is a simple and efficient technique for solving problems involving subarrays or substrings. This approach helps reduce time complexity from O(n²) to O(n).\n\nSliding Window is commonly used in problems like maximum sum subarray, longest unique substring, and more by maintaining a dynamic window over the input.\n\nI’ve added a Java implementation for the fixed-size window (maximum sum subarray), along with a clear explanation and pseudocode.\n\nCheck it out here: ",
+            {
+              "text": "https://lnkd.in/dvFPUTei",
+              "href": "https://github.com/ashmita41/Java-Algorithms/tree/36b910fa0804177d756d29242efc7f5f080fb080/SlidingWindow"
+            },
+            "\n\nI regularly upload Java algorithms with structured explanations, pseudocode, and clean code.\n\nFeel free to explore and share your thoughts!"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7341750409687937026",
+    "kind": "post",
+    "title": "India has taken a major step forward in quantum communication.",
+    "date": "2025-06-20",
+    "tags": [
+      "Networking",
+      "Quantum Computing"
+    ],
+    "original": {
+      "blocks": [
+        "India has taken a major step forward in quantum communication.\n\nDRDO and IIT Delhi have successfully demonstrated secure quantum communication over free space without using any fiber optic cables.\n\nThey achieved over 1 km of secure data transfer using entangled photons through open air.\n\nQuantum Key Distribution was used to exchange secret keys securely.\nThe system even detects if anyone tries to eavesdrop.\nThe error rate remained below 7 percent.\n\nThis is especially useful for defense communication in border areas where laying cables is not feasible.\n\nIt’s more than just a security upgrade.\nIt’s a shift in how we think about cybersecurity, satellite communication, and intelligence sharing.\n\nA great and potentially impactful breakthrough."
+      ]
+    }
+  },
+  {
+    "id": "post-7341729757723553792",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-06-20",
+    "tags": [
+      "Operating Systems"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\nPaging plays a crucial role in how modern operating systems manage memory efficiently and prevent fragmentation.\n\nIt allows multiple applications to run smoothly by breaking memory into fixed-size blocks and mapping them smartly using page tables and virtual memory.\n\nIn this article, I’ve explained Paging in depth with real-world examples and why it’s a fundamental concept every developer should know.\n\n",
+            {
+              "text": "Give it a read and share your thoughts!",
+              "href": "https://ashmita-dev.onrender.com/blogs/paging-in-operating-systems.html"
+            },
+            "\n\n#OperatingSystems #SystemDesign #Paging #MemoryManagement"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7341384326313312258",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-06-19",
+    "tags": [
+      "Operating Systems"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\nCPU Scheduling plays a key role in making your system efficient and responsive. Whether it’s handling apps on your phone or running tasks on a server, the way the CPU chooses what to run next matters a lot.\nThis article explains all major CPU scheduling algorithms with simple examples.\n\n",
+            {
+              "text": "Give it a read and share your thoughts!",
+              "href": "https://ashmita-dev.onrender.com/blogs/cpu-scheduling-in-operating-systems.html"
+            },
+            ""
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7341151005914333185",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-06-18",
+    "tags": [
+      "Networking"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\nEver since I learned about protocols, I’ve started noticing them everywhere.\n\nFrom HTTPS securing my online shopping, to TCP ensuring smooth YouTube streaming, from SMTP and IMAP handling my emails, to SSH letting developers access remote servers safely. Even games use UDP for real-time communication, and VPNs rely on IPsec to protect our data.\n\n",
+            {
+              "text": "Give this article a read",
+              "href": "https://ashmita-dev.onrender.com/blogs/network-protocols.html"
+            },
+            " to explore how these protocols silently power our digital world. Let me know your thoughts!\n\n#SystemDesign #NetworkProtocols #NetworkingBasics"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7340573915280224256",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-06-17",
+    "tags": [
+      "Networking"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\nUnderstanding how devices are connected and how data flows in a network is very important. \n\n",
+            {
+              "text": "Check out this article",
+              "href": "https://ashmita-dev.onrender.com/blogs/network-topology-its-types.html"
+            },
+            " on Network Topology and its types, a key building block in System Design.\n\nGive it a read and let me know your thoughts!\n\n#SystemDesignBasics #NetworkTopology"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7340261120798068736",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-06-16",
+    "tags": [
+      "Distributed Systems",
+      "Networking"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\n",
+            {
+              "text": "Check out this article",
+              "href": "https://ashmita-dev.onrender.com/blogs/peer-to-peer-p2p-architecture-a-deep-dive-with-real-world-use-cases.html"
+            },
+            " on Peer-to-Peer (P2P) Architecture where I have shared what it is, how it works, its key features, advantages and disadvantages, and real-world use cases like file sharing, blockchain, and messaging apps.\n\nWould love to hear your thoughts and feedback after reading it!\n\n#PeerToPeer #NetworkArchitecture #DistributedSystems"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7340022765325803520",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-06-15",
+    "tags": [
+      "Distributed Systems",
+      "Networking"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\nThis article is on Client-Server Architecture, where I’ve explained the concept in a simple and relatable way with real-world examples.\n\nFrom how it works to the different types like 2-tier, 3-tier, and N-tier models, plus key advantages and challenges, everything is covered in detail.\n\nIf you’re diving into system design or backend fundamentals, ",
+            {
+              "text": "give it a read",
+              "href": "https://ashmita-dev.onrender.com/blogs/client-server-architecture-explained-with-depth-and-real-world-examples.html"
+            },
+            " and let me know your thoughts and feedback!\n\n#ClientServerArchitecture #LearningInPublic #SystemDesignBasics"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7339501853321170944",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-06-14",
+    "tags": [
+      "Databases"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone! \nI’ve explained ACID Transactions in a simple and practical way with real-life examples in this article. If you’ve ever been confused about how databases handle critical operations, this will help. ",
+            {
+              "text": "Check it out",
+              "href": "https://ashmita-dev.onrender.com/blogs/acid-transactions-in-databases-explained-with-examples.html"
+            },
+            " and let me know your thoughts!\n\n#DatabaseDesign #SystemDesign #ACIDTransactions"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7339164262394691584",
+    "kind": "post",
+    "title": "Hi everyone,",
+    "date": "2025-06-13",
+    "tags": [
+      "Distributed Systems",
+      "Databases"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone,\nI’ve explained the CAP Theorem in my own words in a simple and easy-to-understand format ",
+            {
+              "text": "through this article",
+              "href": "https://ashmita-dev.onrender.com/blogs/cap-theorem-explained.html"
+            },
+            ".\n\nThanks for reading!\nWould love to hear your thoughts and questions in the comments."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7338804651774902272",
+    "kind": "post",
+    "title": "𝗪𝗵𝗮𝘁 𝗮𝗿𝗲 𝗔𝗖𝗜𝗗 𝗧𝗿𝗮𝗻𝘀𝗮𝗰𝘁𝗶𝗼𝗻𝘀 𝗶𝗻 𝗗𝗮𝘁𝗮𝗯𝗮𝘀𝗲𝘀?",
+    "date": "2025-06-12",
+    "tags": [
+      "Databases"
+    ],
+    "original": {
+      "blocks": [
+        "𝗪𝗵𝗮𝘁 𝗮𝗿𝗲 𝗔𝗖𝗜𝗗 𝗧𝗿𝗮𝗻𝘀𝗮𝗰𝘁𝗶𝗼𝗻𝘀 𝗶𝗻 𝗗𝗮𝘁𝗮𝗯𝗮𝘀𝗲𝘀?\n\nEver wondered how your bank transfers or online orders never go half-done even if something crashes in the middle?\n\nHi everyone, I’m Ashmita 👋\nLet’s talk about the real hero working silently in the background: ACID transactions in databases.\n\nImagine you’re building an e-commerce app. A customer places an order. Your app needs to deduct stock, charge the card, and update accounts, all in one go.\n\nBut what if the payment fails after the stock is deducted? Or the app crashes halfway?\n\nThis is where ACID properties step in and ensure everything runs smoothly:\n • 𝗔𝘁𝗼𝗺𝗶𝗰𝗶𝘁𝘆: All steps succeed together or the system cancels everything.\n • 𝗖𝗼𝗻𝘀𝗶𝘀𝘁𝗲𝗻𝗰𝘆: Data remains valid before and after the transaction.\n • 𝗜𝘀𝗼𝗹𝗮𝘁𝗶𝗼𝗻: Transactions do not interfere with each other.\n • 𝗗𝘂𝗿𝗮𝗯𝗶𝗹𝗶𝘁𝘆: Once a transaction is complete, it is safely saved even if the system fails.\n\nFrom transaction logs to rollback mechanisms and isolation levels like Serializable, databases are built to handle complex processes without losing data or leaving it incomplete.\n\nThese principles power everything from banking systems to e-commerce platforms.\n\nIf you are exploring backend development or diving into system design, ACID is a core concept you must understand.\n\nLet me know your thoughts or share how you’ve come across ACID in real-world scenarios!\n\n#ACIDproperties #SystemDesign #DatabaseDesign #LearningInPublic",
+        {
+          "figure": {
+            "path": "assets/blogs/post-7338804651774902272-01.jpg",
+            "alt": "Four colored boxes show atomicity, consistency, isolation, and durability."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7338441447211225088",
+    "kind": "post",
+    "title": "𝗛𝗼𝘄 𝗣𝗼𝘀𝘁𝗴𝗿𝗲𝗦𝗤𝗟 𝗪𝗼𝗿𝗸𝘀: 𝗜𝗻𝘁𝗲𝗿𝗻𝗮𝗹 𝗔𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲",
+    "date": "2025-06-11",
+    "tags": [
+      "PostgreSQL",
+      "Databases"
+    ],
+    "original": {
+      "blocks": [
+        "𝗛𝗼𝘄 𝗣𝗼𝘀𝘁𝗴𝗿𝗲𝗦𝗤𝗟 𝗪𝗼𝗿𝗸𝘀: 𝗜𝗻𝘁𝗲𝗿𝗻𝗮𝗹 𝗔𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲\n\nIf you are using PostgreSQL in your application, understanding what happens behind the scenes will help in making smarter, faster, and more reliable decisions.\n\nHi everyone, I am Ashmita 👋\nToday, I am sharing a breakdown of how PostgreSQL works internally. This post covers the core components of its architecture and why developers around the world trust it for everything from simple applications to large-scale enterprise systems.\n\n𝗛𝗲𝗿𝗲 𝗮𝗿𝗲 𝘁𝗵𝗲 𝗸𝗲𝘆 𝘁𝗮𝗸𝗲𝗮𝘄𝗮𝘆𝘀:\n\n𝟭. 𝗣𝗿𝗼𝗰𝗲𝘀𝘀-𝗕𝗮𝘀𝗲𝗱 𝗔𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲\nPostgreSQL uses a process-per-connection model. Each client connection is handled by its own operating system process, increasing isolation and system stability. Unlike thread-based systems, this design reduces shared memory risks. Tools like PgBouncer help scale connections efficiently.\n\n𝟮. 𝗪𝗿𝗶𝘁𝗲 𝗔𝗵𝗲𝗮𝗱 𝗟𝗼𝗴𝗴𝗶𝗻𝗴 (𝗪𝗔𝗟)\nBefore any changes are written to the main database, PostgreSQL records them in a log file. This guarantees durability and crash recovery. WAL also enables replication and point-in-time recovery.\n\n𝟯. 𝗠𝘂𝗹𝘁𝗶-𝗩𝗲𝗿𝘀𝗶𝗼𝗻 𝗖𝗼𝗻𝗰𝘂𝗿𝗿𝗲𝗻𝗰𝘆 𝗖𝗼𝗻𝘁𝗿𝗼𝗹 (𝗠𝗩𝗖𝗖)\nPostgreSQL avoids locking by maintaining multiple versions of a row. Readers and writers can work simultaneously without blocking each other. Every transaction works on a consistent snapshot, ensuring high concurrency and performance.\n\n𝟰. 𝗤𝘂𝗲𝗿𝘆 𝗘𝘅𝗲𝗰𝘂𝘁𝗶𝗼𝗻 𝗣𝗶𝗽𝗲𝗹𝗶𝗻𝗲\nEvery query goes through a five-stage pipeline: parsing, rewriting, planning, execution, and result delivery. PostgreSQL evaluates multiple execution plans and chooses the most efficient one using internal statistics.\n\n𝟱. 𝗔𝗱𝘃𝗮𝗻𝗰𝗲𝗱 𝗜𝗻𝗱𝗲𝘅𝗶𝗻𝗴 𝗢𝗽𝘁𝗶𝗼𝗻𝘀\nPostgreSQL supports multiple index types beyond standard B-trees, including GiST, SP-GiST, GIN, and BRIN. Each is tailored for specific use cases like geospatial queries, prefix matching, or time-series data.\n\n𝟲. 𝗗𝗲𝗰𝗹𝗮𝗿𝗮𝘁𝗶𝘃𝗲 𝗧𝗮𝗯𝗹𝗲 𝗣𝗮𝗿𝘁𝗶𝘁𝗶𝗼𝗻𝗶𝗻𝗴\nLarge tables can be split into smaller partitions using range, list, or hash strategies. PostgreSQL automatically routes data to the appropriate partition, improving query performance through partition pruning.\n\nUnderstanding PostgreSQL’s internals will help in designing better schemas, writing optimized queries, and building systems that scale reliably.\n\nIf you're using PostgreSQL or planning to adopt it, I highly recommend exploring these concepts further. Feel free to reach out if you'd like to discuss more about its use cases or implementation strategies.\n\n#PostgreSQL #DatabaseArchitecture #LearningInPublic",
+        {
+          "figure": {
+            "path": "assets/blogs/post-7338441447211225088-01.jpg",
+            "alt": "PostgreSQL product logo."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7337335069360939008",
+    "kind": "post",
+    "title": "𝗛𝗼𝘄 𝗱𝗼 𝗺𝗼𝗱𝗲𝗿𝗻 𝗮𝗽𝗽𝘀 𝗱𝗼 𝘀𝗼 𝗺𝗮𝗻𝘆 𝘁𝗵𝗶𝗻𝗴𝘀 𝗮𝘁 𝗼𝗻𝗰𝗲 𝘄𝗶𝘁𝗵𝗼𝘂𝘁 𝗳𝗿𝗲𝗲𝘇𝗶𝗻𝗴?",
+    "date": "2025-06-08",
+    "tags": [
+      "Concurrency",
+      "Backend Engineering"
+    ],
+    "original": {
+      "blocks": [
+        "𝗛𝗼𝘄 𝗱𝗼 𝗺𝗼𝗱𝗲𝗿𝗻 𝗮𝗽𝗽𝘀 𝗱𝗼 𝘀𝗼 𝗺𝗮𝗻𝘆 𝘁𝗵𝗶𝗻𝗴𝘀 𝗮𝘁 𝗼𝗻𝗰𝗲 𝘄𝗶𝘁𝗵𝗼𝘂𝘁 𝗳𝗿𝗲𝗲𝘇𝗶𝗻𝗴?\n\nHi everyone, I’m Ashmita 👋\nToday I want to share a key concept that often gets confusing but let’s discuss it in a simpler way. We are talking about the difference between a 𝗣𝗿𝗼𝗰𝗲𝘀𝘀 𝗮𝗻𝗱 𝗮 𝗧𝗵𝗿𝗲𝗮𝗱.\n\nLet’s break it down 👇\n\nA process is a program in execution. Think of it as an independent unit with its own memory. A thread is a smaller part within that process, allowing multiple tasks to happen at the same time.\n\n➤ Processes are heavier, take more time to create and run in isolation\n➤ Threads are lightweight, faster to create and share memory within a process\n\n𝗙𝗼𝗿 𝗲𝘅𝗮𝗺𝗽𝗹𝗲, 𝗶𝗻 𝗮 𝘄𝗲𝗯 𝗯𝗿𝗼𝘄𝘀𝗲𝗿:\nOne thread loads the webpage, another handles scrolling and clicks, while another runs JavaScript. Without threads, everything would freeze until one task finishes.\nOr in a word processor: one thread handles typing while another updates formatting in the background.\n\nProcesses offer better isolation and safety\nThreads offer speed and multitasking but need careful handling since they share resources\n\n𝗧𝗟;𝗗𝗥:\n➤ Process = heavier, isolated, safe\n➤ Thread = faster, shared, efficient\n\n#OperatingSystems #ThreadsVsProcesses #LearningInPublic",
+        {
+          "figure": {
+            "path": "assets/blogs/post-7337335069360939008-01.jpg",
+            "alt": "A process with four threads, illustrated as a simple labelled diagram."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7335521991518478337",
+    "kind": "post",
+    "title": "Starting with DP and Graphs now!!",
+    "date": "2025-06-03",
+    "tags": [
+      "Algorithms"
+    ],
+    "original": {
+      "blocks": [
+        "Starting with DP and Graphs now!!\n\nLife was peaceful so far until Trees,\nBirds were chirping, recursion made sense (kind of)... and now it’s time to move ahead into the real chaos \n\nWill keep you all updated on the journey as always 🤩\n\nIf you have any tips or just emotional support to offer please let me know and let's connect 🤝\n\n#DP #Graphs #DSA #LearningInPublic"
+      ]
+    }
+  },
+  {
+    "id": "post-7332985304464658432",
+    "kind": "post",
+    "title": "Stop chasing every new framework.",
+    "date": "2025-05-27",
+    "tags": [
+      "Engineering Practices"
+    ],
+    "original": {
+      "blocks": [
+        "Stop chasing every new framework.\n\nIt’s a trap many beginners fall into — thinking the more tools you know, the better developer you become.\n\nBut what actually makes the difference?\n✅ Understanding how data flows through an app\n✅ Knowing where the business logic belongs (not in the frontend!)\n✅ Realizing how small mistakes can create big problems\n✅ Building a solid foundation with core concepts\n\nFrameworks will come and go.\n\nBut fundamentals? They stay with you forever.\n\nFocus on the “why,” not just the “how.”\n\nThat’s where real growth begins.\n\n#WebDevelopment #SoftwareEngineering #LearnToCode #CodingJourney #TechAdvice",
+        {
+          "figure": {
+            "path": "assets/blogs/post-7332985304464658432-01.jpg",
+            "alt": "A typographic graphic that reads “Don’t make this mistake.”"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7330233971961761792",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-05-19",
+    "tags": [
+      "Engineering Practices"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\n\nI'm very happy to share that I delivered my first talk on \"Introduction to Prompt Engineering – How to Talk to AI Better\" on May 18, 2025, during Brown Bag Session 1 organized by the Google Developers Group Udaipur.\n\nI’m truly grateful for this opportunity. A big thanks to Punita Ojha, shipra jain, and Dheeraj Joshi from the GDG team for their constant support and guidance, and to Deepak Babel Sir for always motivating me.\n\nAlso, a huge shoutout to fellow speakers Charvi Bapna and Tanishq Pariwala, who shared amazing knowledge and insights—it was such an inspiring and enriching experience!\n\nThis talk has significantly boosted my confidence, and I’m even more excited now to continue learning and contributing to the community.\n\nCheck out my video on prompt engineering to get a quick gist of the session: ",
+            {
+              "text": "https://lnkd.in/dAeT3RfY",
+              "href": "https://www.youtube.com/live/xC-SZA3y1Ts"
+            },
+            "\n\n#PromptEngineering #GoogleDevelopersClub #AI #CommunityLearning #PublicSpeaking"
+          ]
+        },
+        {
+          "figure": {
+            "path": "assets/blogs/post-7330233971961761792-01.jpg",
+            "alt": "Prompt Engineering for Beginners presentation and speaker video tiles during GDG Udaipur Brown Bag Session 1."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7182950739357405184",
+    "kind": "post",
+    "title": "Starting my LinkedIn journey... but how?",
+    "date": "2024-04-08",
+    "tags": [
+      "Technology"
+    ],
+    "original": {
+      "blocks": [
+        "Starting my LinkedIn journey... but how?\n\n\n\nAfter spending a considerable amount of time here on LinkedIn, absorbing the valuable knowledge shared by amazing professionals, I'm thrilled to finally break the silence and share my very first post!\n\nI've been a silent observer for quite some time, watching, learning, and being inspired by the wealth of expertise and wisdom shared on this platform. The support and guidance I've received from this community have been invaluable in shaping my professional journey.\n\nI'll be honest, I've hesitated in the past, waiting for that \"perfect moment\" to make my debut. But then it hit me - there's never really a perfect time, is there? The right time to start is always now. So here I am, ready to dive in headfirst and contribute to the conversation.\n\nFrom here on out, you can expect regular posts from me, where I'll be sharing insights, lessons learned, successes, failures, and everything in between. I believe that true growth comes from sharing our experiences, both good and bad, and I'm excited to embark on this journey of learning and growth with all of you.\n\nThank you to everyone who has inspired me and helped me along the way. I can't wait to connect, engage, and learn from each and every one of you.\n\n#firstpost #techie #development #learning #networking"
+      ]
+    }
   }
 ]
