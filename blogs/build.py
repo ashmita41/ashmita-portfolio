@@ -10,9 +10,19 @@ from urllib.parse import quote, urlsplit
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-EMAIL = "ashmitap.official@gmail.com"
 HOST = "https://ashmita-dev.onrender.com"
 PREVIEW = re.compile(r"(<!-- blog-previews:start -->).*?(<!-- blog-previews:end -->)", re.S)
+FOOTER = re.compile(r'<footer class="shell footer">.*?</footer>', re.S)
+
+def site_footer():
+    return """<footer class="shell footer">
+  <p>Made with <span class="footer-heart" role="img" aria-label="love">♥</span> by Ashmita</p>
+  <ul class="footer-socials" aria-label="Social media">
+    <li><a href="https://www.instagram.com/ashmitap47/">Instagram</a></li>
+    <li><a href="https://www.linkedin.com/in/ashmitapandey47">LinkedIn</a></li>
+    <li><a href="https://github.com/ashmita41">GitHub</a></li>
+  </ul>
+</footer>"""
 
 def t(value):
     assert isinstance(value, str) and value.strip(), value
@@ -59,7 +69,7 @@ def shell(title, description, canonical, body, *, prefix="", script="", css_vers
 <meta name="author" content="Ashmita Pandey">
 <link rel="canonical" href="{HOST}/{canonical}">
 <link rel="icon" href="{prefix}favicon.svg?v=creative-blue" type="image/svg+xml">
-<link rel="stylesheet" href="{prefix}styles.css?v={css_version}">
+<link rel="stylesheet" href="{prefix}styles.css?v={css_version}-footer-1">
 {script}
 </head>
 <body>
@@ -71,7 +81,7 @@ def shell(title, description, canonical, body, *, prefix="", script="", css_vers
 <main class="shell" id="main" tabindex="-1">
 {body}
 </main>
-<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:{EMAIL}">{EMAIL}</a><a href="{prefix}index.html">Back to home ↑</a></footer>
+{site_footer()}
 </body>
 </html>
 '''
@@ -376,6 +386,8 @@ if __name__=="__main__":
     source=home.read_text()
     replacement=lambda m:m.group(1)+"\n"+home_previews(entries)+"\n      "+m.group(2)
     refreshed,count=PREVIEW.subn(replacement,source)
+    assert count==1
+    refreshed,count=FOOTER.subn(lambda _: site_footer(),refreshed)
     assert count==1
     files={home:refreshed,ROOT/"blogs.html":to_index(entries)}
     files.update({HERE/(e["id"]+".html"):render_original(e) for e in entries if e.get("original")})

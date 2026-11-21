@@ -198,6 +198,14 @@ nav a:hover,nav a[aria-current=page] { color:var(--accent); text-decoration:unde
 #contact .copy-address:hover { background:#415191; }
 #contact .contact-copy-status { color:#dee5fc; font-size:.88rem; }
 .footer-heart { color:var(--brand); }
+.footer-socials {
+  display:flex; align-items:center; flex-wrap:wrap; gap:.35rem 1.05rem;
+  margin:0; padding:0; list-style:none;
+}
+.footer-socials a { font-weight:650; }
+.about-facts { display:grid; gap:.45rem; margin-top:1.15rem; color:var(--muted); font-size:.95rem; }
+.about-facts > div,.about-flags { display:flex; align-items:baseline; flex-wrap:wrap; gap:.25rem .55rem; }
+.about-facts dt { color:var(--ink); font-weight:690; }
 @media (max-width: 620px) {
   #toolkit .tool-list>div { grid-template-columns:minmax(0,1fr); }
 }
