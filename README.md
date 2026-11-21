@@ -1,18 +1,7 @@
-# Ashmita Pandey: Personal Website
+# Ashmita Pandey: portfolio review
 
-A static portfolio with a writing archive and individual article pages. Render serves these files as-is; no production build step is needed.
+Open index.html in a browser. This site does not require installation, local hosting, or a build to view. The embedded talk needs an internet connection.
 
-- Start with `index.html`. Use `writing.html` to filter the article index by topic.
-- Individual reports and articles live under `writing/`. All reading works without JavaScript; topic filters are optional.
-- To test locally, open `index.html` directly or run `python3 -m http.server`.
-- When you update `writing/articles.json`, run `python3 writing/build.py` to regenerate the archive and article pages. Use `python3 writing/build.py --check` to check freshness.
+The Blogs page indexes verified titles, dates, and topics. It does not publish interview summaries or condensed technical articles as if they were originals, and it does not link visitors to LinkedIn. Add permission-cleared original content by adding an original object with blocks to the relevant entry in blogs/catalog.json, then regenerate with python3 blogs/build.py. Use --check to verify freshness. Plain strings are paragraphs; structured blocks may be a heading, list, or code. Optional original.cover has a local assets path and alt text.
 
-## Practical article schema
-
-Required fields: unique lowercase-hyphenated `id`, `title`, `source`, original HTTPS `url` for provenance, `type` ("Article" or "Interview"), and `tags`. Date and summary are optional.
-
-- `edition: "adapted"`: distinct, condensed site edition; not a word-for-word copy.
-- `edition: "original"`: original or permission-cleared full text for republication.
-- `edition: "notes"`: interview synopsis, not a transcript.
-- `body` can contain plain paragraph strings or objects with `p`, `h2`, `code` (plus optional `language`), or `list`.
-- The generated pages don't send visitors to the original platform. The source link is kept in the manifest for editorial reference.
+The reviewed old adaptation pages and editorial manifest are kept separately outside this public site folder.
