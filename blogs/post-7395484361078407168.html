@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>𝗦𝗵𝗼𝘂𝗹𝗱 𝘆𝗼𝘂 𝗴𝗼 𝗯𝗲𝘆𝗼𝗻𝗱 𝗿𝗲𝗹𝗮𝘁𝗶𝗼𝗻𝗮𝗹 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲𝘀? · Ashmita Pandey</title>
+<meta name="description" content="𝗦𝗵𝗼𝘂𝗹𝗱 𝘆𝗼𝘂 𝗴𝗼 𝗯𝗲𝘆𝗼𝗻𝗱 𝗿𝗲𝗹𝗮𝘁𝗶𝗼𝗻𝗮𝗹 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲𝘀?">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7395484361078407168.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>𝗦𝗵𝗼𝘂𝗹𝗱 𝘆𝗼𝘂 𝗴𝗼 𝗯𝗲𝘆𝗼𝗻𝗱 𝗿𝗲𝗹𝗮𝘁𝗶𝗼𝗻𝗮𝗹 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲𝘀?</h1>
+<p>Ashmita Pandey · <time datetime="2025-11-15">Nov 15, 2025</time> · Databases · System Design</p>
+<div class="original-body"><p>𝗦𝗵𝗼𝘂𝗹𝗱 𝘆𝗼𝘂 𝗴𝗼 𝗯𝗲𝘆𝗼𝗻𝗱 𝗿𝗲𝗹𝗮𝘁𝗶𝗼𝗻𝗮𝗹 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲𝘀?
+
+I have been thinking a lot about this tradeoff lately. Relational systems like MySQL and PostgreSQL have powered our applications for decades. They are stable, mature, and easy to work with. But as data grows more complex and applications scale differently, it is worth asking whether the relational model still serves every use case.
+
+𝗪𝗵𝗲𝗻 𝘆𝗼𝘂 𝗺𝗶𝗴𝗵𝘁 𝗯𝗲 𝘀𝘁𝗿𝗲𝘁𝗰𝗵𝗶𝗻𝗴 𝗿𝗲𝗹𝗮𝘁𝗶𝗼𝗻𝗮𝗹 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲𝘀 𝘁𝗼𝗼 𝗳𝗮𝗿
+
+There are clear signals that your data model is no longer fitting comfortably into tables:
+• Sparse tables with many unused columns
+• Storing JSON or XML because the schema cannot keep up
+• Complex many-to-many or deeply nested relationships
+• Frequent schema migrations for new types of data
+• Write bottlenecks on a single database server
+• Growing datasets that are hard to scale vertically
+
+These are often early signs that you may need something beyond the relational world.
+
+𝗘𝘅𝗽𝗹𝗼𝗿𝗶𝗻𝗴 𝗻𝗼𝗻-𝗿𝗲𝗹𝗮𝘁𝗶𝗼𝗻𝗮𝗹 𝗼𝗽𝘁𝗶𝗼𝗻𝘀
+
+Over the past decade, several database models have emerged to handle new patterns in modern applications:
+• Key-value stores for fast lookups and caching
+• Document stores for flexible, evolving schemas
+• Column-family stores for high-write, large-scale workloads
+• Graph databases for deeply connected data
+• Distributed key-value systems for massive horizontal scaling
+
+𝗛𝗼𝘄 𝘁𝗼 𝗱𝗲𝗰𝗶𝗱𝗲
+
+Ask yourself:
+• Does my data fit a tabular structure, or is it semi-structured or highly connected
+• Do my scaling needs exceed what a single relational instance can deliver
+• How much operational complexity can my team manage
+
+Relational databases are not going anywhere, but they are not always the perfect fit. As your application evolves, choosing the right database model can simplify your architecture and improve performance where it matters most.</p></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

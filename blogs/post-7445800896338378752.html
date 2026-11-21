@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>An API responds in ~100ms for users in the US, but takes ~2 seconds for users in India. · Ashmita Pandey</title>
+<meta name="description" content="An API responds in ~100ms for users in the US, but takes ~2 seconds for users in India.">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7445800896338378752.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>An API responds in ~100ms for users in the US, but takes ~2 seconds for users in India.</h1>
+<p>Ashmita Pandey · <time datetime="2026-04-03">Apr 3, 2026</time> · System Design · Networking</p>
+<div class="original-body"><p>An API responds in ~100ms for users in the US, but takes ~2 seconds for users in India.
+
+At first glance, it looks like a backend bug.
+In reality, it’s a standard system design problem.
+
+When users are far from your servers, latency increases due to network distance, routing, and multiple hops. Optimizing code alone won’t fix this.
+
+What actually works is designing systems for global scale:
+
+1. Region-based deployments
+Serve users from the nearest geographic region instead of a single centralized server.
+
+2. Content Delivery Network (CDN)
+Cache static and frequently accessed data closer to users to reduce backend dependency.
+
+3. Caching layer (Redis / API Gateway)
+Minimize repeated database calls and reduce response time.
+
+4. Database replication
+Route read operations to the nearest replica while keeping writes controlled.
+
+5. Geo-routing
+Automatically direct users to the closest available server.
+
+6. API optimization
+Reduce payload size, enable compression, and use efficient protocols like HTTP/2.
+
+What seems like a performance issue in code is often a distribution problem in architecture.
+
+This is what real-world system design looks like.</p></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

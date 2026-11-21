@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>𝗪𝗵𝗮𝘁 𝗿𝗲𝗮𝗹𝗹𝘆 𝗵𝗮𝗽𝗽𝗲𝗻𝘀 𝘄𝗵𝗲𝗻 𝘆𝗼𝘂 𝗵𝗶𝘁 𝗮𝗻 𝗔𝗣𝗜 𝗲𝗻𝗱𝗽𝗼𝗶𝗻𝘁? · Ashmita Pandey</title>
+<meta name="description" content="𝗪𝗵𝗮𝘁 𝗿𝗲𝗮𝗹𝗹𝘆 𝗵𝗮𝗽𝗽𝗲𝗻𝘀 𝘄𝗵𝗲𝗻 𝘆𝗼𝘂 𝗵𝗶𝘁 𝗮𝗻 𝗔𝗣𝗜 𝗲𝗻𝗱𝗽𝗼𝗶𝗻𝘁?">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7357251323894915072.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>𝗪𝗵𝗮𝘁 𝗿𝗲𝗮𝗹𝗹𝘆 𝗵𝗮𝗽𝗽𝗲𝗻𝘀 𝘄𝗵𝗲𝗻 𝘆𝗼𝘂 𝗵𝗶𝘁 𝗮𝗻 𝗔𝗣𝗜 𝗲𝗻𝗱𝗽𝗼𝗶𝗻𝘁?</h1>
+<p>Ashmita Pandey · <time datetime="2025-08-02">Aug 2, 2025</time> · Backend Engineering · Networking</p>
+<div class="original-body"><p>𝗪𝗵𝗮𝘁 𝗿𝗲𝗮𝗹𝗹𝘆 𝗵𝗮𝗽𝗽𝗲𝗻𝘀 𝘄𝗵𝗲𝗻 𝘆𝗼𝘂 𝗵𝗶𝘁 𝗮𝗻 𝗔𝗣𝗜 𝗲𝗻𝗱𝗽𝗼𝗶𝗻𝘁?
+
+You open Postman or your frontend makes a call to /api/v1/user/42.
+A few hundred milliseconds later, you get a structured JSON response.
+
+But under the surface, here&#x27;s the full picture:
+𝟭. 𝗗𝗡𝗦 𝗥𝗲𝘀𝗼𝗹𝘂𝘁𝗶𝗼𝗻
+The domain name is resolved into an IP address using DNS. This step is crucial in directing your request to the correct server.
+
+𝟮. 𝗥𝗲𝗾𝘂𝗲𝘀𝘁 𝗥𝗼𝘂𝘁𝗶𝗻𝗴
+Once the request reaches the server, the framework (Django, Express, Spring Boot, etc.) checks the HTTP method and URL pattern to route it to the appropriate handler.
+Example:
+GET /api/v1/user/42 routes to get_user_by_id().
+
+𝟯. 𝗠𝗶𝗱𝗱𝗹𝗲𝘄𝗮𝗿𝗲 𝗘𝘅𝗲𝗰𝘂𝘁𝗶𝗼𝗻
+Before hitting the core logic, middleware processes the request. These layers might handle:
+ • Authentication and authorization
+ • Logging
+ • Rate limiting
+ • CORS checks
+ • Input sanitization
+Middleware ensures that only valid, safe, and authorized requests reach your application logic.
+
+𝟰. 𝗕𝘂𝘀𝗶𝗻𝗲𝘀𝘀 𝗟𝗼𝗴𝗶𝗰 / 𝗩𝗶𝗲𝘄 𝗙𝘂𝗻𝗰𝘁𝗶𝗼𝗻
+This is where the actual processing happens:
+ • Fetch data from the database
+ • Apply business rules
+ • Validate inputs
+ • Format or serialize the output
+
+This layer must be robust, testable, and free of unnecessary coupling.
+
+𝟱. 𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗶𝗼𝗻
+The processed data is serialized (often as JSON), assigned an appropriate HTTP status code (like 200, 400, or 404), and wrapped in a response object.
+Example:return Response({&quot;name&quot;: &quot;Ashmita&quot;}, status=200)
+
+𝟲. 𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲 𝗧𝗿𝗮𝗻𝘀𝗺𝗶𝘀𝘀𝗶𝗼𝗻
+The server sends the HTTP response back to the client over the network. TLS encryption (HTTPS) secures the data during transit.
+Client-side rendering or further processing takes place after receiving the response.
+
+𝟳. 𝗕𝗲𝘆𝗼𝗻𝗱 𝘁𝗵𝗲 𝗕𝗮𝘀𝗶𝗰𝘀
+An API isn&#x27;t just about sending and receiving data. It should also account for:
+ • Versioning (/api/v1/)
+ • Pagination and filtering
+ • Idempotency
+ • Error design (consistent structure for error messages)
+ • Throttling and performance optimization
+
+𝗙𝗶𝗻𝗮𝗹 𝘁𝗵𝗼𝘂𝗴𝗵𝘁 - A well-designed API is not about making the server respond it’s about crafting a reliable, predictable, and secure communication system between two independent systems.</p></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

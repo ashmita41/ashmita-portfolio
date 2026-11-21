@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coupon code valid for first 100 users only. · Ashmita Pandey</title>
+<meta name="description" content="Coupon code valid for first 100 users only.">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7353630430379630592.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>Coupon code valid for first 100 users only.</h1>
+<p>Ashmita Pandey · <time datetime="2025-07-23">Jul 23, 2025</time> · Backend Engineering · Concurrency · System Design</p>
+<div class="original-body"><p>Coupon code valid for first 100 users only.
+
+𝗪𝗲 𝗮𝗹𝗹 𝗵𝗮𝘃𝗲 𝘀𝗲𝗲𝗻 𝘁𝗵𝗶𝘀 𝗺𝗲𝘀𝘀𝗮𝗴𝗲, 𝗿𝗶𝗴𝗵𝘁? And just as you are about to complete your payment, you realize you might be the 𝟵𝟴𝘁𝗵, 𝟵𝟵𝘁𝗵, 𝗼𝗿 𝟭𝟬𝟬𝘁𝗵 𝘂𝘀𝗲𝗿.
+
+But here is where things get interesting.
+
+What if, at that exact moment:
+ • One person is entering their 𝗢𝗧𝗣
+ • Another has just clicked on 𝗣𝗮𝘆 𝗡𝗼𝘄
+ • Someone else is reviewing their cart
+
+Now the real question is: 𝘄𝗵𝗼 𝘄𝗶𝗹𝗹 𝗮𝗰𝘁𝘂𝗮𝗹𝗹𝘆 𝗴𝗲𝘁 𝘁𝗵𝗲 𝗱𝗶𝘀𝗰𝗼𝘂𝗻𝘁?
+
+Is it the person who clicked first?
+Is it the one whose payment gateway processed the transaction faster?
+Or is it the person who completed OTP verification before others?
+
+Such situations happen more often than we realize. Whether it is a limited-use coupon, a flash sale on smartphones, or booking tickets for a concert, backend systems face such race conditions daily.
+
+And solving this is not as simple as writing a few conditional statements.
+
+Behind the scenes, the backend has to manage:
+ • 𝗔𝘁𝗼𝗺𝗶𝗰 𝗰𝗼𝘂𝗻𝘁𝗲𝗿𝘀 to precisely track how many coupons have been claimed, even when hundreds or thousands of people are transacting at the same moment.
+ • 𝗥𝗲𝗮𝗹-𝘁𝗶𝗺𝗲 𝗶𝗻𝘃𝗲𝗻𝘁𝗼𝗿𝘆 𝗹𝗼𝗰𝗸𝗶𝗻𝗴 to temporarily hold a coupon or seat while the payment is being processed.
+ • 𝗖𝗼𝗻𝗰𝘂𝗿𝗿𝗲𝗻𝗰𝘆 𝗰𝗼𝗻𝘁𝗿𝗼𝗹, using optimistic or pessimistic locking to ensure fairness without sacrificing performance.
+ • 𝗦𝘁𝗿𝗶𝗰𝘁 𝘁𝗿𝗮𝗻𝘀𝗮𝗰𝘁𝗶𝗼𝗻 𝘀𝗮𝗳𝗲𝘁𝘆 to avoid overselling or assigning more coupons than promised.
+
+Every 𝗺𝗶𝗹𝗹𝗶𝘀𝗲𝗰𝗼𝗻𝗱 𝗰𝗼𝘂𝗻𝘁𝘀. A single wrong decision can lead to 𝗼𝘃𝗲𝗿𝘀𝗲𝗹𝗹𝗶𝗻𝗴, 𝗯𝗹𝗼𝗰𝗸𝗲𝗱 𝘁𝗿𝗮𝗻𝘀𝗮𝗰𝘁𝗶𝗼𝗻𝘀, or 𝗳𝗿𝘂𝘀𝘁𝗿𝗮𝘁𝗲𝗱 𝘂𝘀𝗲𝗿𝘀.
+
+These are the kinds of real-world problems that make backend development so exciting for me. Designing systems that can handle high-concurrency, real-time allocation challenges is not just about good code; it is about thinking strategically and planning for chaos.
+
+So next time you are racing to grab a discount or a concert ticket, remember this: While you are competing, the backend is too.
+
+Under the hood, solving such race conditions often involves using 𝗺𝘂𝘁𝗲𝘅𝗲𝘀 (𝗺𝘂𝘁𝘂𝗮𝗹 𝗲𝘅𝗰𝗹𝘂𝘀𝗶𝗼𝗻 𝗹𝗼𝗰𝗸𝘀) to ensure that shared counters or resources are not accessed by multiple processes at the same time.
+
+Without proper locking, two users might end up grabbing the same coupon or seat and that&#x27;s where mutexes help maintain consistency in high-concurrency situations.</p></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

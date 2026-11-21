@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>𝗠𝘆 𝗘𝘅𝗽𝗲𝗿𝗶𝗲𝗻𝗰𝗲 𝘄𝗶𝘁𝗵 𝗗𝗮𝘁𝗮𝗯𝗿𝗶𝗰𝗸𝘀 (𝗔𝗻𝗱 𝗪𝗵𝘆 𝗜𝘁’𝘀 𝗠𝗼𝗿𝗲 𝗧𝗵𝗮𝗻 𝗝𝘂𝘀𝘁 “𝗕𝗶𝗴 𝗗𝗮𝘁𝗮”) · Ashmita Pandey</title>
+<meta name="description" content="𝗠𝘆 𝗘𝘅𝗽𝗲𝗿𝗶𝗲𝗻𝗰𝗲 𝘄𝗶𝘁𝗵 𝗗𝗮𝘁𝗮𝗯𝗿𝗶𝗰𝗸𝘀 (𝗔𝗻𝗱 𝗪𝗵𝘆 𝗜𝘁’𝘀 𝗠𝗼𝗿𝗲 𝗧𝗵𝗮𝗻 𝗝𝘂𝘀𝘁 “𝗕𝗶𝗴 𝗗𝗮𝘁𝗮”)">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7434619324151042048.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>𝗠𝘆 𝗘𝘅𝗽𝗲𝗿𝗶𝗲𝗻𝗰𝗲 𝘄𝗶𝘁𝗵 𝗗𝗮𝘁𝗮𝗯𝗿𝗶𝗰𝗸𝘀 (𝗔𝗻𝗱 𝗪𝗵𝘆 𝗜𝘁’𝘀 𝗠𝗼𝗿𝗲 𝗧𝗵𝗮𝗻 𝗝𝘂𝘀𝘁 “𝗕𝗶𝗴 𝗗𝗮𝘁𝗮”)</h1>
+<p>Ashmita Pandey · <time datetime="2026-03-03">Mar 3, 2026</time> · Data Engineering · Databricks</p>
+<div class="original-body"><p>𝗠𝘆 𝗘𝘅𝗽𝗲𝗿𝗶𝗲𝗻𝗰𝗲 𝘄𝗶𝘁𝗵 𝗗𝗮𝘁𝗮𝗯𝗿𝗶𝗰𝗸𝘀 (𝗔𝗻𝗱 𝗪𝗵𝘆 𝗜𝘁’𝘀 𝗠𝗼𝗿𝗲 𝗧𝗵𝗮𝗻 𝗝𝘂𝘀𝘁 “𝗕𝗶𝗴 𝗗𝗮𝘁𝗮”)
+
+Recently, I worked on Databricks as part of a data workflow implementation and spent time exploring its architecture in depth. My initial understanding was that it was primarily a managed Spark platform. That’s technically correct.
+
+However, after working with it hands-on, I realized it represents a broader architectural approach to modern data systems.
+
+𝗟𝗮𝗸𝗲𝗵𝗼𝘂𝘀𝗲 𝗔𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲 𝗶𝗻 𝗣𝗿𝗮𝗰𝘁𝗶𝗰𝗲
+Databricks is built around the Lakehouse model, combining scalable object storage with warehouse-level reliability.
+
+With Delta Lake, it introduces:
+ • ACID transactions on cloud object storage
+ • Schema enforcement and schema evolution
+ • Time travel through versioned transaction logs
+ • Optimistic concurrency control
+
+The presence of a transaction log layer fundamentally changes the behavior of data stored in object storage. Instead of treating files as static blobs, Delta maintains metadata and commit logs that enable snapshot isolation and consistent reads across distributed workloads.
+
+𝗦𝗲𝗽𝗮𝗿𝗮𝘁𝗶𝗼𝗻 𝗼𝗳 𝗦𝘁𝗼𝗿𝗮𝗴𝗲 𝗮𝗻𝗱 𝗖𝗼𝗺𝗽𝘂𝘁𝗲
+The strict separation between storage and compute is another strong architectural decision.
+
+Clusters can scale independently. Compute resources can be tuned per workload. Storage remains durable and decoupled. From a system design perspective, this improves elasticity and fault isolation while keeping infrastructure flexible.
+
+𝗨𝗻𝗶𝗳𝗶𝗲𝗱 𝗕𝗮𝘁𝗰𝗵 𝗮𝗻𝗱 𝗦𝘁𝗿𝗲𝗮𝗺𝗶𝗻𝗴
+Databricks leverages Spark’s structured APIs to unify batch and streaming processing.
+
+Streaming workloads are treated as incremental structured queries, which simplifies pipeline design. Instead of maintaining separate architectures for real-time and historical data, both follow a consistent processing model built on execution DAGs and distributed task scheduling.
+
+𝗚𝗼𝘃𝗲𝗿𝗻𝗮𝗻𝗰𝗲 𝗮𝗻𝗱 𝗠𝗲𝘁𝗮𝗱𝗮𝘁𝗮 𝗠𝗮𝗻𝗮𝗴𝗲𝗺𝗲𝗻𝘁
+Unity Catalog introduces centralized governance:
+ • Fine-grained access control
+ • Data lineage tracking
+ • Cross-workspace metadata management
+
+This effectively creates a control plane over distributed data assets, which becomes critical as systems scale.
+
+𝗠𝘆 𝗣𝗲𝗿𝘀𝗽𝗲𝗰𝘁𝗶𝘃𝗲
+Coming from a backend engineering background, what I found particularly interesting was how closely Databricks reflects core distributed systems concepts:
+ • Transaction logs managing distributed state
+ • Snapshot isolation across object storage
+ • DAG-based execution planning
+ • Lazy evaluation and query optimization
+ • Partition pruning and file-level indexing
+ • Fault tolerance via lineage-based recomputation
+
+Understanding these internals makes it particularly interesting from a backend and system design perspective, especially when thinking in terms of distributed state management, execution planning, and concurrency control.</p></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

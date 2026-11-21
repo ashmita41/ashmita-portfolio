@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I recently came across an interesting concept in distributed systems called 𝗧𝗵𝗲 𝗖𝗲𝗹𝗲𝗯𝗿𝗶𝘁𝘆 𝗣𝗿𝗼𝗯𝗹𝗲𝗺, and I thought it would be helpful to break it down. · Ashmita Pandey</title>
+<meta name="description" content="I recently came across an interesting concept in distributed systems called 𝗧𝗵𝗲 𝗖𝗲𝗹𝗲𝗯𝗿𝗶𝘁𝘆 𝗣𝗿𝗼𝗯𝗹𝗲𝗺, and I thought it would be helpful to break it down.">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7395131120352210944.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>I recently came across an interesting concept in distributed systems called 𝗧𝗵𝗲 𝗖𝗲𝗹𝗲𝗯𝗿𝗶𝘁𝘆 𝗣𝗿𝗼𝗯𝗹𝗲𝗺, and I thought it would be helpful to break it down.</h1>
+<p>Ashmita Pandey · <time datetime="2025-11-14">Nov 14, 2025</time> · System Design · Distributed Systems</p>
+<div class="original-body"><p>I recently came across an interesting concept in distributed systems called 𝗧𝗵𝗲 𝗖𝗲𝗹𝗲𝗯𝗿𝗶𝘁𝘆 𝗣𝗿𝗼𝗯𝗹𝗲𝗺, and I thought it would be helpful to break it down.
+
+Imagine you build a social media platform. For most users, a simple NoSQL setup partitioned by user ID works perfectly. Traffic is balanced and predictable.
+
+But the moment a celebrity joins, everything changes.
+
+Millions of users want to follow them, view their posts, and like content in real time. Suddenly, one partition that was meant for normal traffic starts handling most of the platform’s read and write load. Your backend, which looked evenly distributed on paper, begins to struggle.
+
+Here is how engineering teams usually approach this problem:
+
+𝟭. 𝗔𝗱𝗱 𝗰𝗮𝗰𝗵𝗶𝗻𝗴
+A distributed cache like Redis or Memcached serves the frequent reads on celebrity posts. This prevents the hot partition from getting overwhelmed.
+
+𝟮. 𝗦𝗰𝗮𝗹𝗲 𝗼𝘂𝘁 𝘄𝗿𝗶𝘁𝗲𝘀 𝘁𝗵𝗿𝗼𝘂𝗴𝗵 𝘀𝗵𝗮𝗿𝗱𝗶𝗻𝗴
+Reads are manageable with caching, but writes are different. Millions of likes per second cannot hit a single partition.
+So you shard the writes. Likes or posts are split across multiple partitions so the workload is distributed horizontally.
+
+𝟯. 𝗨𝗽𝗱𝗮𝘁𝗲 𝘁𝗵𝗲 𝘀𝗲𝗿𝘃𝗶𝗰𝗲 𝗹𝗼𝗴𝗶𝗰
+Once sharded, the application needs to know where data resides. To show total likes, it must aggregate counts from different shards. This adds complexity but removes the bottleneck.
+
+𝟰. 𝗣𝗿𝗲𝗽𝗮𝗿𝗲 𝗳𝗼𝗿 𝗿𝗲𝗮𝗹-𝘄𝗼𝗿𝗹𝗱 𝗯𝗲𝗵𝗮𝘃𝗶𝗼𝗿
+Sharding and caching mean working with eventual consistency, building aggregation flows, and routing data intelligently.
+
+𝟱. 𝗧𝗵𝗶𝗻𝗸 𝘁𝗵𝗿𝗼𝘂𝗴𝗵 𝗲𝗱𝗴𝗲 𝗰𝗮𝘀𝗲𝘀
+• What happens if the cache fails
+• How you protect the system from sudden write spikes
+• How to keep the user experience stable during peak traffic
+
+It is a fascinating problem because systems rarely break at average load. They break when something extraordinary happens, and the Celebrity Problem is the perfect example of designing for those extremes.</p></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

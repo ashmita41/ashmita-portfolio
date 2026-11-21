@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>𝗗𝗼𝗲𝘀 𝗣𝘆𝘁𝗵𝗼𝗻’𝘀 𝗚𝗮𝗿𝗯𝗮𝗴𝗲 𝗖𝗼𝗹𝗹𝗲𝗰𝘁𝗶𝗼𝗻 𝗿𝗲𝗮𝗹𝗹𝘆 𝗵𝗮𝗻𝗱𝗹𝗲 𝗮𝗹𝗹 𝗺𝗲𝗺𝗼𝗿𝘆 𝗽𝗿𝗼𝗯𝗹𝗲𝗺𝘀? · Ashmita Pandey</title>
+<meta name="description" content="𝗗𝗼𝗲𝘀 𝗣𝘆𝘁𝗵𝗼𝗻’𝘀 𝗚𝗮𝗿𝗯𝗮𝗴𝗲 𝗖𝗼𝗹𝗹𝗲𝗰𝘁𝗶𝗼𝗻 𝗿𝗲𝗮𝗹𝗹𝘆 𝗵𝗮𝗻𝗱𝗹𝗲 𝗮𝗹𝗹 𝗺𝗲𝗺𝗼𝗿𝘆 𝗽𝗿𝗼𝗯𝗹𝗲𝗺𝘀?">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7444758774130671616.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>𝗗𝗼𝗲𝘀 𝗣𝘆𝘁𝗵𝗼𝗻’𝘀 𝗚𝗮𝗿𝗯𝗮𝗴𝗲 𝗖𝗼𝗹𝗹𝗲𝗰𝘁𝗶𝗼𝗻 𝗿𝗲𝗮𝗹𝗹𝘆 𝗵𝗮𝗻𝗱𝗹𝗲 𝗮𝗹𝗹 𝗺𝗲𝗺𝗼𝗿𝘆 𝗽𝗿𝗼𝗯𝗹𝗲𝗺𝘀?</h1>
+<p>Ashmita Pandey · <time datetime="2026-03-31">Mar 31, 2026</time> · Backend Engineering · Python</p>
+<div class="original-body"><p>𝗗𝗼𝗲𝘀 𝗣𝘆𝘁𝗵𝗼𝗻’𝘀 𝗚𝗮𝗿𝗯𝗮𝗴𝗲 𝗖𝗼𝗹𝗹𝗲𝗰𝘁𝗶𝗼𝗻 𝗿𝗲𝗮𝗹𝗹𝘆 𝗵𝗮𝗻𝗱𝗹𝗲 𝗮𝗹𝗹 𝗺𝗲𝗺𝗼𝗿𝘆 𝗽𝗿𝗼𝗯𝗹𝗲𝗺𝘀?
+
+For a long time, I had this assumption:
+Python handles memory automatically, so I don’t really need to think about it.
+
+But recently, while exploring this deeper, I realized something important.
+
+Python does manage memory automatically, but automatic doesn’t mean foolproof.
+
+Python primarily uses reference counting, where every object keeps track of how many references point to it. When this count drops to zero, the memory is freed immediately.
+
+Along with this, Python also uses a garbage collector to handle more complex cases like circular references.
+
+So at a high level, it feels like everything is taken care of.
+
+But in practice, things are a bit different.
+
+𝗪𝗵𝗲𝗿𝗲 𝘁𝗵𝗶𝗻𝗴𝘀 𝗴𝗲𝘁 𝘁𝗿𝗶𝗰𝗸𝘆
+What I found interesting is that Python doesn’t free memory based on whether you need an object.
+It frees memory only when there are no references left.
+
+Which means:
+
+You can stop using an object…
+but if something still references it, it stays in memory.
+
+Relatable scenarios most of us encounter:
+
+1. Caching and global data
+You store data in a global variable or cache “just in case.”
+It keeps growing quietly and never gets released.
+
+2. Circular references
+Two objects referencing each other can prevent memory from being freed because their reference count never reaches zero.
+
+3. Long-running applications
+In scripts, you may never notice.
+But in servers or background jobs, small memory retention keeps adding up over time.
+
+4. Resources not explicitly closed
+Files, DB connections, sockets - they may stay open longer than expected if not handled properly.
+
+Realization - Garbage Collection in Python is powerful, but it works based on reachability, not usefulness.
+
+It cannot decide whether your object is still logically needed.
+It only checks if something still points to it.
+
+Earlier, I thought memory management in Python was something I could ignore.
+
+Now I see it differently.
+
+You don’t need to manage memory manually,
+but you definitely need to understand how it behaves.
+
+Because most memory issues don’t fail immediately.
+They show up later, when your system scales.</p></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

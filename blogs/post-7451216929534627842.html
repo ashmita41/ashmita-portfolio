@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your service is slow… but CPU usage is low. What do you check first? · Ashmita Pandey</title>
+<meta name="description" content="Your service is slow… but CPU usage is low. What do you check first?">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7451216929534627842.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>Your service is slow… but CPU usage is low. What do you check first?</h1>
+<p>Ashmita Pandey · <time datetime="2026-04-18">Apr 18, 2026</time> · Backend Engineering · Observability</p>
+<div class="original-body"><p>Your service is slow… but CPU usage is low. What do you check first?
+
+It feels counterintuitive.
+
+If CPU isn’t busy, why is the system slow?
+
+Because most performance issues aren’t about doing too much work…
+they’re about waiting too long.
+
+Here’s how I approach it:
+
+1. Thread / Process State
+ • Are workers blocked on locks?
+ • Waiting on I/O?
+ • Stuck in queues?
+If your system isn’t using CPU, chances are it’s idle… but not by choice.
+
+2. External Dependencies
+ • Database latency
+ • Third-party APIs
+ • Internal microservices
+A slow dependency can quietly drag your entire system down.
+
+3. Database Bottlenecks
+ • Missing indexes
+ • Inefficient queries
+ • Connection pool limits
+Databases are often the hidden gravity well of latency.
+
+4. Lock Contention
+ • Shared resources causing blocking
+ • Poor concurrency design
+Low CPU + high latency often points to threads waiting their turn.
+
+5. I/O Wait
+ • Disk reads/writes
+ • Network delays
+ • Logging overhead
+I/O is the silent saboteur. It slows everything without spiking CPU.
+
+6. Queue Backlogs
+ • Message queues piling up
+ • Thread pools saturated
+ • Requests waiting before execution
+Sometimes the system isn’t slow… it’s just not getting to work yet.
+
+7. Resource Limits (Other than CPU)
+ • Memory pressure
+ • File descriptors
+ • Network bandwidth
+CPU is just one piece of the puzzle.
+
+If CPU usage is low, your system isn’t overloaded… it’s waiting somewhere. And the real skill is figuring out where that wait begins.
+
+Would love to know what’s the most unexpected bottleneck you’ve discovered when everything looked fine on the surface?</p></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

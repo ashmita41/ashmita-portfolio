@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>If we had to implement the 𝗹𝘀 𝗰𝗼𝗺𝗺𝗮𝗻𝗱 from scratch, how would we even start? · Ashmita Pandey</title>
+<meta name="description" content="If we had to implement the 𝗹𝘀 𝗰𝗼𝗺𝗺𝗮𝗻𝗱 from scratch, how would we even start?">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7354371536272666625.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>If we had to implement the 𝗹𝘀 𝗰𝗼𝗺𝗺𝗮𝗻𝗱 from scratch, how would we even start?</h1>
+<p>Ashmita Pandey · <time datetime="2025-07-25">Jul 25, 2025</time> · Backend Engineering · Linux</p>
+<div class="original-body"><p>If we had to implement the 𝗹𝘀 𝗰𝗼𝗺𝗺𝗮𝗻𝗱 from scratch, how would we even start?
+
+This seems like a very basic thing, but it gives a lot of clarity. Let’s find out by checking it step by step.
+
+When the 𝗹𝘀 command is typed into a terminal, it lists the contents of the current directory.
+
+Seems simple on the surface, but what’s happening underneath?
+
+First, the shell parses the command. Then, it hands control to the underlying program that knows how to interact with the filesystem.
+
+Now think, how would a custom version of 𝗹𝘀 know
+ • Where to look?
+ • What files exist?
+ • What to show (hidden files, file types, permissions)?
+
+Let’s break the approach into layers of thought:
+
+𝟭. 𝗜𝗻𝗽𝘂𝘁 𝗜𝗻𝘁𝗲𝗿𝗽𝗿𝗲𝘁𝗮𝘁𝗶𝗼𝗻:
+Start with the base case - no arguments. The goal is to list the current directory’s contents. So the first task is to figure out what the current directory is.
+
+𝟮. 𝗥𝗲𝗮𝗱𝗶𝗻𝗴 𝗗𝗶𝗿𝗲𝗰𝘁𝗼𝗿𝘆 𝗖𝗼𝗻𝘁𝗲𝗻𝘁𝘀:
+Next, we need to retrieve the list of entries - files, folders, symlinks - everything. That means finding a way to scan or iterate through that directory.
+
+𝟯. 𝗙𝗶𝗹𝘁𝗲𝗿𝗶𝗻𝗴 𝗮𝗻𝗱 𝗙𝗼𝗿𝗺𝗮𝘁𝘁𝗶𝗻𝗴:
+Not all entries are shown the same way. Hidden files (starting with .), color-coded outputs, or even just sorting alphabetically are all part of this stage.
+
+𝟰. 𝗔𝗱𝗱𝗶𝘁𝗶𝗼𝗻𝗮𝗹 𝗙𝗹𝗮𝗴𝘀 𝗮𝗻𝗱 𝗢𝗽𝘁𝗶𝗼𝗻𝘀:
+Over time, more complexity can be added. For example, ls -a, ls -l, ls -lh, etc. Each flag should trigger a variation in logic, whether to show all files, display detailed metadata, or format sizes in human-readable units.
+
+So even a basic utility like 𝗹𝘀 teaches a lot:
+ • How the shell parses commands
+ • How programs interact with the filesystem
+ • How data is presented to the user
+
+Sometimes, the best way to understand systems is by mentally re-building the tools that are relied on every day.</p></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

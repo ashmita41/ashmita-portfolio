@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>𝗪𝗵𝘆 𝗶𝘀 𝗥𝗲𝗱𝗶𝘀 𝘀𝗼 𝗳𝗮𝘀𝘁? · Ashmita Pandey</title>
+<meta name="description" content="𝗪𝗵𝘆 𝗶𝘀 𝗥𝗲𝗱𝗶𝘀 𝘀𝗼 𝗳𝗮𝘀𝘁?">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7394279445479440385.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>𝗪𝗵𝘆 𝗶𝘀 𝗥𝗲𝗱𝗶𝘀 𝘀𝗼 𝗳𝗮𝘀𝘁?</h1>
+<p>Ashmita Pandey · <time datetime="2025-11-12">Nov 12, 2025</time> · Redis · Databases</p>
+<div class="original-body"><p>𝗪𝗵𝘆 𝗶𝘀 𝗥𝗲𝗱𝗶𝘀 𝘀𝗼 𝗳𝗮𝘀𝘁?
+
+Redis is known for its exceptional speed and low-latency performance, capable of handling over 100,000 queries per second. Its design is optimized for in-memory operations, efficient I/O management, and data structure optimization.
+
+𝟭. 𝗥𝗔𝗠-𝗯𝗮𝘀𝗲𝗱 𝗮𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲
+Redis stores all data in RAM rather than on disk. Since RAM access times are measured in nanoseconds compared to milliseconds for disk access, Redis can perform read and write operations thousands of times faster than traditional disk-based databases. This eliminates I/O bottlenecks and enables real-time data processing.
+
+𝟮. 𝗜𝗢 𝗠𝘂𝗹𝘁𝗶𝗽𝗹𝗲𝘅𝗶𝗻𝗴 𝗮𝗻𝗱 𝗦𝗶𝗻𝗴𝗹𝗲-𝘁𝗵𝗿𝗲𝗮𝗱𝗲𝗱 𝗘𝘅𝗲𝗰𝘂𝘁𝗶𝗼𝗻
+Redis uses an event-driven model based on IO multiplexing. Multiple client connections are handled concurrently within a single thread using mechanisms like epoll, kqueue, or select. This avoids the overhead of thread context switching and locking, ensuring predictable performance under high concurrency. The single-threaded event loop processes commands sequentially, maintaining data consistency while maximizing CPU efficiency.
+
+𝟯. 𝗢𝗽𝘁𝗶𝗺𝗶𝘇𝗲𝗱 𝗗𝗮𝘁𝗮 𝗦𝘁𝗿𝘂𝗰𝘁𝘂𝗿𝗲𝘀
+Redis implements highly efficient, low-level data structures tailored for specific use cases.
+ • SDS (Simple Dynamic Strings) for O(1) string length retrieval and pre-allocated buffer management.
+ • HashTables and ZipLists for compact and fast key-value storage.
+ • SkipLists and IntSets for quick sorted data retrieval and membership checks.
+These structures minimize memory fragmentation, reduce reallocation costs, and support constant or logarithmic time complexity for most operations.
+
+In essence, Redis achieves its performance through memory-based storage, non-blocking I/O design, and carefully engineered data structures that together ensure minimal latency and high throughput.</p><figure><img src="../assets/blogs/post-7394279445479440385-01.jpg" alt="Redis product logo." loading="lazy" decoding="async"></figure></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

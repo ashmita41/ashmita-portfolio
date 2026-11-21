@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>𝗪𝗵𝗮𝘁 𝗵𝗮𝗽𝗽𝗲𝗻𝘀 𝗶𝗳 𝘁𝘄𝗼 𝗺𝗶𝗰𝗿𝗼𝘀𝗲𝗿𝘃𝗶𝗰𝗲𝘀 𝘁𝗿𝘆 𝘁𝗼 𝗺𝗼𝗱𝗶𝗳𝘆 𝘁𝗵𝗲 𝘀𝗮𝗺𝗲 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲 𝗿𝗲𝗰𝗼𝗿𝗱 𝗮𝘁 𝘁𝗵𝗲 𝘀𝗮𝗺𝗲 𝘁𝗶𝗺𝗲? · Ashmita Pandey</title>
+<meta name="description" content="𝗪𝗵𝗮𝘁 𝗵𝗮𝗽𝗽𝗲𝗻𝘀 𝗶𝗳 𝘁𝘄𝗼 𝗺𝗶𝗰𝗿𝗼𝘀𝗲𝗿𝘃𝗶𝗰𝗲𝘀 𝘁𝗿𝘆 𝘁𝗼 𝗺𝗼𝗱𝗶𝗳𝘆 𝘁𝗵𝗲 𝘀𝗮𝗺𝗲 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲 𝗿𝗲𝗰𝗼𝗿𝗱 𝗮𝘁 𝘁𝗵𝗲 𝘀𝗮𝗺𝗲 𝘁𝗶𝗺𝗲?">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7407689298478551040.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>𝗪𝗵𝗮𝘁 𝗵𝗮𝗽𝗽𝗲𝗻𝘀 𝗶𝗳 𝘁𝘄𝗼 𝗺𝗶𝗰𝗿𝗼𝘀𝗲𝗿𝘃𝗶𝗰𝗲𝘀 𝘁𝗿𝘆 𝘁𝗼 𝗺𝗼𝗱𝗶𝗳𝘆 𝘁𝗵𝗲 𝘀𝗮𝗺𝗲 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲 𝗿𝗲𝗰𝗼𝗿𝗱 𝗮𝘁 𝘁𝗵𝗲 𝘀𝗮𝗺𝗲 𝘁𝗶𝗺𝗲?</h1>
+<p>Ashmita Pandey · <time datetime="2025-12-19">Dec 19, 2025</time> · Microservices · Databases</p>
+<div class="original-body"><p>𝗪𝗵𝗮𝘁 𝗵𝗮𝗽𝗽𝗲𝗻𝘀 𝗶𝗳 𝘁𝘄𝗼 𝗺𝗶𝗰𝗿𝗼𝘀𝗲𝗿𝘃𝗶𝗰𝗲𝘀 𝘁𝗿𝘆 𝘁𝗼 𝗺𝗼𝗱𝗶𝗳𝘆 𝘁𝗵𝗲 𝘀𝗮𝗺𝗲 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲 𝗿𝗲𝗰𝗼𝗿𝗱 𝗮𝘁 𝘁𝗵𝗲 𝘀𝗮𝗺𝗲 𝘁𝗶𝗺𝗲?
+
+A friend recently asked me this question, and after exploring it, here are the key findings. In this post, I will try to cover it in brief so that everyone can understand.
+
+When two independent services attempt to write to the same data, the system can run into issues like lost updates, version conflicts, and inconsistent state. To handle this, backend systems generally follow a few well-established approaches:
+
+1. Pessimistic Locking
+The database locks the record during a transaction to prevent parallel writes. Reliable, but may affect performance.
+
+2. Optimistic Locking
+Each record has a version or timestamp, and updates succeed only if versions match. This scales well and is widely used.
+
+3. Distributed Locking
+Using tools like Redis or ZooKeeper when multiple services across nodes need exclusive access.
+
+4. Event or Saga-Based Designs
+Instead of writing directly to the same table, services communicate through events and avoid touching the same record.
+
+Most importantly:
+Each microservice should ideally own its data. If two services need interaction on the same business entity, sharing information through events or APIs is safer than competing writes to a shared table.</p></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

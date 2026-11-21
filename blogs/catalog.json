@@ -23778,5 +23778,913 @@
         }
       ]
     }
+  },
+  {
+    "id": "post-7492263669331054592",
+    "kind": "post",
+    "title": "Sometimes, the fastest database query is the one you never execute.",
+    "date": "2026-08-09",
+    "tags": [
+      "System Design",
+      "Databases"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Sometimes, the fastest database query is the one you never execute.\n\nThat's the basic idea behind Bloom Filters.\n\nBefore performing an expensive lookup, a Bloom Filter helps answer a simple question:\n\nCould this key exist?\n\nThe answer can be:\n\nDefinitely not\nor\nProbably yes\n\nIf it's definitely not present, we can skip the lookup.\n\nIf it's probably present, we perform the actual lookup.\n\nThe interesting part is that Bloom Filters don't store the actual data.\n\nThey use a bit array and multiple hash functions to keep just enough information to determine whether an element could exist.\n\nThis makes them extremely memory efficient.\n\nBut there is a trade-off.\n\nBloom Filters can have false positives, but they can never have false negatives.\n\nThis simple idea is useful in systems such as Cassandra, Bigtable, HBase, Redis, and other large-scale systems where avoiding unnecessary disk or database reads can make a significant difference.\n\nI recently wrote an article explaining how Bloom Filters work, why false positives happen, how they save disk I/O, and where they are used in real-world systems.\n\nIf you've heard about Bloom Filters but never quite understood how they work, ",
+            {
+              "text": "check it out.",
+              "href": "https://ashmita-dev.onrender.com/blogs/bloom-filters-how-databases-avoid-millions-of-unnecessary-disk-reads.html"
+            },
+            ""
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7484144222854508545",
+    "kind": "post",
+    "title": "Spent my Saturday with a room full of people building some really cool stuff 😊",
+    "date": "2026-07-18",
+    "tags": [
+      "Speaking",
+      "Community",
+      "AI"
+    ],
+    "original": {
+      "blocks": [
+        "Spent my Saturday with a room full of people building some really cool stuff 😊\n\nHad a great time attending the Agents & APIs Developer Meetup by Postman at DevX.\n\nIt was great listening to Nikhilesh Tayal. His session felt a little extra special since he's from my hometown, Udaipur. Yash Jain shared some practical takeaways, and I also enjoyed hearing Indranil Chandra's perspective on AI.\n\nA special mention to Aanchal Mishra for being such a wonderful host. She kept the sessions engaging and made the whole event feel very welcoming.\n\nBig thanks to Disha Jain and Shubham Kanojiya from IndiRepair for putting together such a fantastic event. Community events like these take a lot of effort behind the scenes, and it truly showed.\n\nReally enjoyed connecting with the amazing folks from the developer community.\n\nThank you Postman, GitHub, IndiRepair and DevX for making this happen. Looking forward to the next one! 🚀\n\n#Postman #GitHub #DeveloperCommunity #AI #APIs #Networking #Mumbai",
+        {
+          "figure": {
+            "path": "assets/blogs/post-7484144222854508545-01.jpg",
+            "alt": "Attendees seated at the public Postman Agents & APIs developer meetup."
+          }
+        },
+        {
+          "figure": {
+            "path": "assets/blogs/post-7484144222854508545-02.jpg",
+            "alt": "A presenter speaks to the audience at the public meetup."
+          }
+        },
+        {
+          "figure": {
+            "path": "assets/blogs/post-7484144222854508545-03.jpg",
+            "alt": "The audience at the meetup in the DevX event space."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7482323563878703104",
+    "kind": "post",
+    "title": "It took me almost a week to write this article",
+    "date": "2026-07-13",
+    "tags": [
+      "AI",
+      "Engineering Practices"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "It took me almost a week to write this article\n\nIt captures my thoughts on the shift from 𝗩𝗶𝗯𝗲 𝗖𝗼𝗱𝗶𝗻𝗴 to 𝗦𝗽𝗲𝗰-𝗗𝗿𝗶𝘃𝗲𝗻 𝗗𝗲𝘃𝗲𝗹𝗼𝗽𝗺𝗲𝗻𝘁, why specifications are becoming increasingly important in the AI era, and what this means for software engineers.\n\n",
+            {
+              "text": "I'd love for you to give it a read.",
+              "href": "https://ashmita-dev.onrender.com/blogs/stop-vibe-coding-start-writing-specifications.html"
+            },
+            "\n\nA big thanks to Shahid Kazi, for introducing me to Spec-Driven Development. One thing he often says has stayed with me:\n\n\"In the AI era, an engineer should invest their time in understanding the business and asking the right questions.\"\n\nThat mindset has completely changed the way I approach software development.\n\nI feel this is just the beginning. As AI continues to evolve, engineers may spend less time writing code and more time understanding the business, defining requirements, and making architectural decisions.\n\nDo you agree, or do you think writing code will always remain the core skill of a software engineer?"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7479907757345685505",
+    "kind": "post",
+    "title": "HTTP just got its first new standardized request method in more than 20 years.",
+    "date": "2026-07-06",
+    "tags": [
+      "Networking",
+      "HTTP"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "HTTP just got its first new standardized request method in more than 20 years.\n\nIt's called QUERY.\n\nAt first, it might seem like just another HTTP method. But it actually solves a problem that many backend engineers have encountered while designing APIs.\n\nSuppose you're building a product search endpoint where users can filter by:\n\n• Multiple brands\n• Price range\n• Categories\n• Rating\n• Availability\n• Sorting options\n\nTraditionally, we'd use a GET request.\n\nhttp\nGET /products?brands=Apple,Samsung&minPrice=30000&maxPrice=80000&rating=4...\n\nThis works well for simple queries, but as more filters are added, the URL quickly becomes long, difficult to read, and harder to maintain. It can also run into URL length limitations imposed by browsers, proxies, or servers.\n\nTo avoid this, many APIs use POST instead and send the filters as a JSON request body.\n\n{\n \"brands\": [\"Apple\", \"Samsung\"],\n \"price\": {\n  \"min\": 30000,\n  \"max\": 80000\n },\n \"rating\": 4,\n \"inStock\": true\n}\n\nWhile this makes the request much cleaner, there's one issue.\n\nA search operation doesn't create or modify anything. It's simply asking the server to return data. Using POST works technically, but it doesn't accurately describe the intent of the request.\n\nThat's where QUERY comes in.\n\nIt allows clients to send a request body while explicitly indicating that the operation is read-only.\n\nIn other words:\n\n• You get the flexibility of a request body.\n• The request still represents a read operation.\n• API semantics become clearer and more consistent.\n\nThis may seem like a small addition, but it's significant because it's the first new standardized HTTP request method in more than two decades.\n\nEven technologies that have been around for decades continue to evolve as new engineering challenges emerge.\n\nOfficial RFC: ",
+            {
+              "text": "https://lnkd.in/ez6ZZyyr",
+              "href": "https://www.rfc-editor.org/info/rfc10008/"
+            },
+            "\n\nHave you ever used POST for search endpoints because GET wasn't sufficient? I'd be interested to know how you've approached this in your APIs."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7471117168579899392",
+    "kind": "post",
+    "title": "Why and how is Redis single-threaded, yet still fast enough to handle thousands of concurrent connections?",
+    "date": "2026-06-12",
+    "tags": [
+      "System Design",
+      "Redis"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Why and how is Redis single-threaded, yet still fast enough to handle thousands of concurrent connections?\n\nRedis powers some of the world's largest applications, but one of its most interesting design choices is that command execution is primarily single-threaded.\n\nI recently wrote an article that explores the architecture behind Redis, including atomic operations, I/O Multiplexing, the event loop, in-memory execution, persistence mechanisms, and the engineering trade-offs that make it all work.\n\n",
+            {
+              "text": "Check it out",
+              "href": "https://ashmita-dev.onrender.com/blogs/what-makes-redis-special-understanding-why-a-single-threaded-database-can-handle-massive-scale.html"
+            },
+            " if you're interested in Backend Engineering, System Design, or understanding what happens behind a simple GET or SET command.\n\nWould love to hear your thoughts and any interesting Redis use cases you've worked on."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7466828933531885568",
+    "kind": "post",
+    "title": "How much storage do you think YouTube needs every day if users upload 500 hours of video every minute?",
+    "date": "2026-05-31",
+    "tags": [
+      "System Design",
+      "Storage",
+      "Video"
+    ],
+    "original": {
+      "blocks": [
+        "How much storage do you think YouTube needs every day if users upload 500 hours of video every minute?\n\nTake a guess before you Google it"
+      ]
+    }
+  },
+  {
+    "id": "post-7457053869471260672",
+    "kind": "post",
+    "title": "Everyone talks about AI hallucinations and bias",
+    "date": "2026-05-04",
+    "tags": [
+      "AI",
+      "Engineering Practices"
+    ],
+    "original": {
+      "blocks": [
+        "Everyone talks about AI hallucinations and bias\n\nBut there’s a quieter problem that might be more dangerous.\n\n👉 AI that agrees with you too much.\n\nBoth OpenAI and Anthropic have acknowledged this as a major issue.\n\nTechnically, it’s called sycophancy.\n\nAI systems tend to validate your opinions, even when you’re wrong.\n\nAnd it’s not random.\n\nA study by Stanford University found that top models like GPT, Claude, and Gemini are ~49% more likely to agree with users than humans are.\n\nSo why does this happen?\n\nThere are two layers to it:\n\n1. Technical reason (RLHF)\nMost modern AI models are trained using Reinforcement Learning from Human Feedback.\n\nHumans rate responses.\nAI learns what gets higher ratings.\n\nAnd guess what humans tend to reward?\n\n✔️ Agreement\n✔️ Validation\n✔️ “You’re right” energy\n\nSo the model optimizes for that.\n\n2. Psychological + business reason\n\nLet’s be honest.\n\nA system that agrees with you feels:\n• Smarter\n• Friendlier\n• Easier to trust\n\nIt becomes… addictive.\n\nAnd more engagement = more usage = more growth.\n\nSo naturally, a “yes-man AI” performs better as a product.\n\nNow the real question:\n\nAre we building AI that challenges humans to think better\nor AI that simply keeps humans comfortable?\n\nBecause those two paths lead to very different futures."
+      ]
+    }
+  },
+  {
+    "id": "post-7456718011484315648",
+    "kind": "post",
+    "title": "Do you know the difference between AI Agents and Agentic AI?",
+    "date": "2026-05-03",
+    "tags": [
+      "AI",
+      "Agents"
+    ],
+    "original": {
+      "blocks": [
+        "Do you know the difference between AI Agents and Agentic AI?\n\nA lot of people use these terms interchangeably.\nBut they’re fundamentally different.\n\nLet’s break it down with a practical example 👇\n\nImagine you’re building a system for trip planning.\n\nA user says:\n\"I want to plan a 3-day trip to Goa within ₹15,000.\"\n\n👉 What an AI Agent does:\n\nAn AI agent handles a specific task.\n\nFor example:\n\nOne agent finds flights\nOne agent suggests hotels\nOne agent lists places to visit\n\nEach agent executes its job.\nBut you still decide how everything fits together.\n\n👉 What a Multi-Agent System does:\n\nNow multiple agents work together:\n\nTravel agent (flights/trains)\nAccommodation agent\nItinerary agent\n\nThey collaborate and give a combined output.\n\nBetter. But still predefined coordination.\n\n👉 What Agentic AI does:\n\nThis is where the shift happens.\n\nSame input:\n\"3-day Goa trip under ₹15,000\"\n\nNow the system:\n • Understands constraints (budget, duration, preferences)\n • Creates a plan (travel + stay + activities allocation)\n • Decides trade-offs (cheap flight vs better hotel)\n • Chooses which tools/agents to use\n • Executes in the right sequence\n • Adapts if something fails (e.g., budget exceeded → replan)\n\nIt doesn’t just execute tasks.\nIt thinks, plans, and orchestrates like a human would.\n\nThe core difference:\n • AI Agents → Do tasks\n • Multi-Agent Systems → Do multiple tasks together\n • Agentic AI → Decides what tasks to do, how to do them, and in what order\n\nNot every problem needs Agentic AI.\n\nBut when it does,\nit changes everything.\n\nFrom executing tasks\nto actually figuring out what needs to be done.\n\nReally curious to hear what you think. Where do you see Agentic AI being used?"
+      ]
+    }
+  },
+  {
+    "id": "post-7456015952997044224",
+    "kind": "post",
+    "title": "What happens when you upload a file to Amazon S3?",
+    "date": "2026-05-01",
+    "tags": [
+      "System Design",
+      "Cloud Computing",
+      "AWS"
+    ],
+    "original": {
+      "blocks": [
+        "What happens when you upload a file to Amazon S3?\n\nLet’s understand it step by step 👇\n\nAt a high level, S3 works with two core layers:\n\n• Bucket (metadata layer)\n• Object (data + metadata)\n\nNow here’s the actual flow:\n\n1. You create a bucket\nThe bucket is not where your file physically lives\nIt exists in the metadata layer and acts as a logical container\nIt defines namespace, region, policies, and access control\n\n2. Client sends a PUT request\nWhen you upload a file, Your application sends an HTTP PUT request to S3 (often signed using AWS Signature V4)\n\n3. S3 checks:\n– Does the bucket exist?\n– Do you have permission to upload?\n– It validates:\n  IAM policies / bucket policies\n ACLs (if used)\n Request signature\n\n4. Request is routed internally\nS3 routes the request to the appropriate partition based on the object key (This is part of how S3 achieves horizontal scaling)\n\n5. Metadata is prepared\nBefore storing the file, S3 creates metadata like:\n– Key (object name)\n– Size, content-type\n– Timestamps, storage class\n– Version ID (if versioning is enabled)\n\n6. Data gets stored\nThe object data is written to multiple storage nodes across Availability Zones\nS3 ensures high durability (11 9’s) by replicating the data\n\n7. Unique Object ID is generated\nS3 assigns an ID that links your file’s data with its metadata\nIt is an internal identifier that maps the object’s data to its metadata\nS3 provides strong read-after-write consistency for PUT operations\n\n8. Metadata store is updated\nThe metadata layer is updated with object location, version, and attributes\nThis enables fast lookup and retrieval\n\nS3 is not just a storage service\nIt’s a distributed system that separates compute, metadata, and storage layers\n\nThat’s why it works reliably even at massive scale!",
+        {
+          "figure": {
+            "path": "assets/blogs/post-7456015952997044224-01.jpg",
+            "alt": "Amazon S3 product logo."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7454055177172639745",
+    "kind": "post",
+    "title": "Dead Letter Queues are one of those small concepts that quietly save production systems.",
+    "date": "2026-04-26",
+    "tags": [
+      "System Design",
+      "Messaging"
+    ],
+    "original": {
+      "blocks": [
+        "Dead Letter Queues are one of those small concepts that quietly save production systems.\n\nWhen a message fails to be processed\nMaybe the data is malformed\nMaybe a downstream service is down\n\nWhat do you do?\nDrop it? Retry forever?\n\nNeither.\n\nYou send it to a Dead Letter Queue (DLQ).\n\nA DLQ is a separate queue for messages that fail after a defined number of retries.\nThey don’t block your main flow. They don’t keep consuming resources. They wait until someone inspects and fixes them.\n\nWithout DLQs\n• One bad message can block the entire queue\n• Continuous retries can waste resources\n\nWith DLQs\n• The main system keeps running\n• Failures are isolated and easier to debug\n\nAny async system at scale should include a DLQ.\n\nWould love to know how others handle failed messages in their systems."
+      ]
+    }
+  },
+  {
+    "id": "post-7453328085342412800",
+    "kind": "post",
+    "title": "I was having a conversation with a fellow techie recently, and we landed on a simple idea that often gets overlooked.",
+    "date": "2026-04-24",
+    "tags": [
+      "Engineering Practices"
+    ],
+    "original": {
+      "blocks": [
+        "I was having a conversation with a fellow techie recently, and we landed on a simple idea that often gets overlooked.\n\nPolling is one of the most underestimated solutions.\n\nEngineers love WebSockets and event-driven systems. And yes, they are powerful.\nBut not every problem needs real-time complexity.\n\nIf updates happen every few minutes and don’t need to feel instant, polling every 30 seconds works perfectly fine.\nNo persistent connections. No complex setup. Just a simple API call on a timer.\n\nNow compare that with WebSockets\n• You need sticky sessions\n• You need to handle reconnections\n• You need to manage server-side state\n\nThat cost adds up.\n\nSo before jumping to a real-time solution, ask\nDoes this actually need to be real-time?\nOr does it just need to be recent enough?\n\nSometimes, the simplest approach is the most reliable one.\n\nThe boring solution is often the right one."
+      ]
+    }
+  },
+  {
+    "id": "post-7451216929534627842",
+    "kind": "post",
+    "title": "Your service is slow… but CPU usage is low. What do you check first?",
+    "date": "2026-04-18",
+    "tags": [
+      "Backend Engineering",
+      "Observability"
+    ],
+    "original": {
+      "blocks": [
+        "Your service is slow… but CPU usage is low. What do you check first?\n\nIt feels counterintuitive.\n\nIf CPU isn’t busy, why is the system slow?\n\nBecause most performance issues aren’t about doing too much work…\nthey’re about waiting too long.\n\nHere’s how I approach it:\n\n1. Thread / Process State\n • Are workers blocked on locks?\n • Waiting on I/O?\n • Stuck in queues?\nIf your system isn’t using CPU, chances are it’s idle… but not by choice.\n\n2. External Dependencies\n • Database latency\n • Third-party APIs\n • Internal microservices\nA slow dependency can quietly drag your entire system down.\n\n3. Database Bottlenecks\n • Missing indexes\n • Inefficient queries\n • Connection pool limits\nDatabases are often the hidden gravity well of latency.\n\n4. Lock Contention\n • Shared resources causing blocking\n • Poor concurrency design\nLow CPU + high latency often points to threads waiting their turn.\n\n5. I/O Wait\n • Disk reads/writes\n • Network delays\n • Logging overhead\nI/O is the silent saboteur. It slows everything without spiking CPU.\n\n6. Queue Backlogs\n • Message queues piling up\n • Thread pools saturated\n • Requests waiting before execution\nSometimes the system isn’t slow… it’s just not getting to work yet.\n\n7. Resource Limits (Other than CPU)\n • Memory pressure\n • File descriptors\n • Network bandwidth\nCPU is just one piece of the puzzle.\n\nIf CPU usage is low, your system isn’t overloaded… it’s waiting somewhere. And the real skill is figuring out where that wait begins.\n\nWould love to know what’s the most unexpected bottleneck you’ve discovered when everything looked fine on the surface?"
+      ]
+    }
+  },
+  {
+    "id": "post-7449048153221210112",
+    "kind": "post",
+    "title": "How do you deploy 20+ microservices with zero downtime?",
+    "date": "2026-04-12",
+    "tags": [
+      "Microservices",
+      "DevOps"
+    ],
+    "original": {
+      "blocks": [
+        "How do you deploy 20+ microservices with zero downtime?\n\nWhen systems scale, deployments can’t afford disruption. A single failed release can impact thousands of users in seconds.\n\nHere are some key strategies that make seamless deployments possible:\n\n✔ Blue-Green Deployment\nMaintain two identical environments: Blue (live) and Green (new version).\n • Deploy the new version to the Green environment\n • Run validations and health checks\n • Switch traffic from Blue to Green once stable\nThis approach allows instant rollback by redirecting traffic back if needed.\n\n✔ Canary Release\nRoll out changes incrementally to a small subset of users:\n • Start with a small percentage (e.g., 1–5%)\n • Monitor system metrics like errors, latency, and usage patterns\n • Gradually increase traffic if everything performs as expected\nThis helps limit the impact of potential issues.\n\n✔ Kubernetes Rolling Updates\nIn containerized environments, Kubernetes manages deployments efficiently:\n • New instances (pods) are created alongside existing ones\n • Traffic is gradually shifted to the new version\n • Old instances are terminated only after stability is confirmed\nThis ensures continuous availability during updates.\n\n✔ Feature Flags\nDecouple deployment from feature release:\n • Deploy code without immediately exposing new functionality\n • Enable features selectively for users or regions\n • Disable features instantly without redeploying\nThis provides fine-grained control and safer experimentation.\n\nIn practice, these strategies are often combined to achieve both reliability and speed.\nFor example, using feature flags alongside canary releases and rolling updates enables controlled, observable, and reversible deployments.\n\nThe objective is not just to deploy faster, but to deploy safely, predictably, and without disrupting users."
+      ]
+    }
+  },
+  {
+    "id": "post-7445800896338378752",
+    "kind": "post",
+    "title": "An API responds in ~100ms for users in the US, but takes ~2 seconds for users in India.",
+    "date": "2026-04-03",
+    "tags": [
+      "System Design",
+      "Networking"
+    ],
+    "original": {
+      "blocks": [
+        "An API responds in ~100ms for users in the US, but takes ~2 seconds for users in India.\n\nAt first glance, it looks like a backend bug.\nIn reality, it’s a standard system design problem.\n\nWhen users are far from your servers, latency increases due to network distance, routing, and multiple hops. Optimizing code alone won’t fix this.\n\nWhat actually works is designing systems for global scale:\n\n1. Region-based deployments\nServe users from the nearest geographic region instead of a single centralized server.\n\n2. Content Delivery Network (CDN)\nCache static and frequently accessed data closer to users to reduce backend dependency.\n\n3. Caching layer (Redis / API Gateway)\nMinimize repeated database calls and reduce response time.\n\n4. Database replication\nRoute read operations to the nearest replica while keeping writes controlled.\n\n5. Geo-routing\nAutomatically direct users to the closest available server.\n\n6. API optimization\nReduce payload size, enable compression, and use efficient protocols like HTTP/2.\n\nWhat seems like a performance issue in code is often a distribution problem in architecture.\n\nThis is what real-world system design looks like."
+      ]
+    }
+  },
+  {
+    "id": "post-7444758774130671616",
+    "kind": "post",
+    "title": "𝗗𝗼𝗲𝘀 𝗣𝘆𝘁𝗵𝗼𝗻’𝘀 𝗚𝗮𝗿𝗯𝗮𝗴𝗲 𝗖𝗼𝗹𝗹𝗲𝗰𝘁𝗶𝗼𝗻 𝗿𝗲𝗮𝗹𝗹𝘆 𝗵𝗮𝗻𝗱𝗹𝗲 𝗮𝗹𝗹 𝗺𝗲𝗺𝗼𝗿𝘆 𝗽𝗿𝗼𝗯𝗹𝗲𝗺𝘀?",
+    "date": "2026-03-31",
+    "tags": [
+      "Backend Engineering",
+      "Python"
+    ],
+    "original": {
+      "blocks": [
+        "𝗗𝗼𝗲𝘀 𝗣𝘆𝘁𝗵𝗼𝗻’𝘀 𝗚𝗮𝗿𝗯𝗮𝗴𝗲 𝗖𝗼𝗹𝗹𝗲𝗰𝘁𝗶𝗼𝗻 𝗿𝗲𝗮𝗹𝗹𝘆 𝗵𝗮𝗻𝗱𝗹𝗲 𝗮𝗹𝗹 𝗺𝗲𝗺𝗼𝗿𝘆 𝗽𝗿𝗼𝗯𝗹𝗲𝗺𝘀?\n\nFor a long time, I had this assumption:\nPython handles memory automatically, so I don’t really need to think about it.\n\nBut recently, while exploring this deeper, I realized something important.\n\nPython does manage memory automatically, but automatic doesn’t mean foolproof.\n\nPython primarily uses reference counting, where every object keeps track of how many references point to it. When this count drops to zero, the memory is freed immediately.\n\nAlong with this, Python also uses a garbage collector to handle more complex cases like circular references.\n\nSo at a high level, it feels like everything is taken care of.\n\nBut in practice, things are a bit different.\n\n𝗪𝗵𝗲𝗿𝗲 𝘁𝗵𝗶𝗻𝗴𝘀 𝗴𝗲𝘁 𝘁𝗿𝗶𝗰𝗸𝘆\nWhat I found interesting is that Python doesn’t free memory based on whether you need an object.\nIt frees memory only when there are no references left.\n\nWhich means:\n\nYou can stop using an object…\nbut if something still references it, it stays in memory.\n\nRelatable scenarios most of us encounter:\n\n1. Caching and global data\nYou store data in a global variable or cache “just in case.”\nIt keeps growing quietly and never gets released.\n\n2. Circular references\nTwo objects referencing each other can prevent memory from being freed because their reference count never reaches zero.\n\n3. Long-running applications\nIn scripts, you may never notice.\nBut in servers or background jobs, small memory retention keeps adding up over time.\n\n4. Resources not explicitly closed\nFiles, DB connections, sockets - they may stay open longer than expected if not handled properly.\n\nRealization - Garbage Collection in Python is powerful, but it works based on reachability, not usefulness.\n\nIt cannot decide whether your object is still logically needed.\nIt only checks if something still points to it.\n\nEarlier, I thought memory management in Python was something I could ignore.\n\nNow I see it differently.\n\nYou don’t need to manage memory manually,\nbut you definitely need to understand how it behaves.\n\nBecause most memory issues don’t fail immediately.\nThey show up later, when your system scales."
+      ]
+    }
+  },
+  {
+    "id": "post-7437820090768719872",
+    "kind": "post",
+    "title": "🚩 Red Flag: Blocking users by IP",
+    "date": "2026-03-12",
+    "tags": [
+      "Networking",
+      "Reliability"
+    ],
+    "original": {
+      "blocks": [
+        "🚩 Red Flag: Blocking users by IP\n\nA common reaction to API abuse is to block the attacker’s IP address.\nHowever, this can unintentionally block many legitimate users.\n\nIn many environments like corporate offices, universities, or campuses, thousands of users share the same public IP due to NAT (Network Address Translation). Blocking that IP can therefore deny access to an entire organization.\n\nBetter approach:\n• Prefer rate limiting by User_ID or API_Key whenever authentication exists.\n• Use IP-based limits only for unauthenticated endpoints.\n• Apply higher thresholds for IP limits to reduce false positives.\n• Consider combining IP + user-level limits for better protection.\n\nIP addresses often represent networks, not individual users, so relying solely on IP blocking can lead to unintended service disruptions."
+      ]
+    }
+  },
+  {
+    "id": "post-7434619324151042048",
+    "kind": "post",
+    "title": "𝗠𝘆 𝗘𝘅𝗽𝗲𝗿𝗶𝗲𝗻𝗰𝗲 𝘄𝗶𝘁𝗵 𝗗𝗮𝘁𝗮𝗯𝗿𝗶𝗰𝗸𝘀 (𝗔𝗻𝗱 𝗪𝗵𝘆 𝗜𝘁’𝘀 𝗠𝗼𝗿𝗲 𝗧𝗵𝗮𝗻 𝗝𝘂𝘀𝘁 “𝗕𝗶𝗴 𝗗𝗮𝘁𝗮”)",
+    "date": "2026-03-03",
+    "tags": [
+      "Data Engineering",
+      "Databricks"
+    ],
+    "original": {
+      "blocks": [
+        "𝗠𝘆 𝗘𝘅𝗽𝗲𝗿𝗶𝗲𝗻𝗰𝗲 𝘄𝗶𝘁𝗵 𝗗𝗮𝘁𝗮𝗯𝗿𝗶𝗰𝗸𝘀 (𝗔𝗻𝗱 𝗪𝗵𝘆 𝗜𝘁’𝘀 𝗠𝗼𝗿𝗲 𝗧𝗵𝗮𝗻 𝗝𝘂𝘀𝘁 “𝗕𝗶𝗴 𝗗𝗮𝘁𝗮”)\n\nRecently, I worked on Databricks as part of a data workflow implementation and spent time exploring its architecture in depth. My initial understanding was that it was primarily a managed Spark platform. That’s technically correct.\n\nHowever, after working with it hands-on, I realized it represents a broader architectural approach to modern data systems.\n\n𝗟𝗮𝗸𝗲𝗵𝗼𝘂𝘀𝗲 𝗔𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲 𝗶𝗻 𝗣𝗿𝗮𝗰𝘁𝗶𝗰𝗲\nDatabricks is built around the Lakehouse model, combining scalable object storage with warehouse-level reliability.\n\nWith Delta Lake, it introduces:\n • ACID transactions on cloud object storage\n • Schema enforcement and schema evolution\n • Time travel through versioned transaction logs\n • Optimistic concurrency control\n\nThe presence of a transaction log layer fundamentally changes the behavior of data stored in object storage. Instead of treating files as static blobs, Delta maintains metadata and commit logs that enable snapshot isolation and consistent reads across distributed workloads.\n\n𝗦𝗲𝗽𝗮𝗿𝗮𝘁𝗶𝗼𝗻 𝗼𝗳 𝗦𝘁𝗼𝗿𝗮𝗴𝗲 𝗮𝗻𝗱 𝗖𝗼𝗺𝗽𝘂𝘁𝗲\nThe strict separation between storage and compute is another strong architectural decision.\n\nClusters can scale independently. Compute resources can be tuned per workload. Storage remains durable and decoupled. From a system design perspective, this improves elasticity and fault isolation while keeping infrastructure flexible.\n\n𝗨𝗻𝗶𝗳𝗶𝗲𝗱 𝗕𝗮𝘁𝗰𝗵 𝗮𝗻𝗱 𝗦𝘁𝗿𝗲𝗮𝗺𝗶𝗻𝗴\nDatabricks leverages Spark’s structured APIs to unify batch and streaming processing.\n\nStreaming workloads are treated as incremental structured queries, which simplifies pipeline design. Instead of maintaining separate architectures for real-time and historical data, both follow a consistent processing model built on execution DAGs and distributed task scheduling.\n\n𝗚𝗼𝘃𝗲𝗿𝗻𝗮𝗻𝗰𝗲 𝗮𝗻𝗱 𝗠𝗲𝘁𝗮𝗱𝗮𝘁𝗮 𝗠𝗮𝗻𝗮𝗴𝗲𝗺𝗲𝗻𝘁\nUnity Catalog introduces centralized governance:\n • Fine-grained access control\n • Data lineage tracking\n • Cross-workspace metadata management\n\nThis effectively creates a control plane over distributed data assets, which becomes critical as systems scale.\n\n𝗠𝘆 𝗣𝗲𝗿𝘀𝗽𝗲𝗰𝘁𝗶𝘃𝗲\nComing from a backend engineering background, what I found particularly interesting was how closely Databricks reflects core distributed systems concepts:\n • Transaction logs managing distributed state\n • Snapshot isolation across object storage\n • DAG-based execution planning\n • Lazy evaluation and query optimization\n • Partition pruning and file-level indexing\n • Fault tolerance via lineage-based recomputation\n\nUnderstanding these internals makes it particularly interesting from a backend and system design perspective, especially when thinking in terms of distributed state management, execution planning, and concurrency control."
+      ]
+    }
+  },
+  {
+    "id": "post-7432279543060512768",
+    "kind": "post",
+    "title": "𝗦𝘆𝘀𝘁𝗲𝗺 𝗗𝗲𝘀𝗶𝗴𝗻 𝗡𝗼𝘁𝗲:",
+    "date": "2026-02-25",
+    "tags": [
+      "Kafka",
+      "Messaging"
+    ],
+    "original": {
+      "blocks": [
+        "𝗦𝘆𝘀𝘁𝗲𝗺 𝗗𝗲𝘀𝗶𝗴𝗻 𝗡𝗼𝘁𝗲:\n“𝗠𝗲𝘀𝘀𝗮𝗴𝗲 𝗤𝘂𝗲𝘂𝗲” 𝗮𝗻𝗱 “𝗘𝘃𝗲𝗻𝘁 𝗦𝘁𝗿𝗲𝗮𝗺” 𝗮𝗿𝗲 𝗻𝗼𝘁 𝘀𝘆𝗻𝗼𝗻𝘆𝗺𝘀.\n\nIf you use RabbitMQ, once a worker reads a message, it gets deleted.\nIt’s a queue.\n\nIf you use Kafka, the message stays there.\nIt’s an append-only log.\n\nIn practice:\nIf you need multiple different microservices to react to the exact same event independently (and potentially replay past events), you need an Event Stream, not a standard Message Queue"
+      ]
+    }
+  },
+  {
+    "id": "post-7431541803658395649",
+    "kind": "post",
+    "title": "In a monolith, transactions are easy.",
+    "date": "2026-02-23",
+    "tags": [
+      "System Design",
+      "Microservices"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "In a monolith, transactions are easy.\nEverything runs inside a single database transaction. If one step fails, the entire operation rolls back.\n\nMicroservices don’t work that way.\nEach service owns its own database, network calls can fail, and locking multiple databases in a single transaction isn’t practical. That’s where the Saga Design Pattern becomes useful.\n\nCheck out my recent article that dives into the Saga pattern in microservice architecture.\n",
+            {
+              "text": "Do give it a read,",
+              "href": "https://ashmita-dev.onrender.com/blogs/saga-design-pattern-in-microservice-architecture.html"
+            },
+            " and I’d love to discuss further!"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7429733412426522624",
+    "kind": "post",
+    "title": "Recently discovered git worktree at work, and it genuinely made my day easier.",
+    "date": "2026-02-18",
+    "tags": [
+      "Engineering Practices",
+      "Git"
+    ],
+    "original": {
+      "blocks": [
+        "Recently discovered git worktree at work, and it genuinely made my day easier.\n\nI was working on two branches in parallel, which normally comes with a lot of switching and context loss. Using worktree, I was able to keep both branches open side by side and make progress on each without disrupting my setup.\n\nIt reduced a surprising amount of mental overhead and saved time. One of those small Git features that quietly improves your workflow once you start using it."
+      ]
+    }
+  },
+  {
+    "id": "post-7425774495682023424",
+    "kind": "post",
+    "title": "𝗪𝗵𝗮𝘁 𝗮 𝗠𝗲𝘀𝘀𝗮𝗴𝗲 𝗤𝘂𝗲𝘂𝗲 𝗥𝗲𝗮𝗹𝗹𝘆 𝗜𝘀?",
+    "date": "2026-02-07",
+    "tags": [
+      "System Design",
+      "Messaging"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "𝗪𝗵𝗮𝘁 𝗮 𝗠𝗲𝘀𝘀𝗮𝗴𝗲 𝗤𝘂𝗲𝘂𝗲 𝗥𝗲𝗮𝗹𝗹𝘆 𝗜𝘀?\n\nHi everyone, check out my recent article where I explore what a message queue actually does beyond simply moving messages.\n\nI break down message queues from first principles, starting with a toy design and gradually layering in real-world constraints such as consumer failure, acknowledgements, retries, and concurrency. The goal is to understand why queues are designed the way they are, not just how to use them.\n\nIf system design and distributed systems interest you, I’d love for you to ",
+            {
+              "text": "give it a read",
+              "href": "https://ashmita-dev.onrender.com/blogs/what-a-message-queue-really-is.html"
+            },
+            " and share your thoughts. Let’s connect and continue the conversation around building resilient systems."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7421511787935784960",
+    "kind": "post",
+    "title": "OpenAI recently released an article on 𝗦𝗰𝗮𝗹𝗶𝗻𝗴 𝗣𝗼𝘀𝘁𝗴𝗿𝗲𝗦𝗤𝗟 𝘁𝗼 𝗽𝗼𝘄𝗲𝗿 𝟴𝟬𝟬 𝗺𝗶𝗹𝗹𝗶𝗼𝗻 𝗖𝗵𝗮𝘁𝗚𝗣𝗧 𝘂𝘀𝗲𝗿𝘀.",
+    "date": "2026-01-26",
+    "tags": [
+      "PostgreSQL",
+      "Databases"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "OpenAI recently released an article on 𝗦𝗰𝗮𝗹𝗶𝗻𝗴 𝗣𝗼𝘀𝘁𝗴𝗿𝗲𝗦𝗤𝗟 𝘁𝗼 𝗽𝗼𝘄𝗲𝗿 𝟴𝟬𝟬 𝗺𝗶𝗹𝗹𝗶𝗼𝗻 𝗖𝗵𝗮𝘁𝗚𝗣𝗧 𝘂𝘀𝗲𝗿𝘀.\n\nAfter reading it, here are my key takeaways.\n\nDespite a 10x growth in database load over the past year, OpenAI still runs a 𝘀𝗶𝗻𝗴𝗹𝗲-𝗽𝗿𝗶𝗺𝗮𝗿𝘆 𝗣𝗼𝘀𝘁𝗴𝗿𝗲𝗦𝗤𝗟 𝘀𝗲𝘁𝘂𝗽 with nearly 𝟱𝟬 𝗿𝗲𝗮𝗱 𝗿𝗲𝗽𝗹𝗶𝗰𝗮𝘀 distributed globally. Instead of premature sharding, the focus was on disciplined optimization, vertical scaling, and offloading read-heavy traffic to replicas.\n\nThe real challenge was write scalability.  Due to 𝗣𝗼𝘀𝘁𝗴𝗿𝗲𝗦𝗤𝗟’𝘀 𝗠𝗩𝗖𝗖 𝗺𝗼𝗱𝗲𝗹, write-heavy workloads caused amplification and operational overhead. To address this, shardable write-heavy workloads were migrated to systems like Azure Cosmos DB, while PostgreSQL remained unsharded to avoid large-scale application changes.\n\nWhat stood out most was the engineering pragmatism. Fixing redundant writes, introducing lazy writes, auditing expensive ORM-generated queries, using PgBouncer for connection pooling, isolating workloads, and protecting the database from cache-miss spikes all played a key role.\n\nA great reminder that scaling is often about strong fundamentals, not exotic systems.\n\nShoutout to Bohan Zhang from OpenAI for a clear and insightful write-up.\nFull article: ",
+            {
+              "text": "https://lnkd.in/de5SFKwZ",
+              "href": "https://openai.com/index/scaling-postgresql/"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7420346302418538496",
+    "kind": "post",
+    "title": "Resuming the System Design Building Blocks series!",
+    "date": "2026-01-23",
+    "tags": [
+      "Kafka",
+      "Messaging"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Resuming the System Design Building Blocks series!\n\n",
+            {
+              "text": "Checkout my recent article on Apache Kafka,",
+              "href": "https://ashmita-dev.onrender.com/blogs/understanding-apache-kafka-and-its-role-in-modern-system-design.html"
+            },
+            " covering core concepts, real-world use cases, and its role in building scalable, event-driven systems.\n\nWould love to discuss further and hear your thoughts 👇"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7414202059744370688",
+    "kind": "post",
+    "title": "Recently I’ve been working with Elasticsearch, and it’s been a great learning experience.",
+    "date": "2026-01-06",
+    "tags": [
+      "Projects",
+      "AI"
+    ],
+    "original": {
+      "blocks": [
+        "Recently I’ve been working with Elasticsearch, and it’s been a great learning experience.\n\nWhat stood out to me is how thoughtfully its architecture is designed for scale and performance.\n\nInstead of relying on a single database instance, Elasticsearch distributes data across multiple nodes. Each index is broken into shards, and those shards are replicated across the cluster. This allows queries to be processed in parallel, which is a big reason why search and analytics remain fast even as data grows.\n\nAnother important aspect is how Elasticsearch handles indexing. Data is stored in a structure optimized for retrieval, making full-text search, filtering, and aggregations highly efficient. From a backend perspective, this changes how you think about designing APIs and building data-heavy features.\n\nI’ve only started exploring its capabilities, but it has already given me better insight into building scalable and responsive systems.\nIn the future, I’ll definitely be writing a detailed article on Elasticsearch and its real-world use cases.\n\nIf you’re exploring interesting technologies or building something exciting, feel free to share your experiences or connect. Always open to learning from the community.\n\n#Elasticsearch #BackendEngineering #SystemDesign #DistributedSystems #ScalableSystems #SoftwareDevelopment #LearningJourney",
+        {
+          "figure": {
+            "path": "assets/blogs/post-7414202059744370688-01.jpg",
+            "alt": "Elasticsearch product logo."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7412733222331039744",
+    "kind": "post",
+    "title": "While working on distributed systems, I finally started appreciating the real meaning of the CAP Theorem.",
+    "date": "2026-01-02",
+    "tags": [
+      "Distributed Systems",
+      "Databases"
+    ],
+    "original": {
+      "blocks": [
+        "While working on distributed systems, I finally started appreciating the real meaning of the CAP Theorem.\n\nIn theory, we learn that a system can only guarantee two out of:\n • Consistency\n • Availability\n • Partition Tolerance\n\nBut when you’re designing real services, this isn’t an abstract concept.\nIt shows up in very practical decisions:\n• Do we serve slightly stale data or fail the request?\n• Do we block writes during a network partition or allow divergence?\n• Do we optimize for uptime or for strict correctness in this workflow?\n\nFor example, when network partitions happen (and they always do at scale), the system must choose:\nCP: Preserve correctness, possibly rejecting some requests\nAP: Remain responsive, even if data becomes temporarily inconsistent\n\nThere is no universally “right” choice.\nThe correct decision depends on the business requirement, the user experience you want to protect, and the type of data being handled.\n\nWorking on real distributed systems taught me that CAP is not just a theorem.\nIt’s a design conversation you have every time you build something that needs to scale reliably."
+      ]
+    }
+  },
+  {
+    "id": "post-7410726205710278656",
+    "kind": "post",
+    "title": "𝗪𝗵𝗮𝘁 𝗔𝗿𝗲 𝗪𝗲𝗯𝗵𝗼𝗼𝗸𝘀 𝗮𝗻𝗱 𝗛𝗼𝘄 𝗗𝗼 𝗧𝗵𝗲𝘆 𝗪𝗼𝗿𝗸?",
+    "date": "2025-12-27",
+    "tags": [
+      "Backend Engineering",
+      "APIs"
+    ],
+    "original": {
+      "blocks": [
+        "𝗪𝗵𝗮𝘁 𝗔𝗿𝗲 𝗪𝗲𝗯𝗵𝗼𝗼𝗸𝘀 𝗮𝗻𝗱 𝗛𝗼𝘄 𝗗𝗼 𝗧𝗵𝗲𝘆 𝗪𝗼𝗿𝗸?\n\nIn today’s highly connected digital world, no system truly works alone.\nE-commerce platforms talk to payment gateways, payment gateways talk to banks, and banks update customer accounts.\nThis constant, real-time communication is what powers modern applications.\n\nOne of the most common ways systems communicate is through webhooks.\n\n𝗪𝗵𝗮𝘁 𝗶𝘀 𝗮 𝘄𝗲𝗯𝗵𝗼𝗼𝗸?\nA webhook is an HTTP request triggered automatically by an event in one system and sent to another system with event data.\n\nIn short:\nEvent happens → webhook fires → another system reacts.\n\n𝗪𝗵𝗮𝘁 𝗮𝗿𝗲 𝘄𝗲𝗯𝗵𝗼𝗼𝗸𝘀 𝘂𝘀𝗲𝗱 𝗳𝗼𝗿?\nWebhooks notify one system when something important happens in another.\n\nFor example:\nWhen your credit card is charged for a subscription, the banking system sends a webhook to the service, which then sends you an email notification.\nNo polling. No waiting. Just real-time updates.\n\nThey are a core building block of event-driven applications and architectures.\n\n𝗪𝗲𝗯𝗵𝗼𝗼𝗸 𝘃𝘀 𝗔𝗣𝗜\nAPIs are for requesting actions or data.\nWebhooks are for receiving notifications when actions happen.\n\nBoth work together.\nAPIs create events.\nWebhooks respond to them.\n\n𝗛𝗼𝘄 𝘄𝗲𝗯𝗵𝗼𝗼𝗸𝘀 𝘄𝗼𝗿𝗸\n 1. You register a public endpoint URL with a provider (Stripe, GitHub, Twilio, etc.).\n 2. You subscribe to specific events like payment.created or user.updated.\n 3. When the event occurs, the provider sends an HTTP request to your endpoint.\n 4. Your system processes the event.\n\nKey things to handle in real systems\n • At-least-once delivery → make your processing idempotent\n • Short timeouts → acknowledge fast, process asynchronously\n • High traffic bursts → use queues\n • Out-of-order events → rely on timestamps\n • Security risks → always verify webhook signatures (HMAC)\n\nWebhooks look simple, but in production they require serious engineering discipline.\nUsed correctly, they enable scalable, reliable, real-time systems.\n\nFor anyone working on backend systems, developing a good understanding of webhooks can be very helpful."
+      ]
+    }
+  },
+  {
+    "id": "post-7407689298478551040",
+    "kind": "post",
+    "title": "𝗪𝗵𝗮𝘁 𝗵𝗮𝗽𝗽𝗲𝗻𝘀 𝗶𝗳 𝘁𝘄𝗼 𝗺𝗶𝗰𝗿𝗼𝘀𝗲𝗿𝘃𝗶𝗰𝗲𝘀 𝘁𝗿𝘆 𝘁𝗼 𝗺𝗼𝗱𝗶𝗳𝘆 𝘁𝗵𝗲 𝘀𝗮𝗺𝗲 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲 𝗿𝗲𝗰𝗼𝗿𝗱 𝗮𝘁 𝘁𝗵𝗲 𝘀𝗮𝗺𝗲 𝘁𝗶𝗺𝗲?",
+    "date": "2025-12-19",
+    "tags": [
+      "Microservices",
+      "Databases"
+    ],
+    "original": {
+      "blocks": [
+        "𝗪𝗵𝗮𝘁 𝗵𝗮𝗽𝗽𝗲𝗻𝘀 𝗶𝗳 𝘁𝘄𝗼 𝗺𝗶𝗰𝗿𝗼𝘀𝗲𝗿𝘃𝗶𝗰𝗲𝘀 𝘁𝗿𝘆 𝘁𝗼 𝗺𝗼𝗱𝗶𝗳𝘆 𝘁𝗵𝗲 𝘀𝗮𝗺𝗲 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲 𝗿𝗲𝗰𝗼𝗿𝗱 𝗮𝘁 𝘁𝗵𝗲 𝘀𝗮𝗺𝗲 𝘁𝗶𝗺𝗲?\n\nA friend recently asked me this question, and after exploring it, here are the key findings. In this post, I will try to cover it in brief so that everyone can understand.\n\nWhen two independent services attempt to write to the same data, the system can run into issues like lost updates, version conflicts, and inconsistent state. To handle this, backend systems generally follow a few well-established approaches:\n\n1. Pessimistic Locking\nThe database locks the record during a transaction to prevent parallel writes. Reliable, but may affect performance.\n\n2. Optimistic Locking\nEach record has a version or timestamp, and updates succeed only if versions match. This scales well and is widely used.\n\n3. Distributed Locking\nUsing tools like Redis or ZooKeeper when multiple services across nodes need exclusive access.\n\n4. Event or Saga-Based Designs\nInstead of writing directly to the same table, services communicate through events and avoid touching the same record.\n\nMost importantly:\nEach microservice should ideally own its data. If two services need interaction on the same business entity, sharing information through events or APIs is safer than competing writes to a shared table."
+      ]
+    }
+  },
+  {
+    "id": "post-7406585279769341956",
+    "kind": "post",
+    "title": "𝗪𝗵𝗮𝘁 𝗜 𝗻𝗼𝘄 𝗰𝗵𝗲𝗰𝗸 𝗳𝗶𝗿𝘀𝘁 𝘄𝗵𝗲𝗻 𝘀𝗼𝗺𝗲𝗼𝗻𝗲 𝘀𝗮𝘆𝘀 “𝘁𝗵𝗲 𝗔𝗣𝗜 𝗶𝘀 𝘀𝗹𝗼𝘄”",
+    "date": "2025-12-16",
+    "tags": [
+      "Backend Engineering",
+      "Observability"
+    ],
+    "original": {
+      "blocks": [
+        "𝗪𝗵𝗮𝘁 𝗜 𝗻𝗼𝘄 𝗰𝗵𝗲𝗰𝗸 𝗳𝗶𝗿𝘀𝘁 𝘄𝗵𝗲𝗻 𝘀𝗼𝗺𝗲𝗼𝗻𝗲 𝘀𝗮𝘆𝘀 “𝘁𝗵𝗲 𝗔𝗣𝗜 𝗶𝘀 𝘀𝗹𝗼𝘄”\n\nWhen I started working on backend systems, I used to jump straight into the code.\nOver time, I learned that slowness is rarely a code problem. It’s about where the time is going.\n\nSo before touching the implementation, this is the checklist I follow:\n\n𝟭. 𝗜𝘀 𝗶𝘁 𝗻𝗲𝘁𝘄𝗼𝗿𝗸 𝗼𝗿 𝗯𝗮𝗰𝗸𝗲𝗻𝗱?\n • Check TTFB vs total response time\n • Slow before first byte = backend\n • Slow after = client / network / payload size\nMany “slow APIs” are actually slow clients.\n\n𝟮. 𝗪𝗵𝗶𝗰𝗵 𝗱𝗲𝗽𝗲𝗻𝗱𝗲𝗻𝗰𝘆 𝗶𝘀 𝗱𝗼𝗺𝗶𝗻𝗮𝘁𝗶𝗻𝗴 𝗹𝗮𝘁𝗲𝗻𝗰𝘆?\nBreak the request into parts:\n • Auth / middleware\n • Database\n • Cache\n • External APIs\n • Background jobs accidentally running inline\nOne slow dependency = slow API.\n\n𝟯. 𝗗𝗮𝘁𝗮𝗯𝗮𝘀𝗲 𝗳𝗶𝗿𝘀𝘁, 𝗮𝗹𝘄𝗮𝘆 𝗔𝘀𝗸:\n • Is this query indexed?\n • Is it doing more work than needed?\n • N+1 queries?\n • Full collection scan hiding behind small data?\nMost backend slowness lives here.\n\n𝟰. 𝗔𝗿𝗲 𝘄𝗲 𝗯𝗹𝗼𝗰𝗸𝗶𝗻𝗴 𝘄𝗵𝗲𝗻 𝘄𝗲 𝘀𝗵𝗼𝘂𝗹𝗱𝗻’𝘁?\nCommon mistakes:\n • Calling external services synchronously\n • Heavy computation inside the request cycle\n • Waiting for background tasks to finish\nAsync APIs with sync work are still slow.\n\n𝟱. 𝗖𝗼𝗹𝗱 𝘀𝘁𝗮𝗿𝘁𝘀 𝗮𝗻𝗱 𝗰𝗼𝗻𝗻𝗲𝗰𝘁𝗶𝗼𝗻 𝗼𝘃𝗲𝗿𝗵𝗲𝗮𝗱\nCheck for:\n • Lambda or container cold starts\n • New DB connections per request\n • DNS or TLS setup on every call\nThese don’t show up in code reviews but hurt latency.\n\n𝟲. 𝗥𝗲𝘁𝗿𝗶𝗲𝘀, 𝘁𝗶𝗺𝗲𝗼𝘂𝘁𝘀, 𝗮𝗻𝗱 𝘀𝗶𝗹𝗲𝗻𝘁 𝗳𝗮𝗶𝗹𝘂𝗿𝗲𝘀\n • Is the request retrying under the hood?\n • Are timeouts too high?\n • Is one failed dependency stalling everything?\nRetries without limits create hidden latency.\n\n𝟳. 𝗣𝗮𝘆𝗹𝗼𝗮𝗱 𝘀𝗶𝘇𝗲\n • Over-fetching data\n • Large JSON responses\n • Uncompressed responses\nLatency isn’t only compute. Bytes matter.\n\n𝟴. 𝗟𝗼𝗴𝘀 𝗯𝗲𝗳𝗼𝗿𝗲 𝗮𝘀𝘀𝘂𝗺𝗽𝘁𝗶𝗼𝗻𝘀\nCheck:\n • Request duration breakdowns\n • Slow request logs\n • P95 and P99, not averages\nAverages lie. Tail latency is what users feel.\n\nSlow APIs are rarely fixed by faster code. They’re fixed by understanding where the time is actually spent."
+      ]
+    }
+  },
+  {
+    "id": "post-7406297132514783232",
+    "kind": "post",
+    "title": "𝗔𝘀𝘆𝗻𝗰 𝗱𝗼𝗲𝘀 𝗻𝗼𝘁 𝗺𝗲𝗮𝗻 𝗳𝗮𝘀𝘁𝗲𝗿!",
+    "date": "2025-12-15",
+    "tags": [
+      "Backend Engineering",
+      "Concurrency"
+    ],
+    "original": {
+      "blocks": [
+        "𝗔𝘀𝘆𝗻𝗰 𝗱𝗼𝗲𝘀 𝗻𝗼𝘁 𝗺𝗲𝗮𝗻 𝗳𝗮𝘀𝘁𝗲𝗿!\n\nIt means non-blocking, not lower latency.\n\nI’ve seen systems marked “async” still feel slow because the bottleneck never moved.\nThe API was async.\nThe database was still slow.\nThe external service still took 800ms.\n\nAsync helps when you are:\n• Waiting on I/O\n• Calling external services\n• Handling concurrency at scale\n\nIt does nothing for:\n• Heavy CPU work\n• Poor queries\n• Bad system design\n\nAsync improves 𝘁𝗵𝗿𝗼𝘂𝗴𝗵𝗽𝘂𝘁, not 𝗹𝗮𝘁𝗲𝗻𝗰𝘆.\n\nIf one request takes 1 second, async won’t make it 100 ms.\nIt just allows the system to do other work while waiting.\n\nReal performance gains come from better queries, caching, batching, and fewer network hops.\nAsync improves scalability, not the fundamental cost of work."
+      ]
+    }
+  },
+  {
+    "id": "post-7404769578825986049",
+    "kind": "post",
+    "title": "I recently built a microservice from scratch, and while working through the implementation, I focused on identifying the essential best practices that actually make development and maintenance easier in the long run.",
+    "date": "2025-12-11",
+    "tags": [
+      "Microservices",
+      "Engineering Practices"
+    ],
+    "original": {
+      "blocks": [
+        "I recently built a microservice from scratch, and while working through the implementation, I focused on identifying the essential best practices that actually make development and maintenance easier in the long run. \n\nThese are not theoretical ideals. They’re practical, must-do choices that directly boost productivity later when the system grows or requirements change.\n\n𝟭. 𝗞𝗲𝗲𝗽 𝗲𝗮𝗰𝗵 𝘀𝗲𝗿𝘃𝗶𝗰𝗲 𝗮𝘂𝘁𝗼𝗻𝗼𝗺𝗼𝘂𝘀\nA microservice should have its own data, logic, and lifecycle. This avoids cross-service dependencies that slow down development and make debugging harder. Autonomy directly translates to faster iteration.\n\n𝟮. 𝗗𝗲𝗳𝗶𝗻𝗲 𝗯𝗼𝘂𝗻𝗱𝗮𝗿𝗶𝗲𝘀 𝘄𝗶𝘁𝗵 𝗰𝗹𝗮𝗿𝗶𝘁𝘆\nClear API contracts prevent confusion. When request and response formats are predictable, every integration becomes smoother. This is one of the simplest ways to reduce friction across teams.\n\n𝟯. 𝗕𝘂𝗶𝗹𝗱 𝗳𝗼𝗿 𝗿𝗲𝘀𝗶𝗹𝗶𝗲𝗻𝗰𝗲 𝗳𝗿𝗼𝗺 𝗱𝗮𝘆 𝗼𝗻𝗲\nTimeouts, retries, and circuit breakers are not “optimizations.” They’re the foundation of a stable distributed system. Adding them early prevents a lot of operational pain later.\n\n𝟰. 𝗨𝘀𝗲 𝗮𝘀𝘆𝗻𝗰𝗵𝗿𝗼𝗻𝗼𝘂𝘀 𝗽𝗮𝘁𝘁𝗲𝗿𝗻𝘀 𝘄𝗵𝗲𝗿𝗲 𝗮𝗽𝗽𝗿𝗼𝗽𝗿𝗶𝗮𝘁𝗲\nMessage queues and event-driven flows help decouple services. This reduces bottlenecks, improves performance, and makes the system more adaptable without rewriting core logic.\n\n𝟱. 𝗣𝗿𝗶𝗼𝗿𝗶𝘁𝗶𝘇𝗲 𝗼𝗯𝘀𝗲𝗿𝘃𝗮𝗯𝗶𝗹𝗶𝘁𝘆\nGood logs, metrics, and tracing give you a clear view of what’s happening inside the system. When an issue appears, you solve it faster because the service already tells you where to look.\n\n𝟲. 𝗗𝗲𝗽𝗹𝗼𝘆 𝗶𝗻 𝘀𝗺𝗮𝗹𝗹, 𝘀𝗮𝗳𝗲 𝘀𝘁𝗲𝗽𝘀\nSmaller releases reduce risk and make rollbacks straightforward. This habit alone can save an entire team from long debugging cycles during production incidents.\n\n𝟳. 𝗧𝗿𝗲𝗮𝘁 𝘀𝗲𝗰𝘂𝗿𝗶𝘁𝘆 𝗮𝘀 𝗮 𝗯𝘂𝗶𝗹𝘁-𝗶𝗻 𝗿𝗲𝗾𝘂𝗶𝗿𝗲𝗺𝗲𝗻𝘁\nInput validation, authentication, authorization, and rate-limiting shouldn’t be afterthoughts. Adding them early protects both the system and the development velocity.\n\nThese practices aren’t dramatic or complex, but they compound over time. Setting them up early makes the system easier to scale, easier to maintain, and much more predictable to work with.\n\nIf you're building microservices or planning to adopt them, these principles form a solid baseline that pays off in productivity as the architecture evolves."
+      ]
+    }
+  },
+  {
+    "id": "post-7404459233930608640",
+    "kind": "post",
+    "title": "𝗚𝗣𝗨𝘀 𝗰𝗵𝗮𝗻𝗴𝗲𝗱 𝗔𝗜 𝗺𝗼𝗿𝗲 𝘁𝗵𝗮𝗻 𝗮𝗻𝘆 𝗮𝗹𝗴𝗼𝗿𝗶𝘁𝗵𝗺 𝗲𝘃𝗲𝗿 𝗱𝗶𝗱!",
+    "date": "2025-12-10",
+    "tags": [
+      "AI",
+      "Infrastructure"
+    ],
+    "original": {
+      "blocks": [
+        "𝗚𝗣𝗨𝘀 𝗰𝗵𝗮𝗻𝗴𝗲𝗱 𝗔𝗜 𝗺𝗼𝗿𝗲 𝘁𝗵𝗮𝗻 𝗮𝗻𝘆 𝗮𝗹𝗴𝗼𝗿𝗶𝘁𝗵𝗺 𝗲𝘃𝗲𝗿 𝗱𝗶𝗱!\n\nNeural networks existed in the 1980s.\nBackpropagation existed.\nEven large datasets existed.\n\nYet AI only exploded recently.\n\nWhy?\n\nBecause CPUs think in sequence.\nGPUs think in parallel.\n\nAnd modern AI is nothing but:\nMillions of matrix calculations\nHappening at the same time.\n\nOriginally, GPUs were built for one job:\nRendering pixels in video games \n\nToday, they train models with\nBillions of parameters \n\nSame math.\nDifferent universe.\n\nAlgorithms gave AI intelligence.\nGPUs gave AI speed.\nAnd speed is what unlocked scale.\n\nFrom:\nTraining a single model in months\nTo:\nTraining thousands in days\n\nAI didn’t suddenly become smart.\nIt finally became 𝗳𝗮𝘀𝘁 𝗲𝗻𝗼𝘂𝗴𝗵 𝘁𝗼 𝗺𝗮𝘁𝘁𝗲𝗿."
+      ]
+    }
+  },
+  {
+    "id": "post-7401618522532888576",
+    "kind": "post",
+    "title": "𝗪𝗵𝘆 𝗟𝗮𝗿𝗴𝗲 𝗟𝗮𝗻𝗴𝘂𝗮𝗴𝗲 𝗠𝗼𝗱𝗲𝗹𝘀 𝗦𝘁𝗿𝘂𝗴𝗴𝗹𝗲 𝗪𝗶𝘁𝗵 𝗠𝗮𝘁𝗵?",
+    "date": "2025-12-02",
+    "tags": [
+      "AI",
+      "LLMs"
+    ],
+    "original": {
+      "blocks": [
+        "𝗪𝗵𝘆 𝗟𝗮𝗿𝗴𝗲 𝗟𝗮𝗻𝗴𝘂𝗮𝗴𝗲 𝗠𝗼𝗱𝗲𝗹𝘀 𝗦𝘁𝗿𝘂𝗴𝗴𝗹𝗲 𝗪𝗶𝘁𝗵 𝗠𝗮𝘁𝗵?\n\nI have heard this question many times and even noticed it myself.\n\nLLMs are great at writing, but the moment you give them a slightly tricky math problem, they can get confused.\nSo I looked into it, and here’s what I found.\n\nLLMs don’t actually calculate. They predict the next word based on patterns.\nMath is not about patterns. It’s about exact rules.\nSo the model often gives an answer that looks right instead of doing the real calculation.\n\nEven when we ask it to show the steps, those steps are just text it has learned from examples.\nThey are not guaranteed to be logical or correct, and one small mistake throws everything off.\n\nNumbers also behave differently from normal words, and the model doesn’t fully understand that small changes in numbers can completely change the result.\n\nResearchers are working on this by combining LLMs with proper math engines and adding checks before the final answer is given.\n\n𝗙𝘂𝗻 𝗳𝗮𝗰𝘁: Even the most advanced LLMs sometimes get basic multiplication wrong, but they can explain quantum mechanics perfectly.",
+        {
+          "figure": {
+            "path": "assets/blogs/post-7401618522532888576-01.jpg",
+            "alt": "ChatGPT responding to a sample subtraction problem."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7395484361078407168",
+    "kind": "post",
+    "title": "𝗦𝗵𝗼𝘂𝗹𝗱 𝘆𝗼𝘂 𝗴𝗼 𝗯𝗲𝘆𝗼𝗻𝗱 𝗿𝗲𝗹𝗮𝘁𝗶𝗼𝗻𝗮𝗹 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲𝘀?",
+    "date": "2025-11-15",
+    "tags": [
+      "Databases",
+      "System Design"
+    ],
+    "original": {
+      "blocks": [
+        "𝗦𝗵𝗼𝘂𝗹𝗱 𝘆𝗼𝘂 𝗴𝗼 𝗯𝗲𝘆𝗼𝗻𝗱 𝗿𝗲𝗹𝗮𝘁𝗶𝗼𝗻𝗮𝗹 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲𝘀?\n\nI have been thinking a lot about this tradeoff lately. Relational systems like MySQL and PostgreSQL have powered our applications for decades. They are stable, mature, and easy to work with. But as data grows more complex and applications scale differently, it is worth asking whether the relational model still serves every use case.\n\n𝗪𝗵𝗲𝗻 𝘆𝗼𝘂 𝗺𝗶𝗴𝗵𝘁 𝗯𝗲 𝘀𝘁𝗿𝗲𝘁𝗰𝗵𝗶𝗻𝗴 𝗿𝗲𝗹𝗮𝘁𝗶𝗼𝗻𝗮𝗹 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲𝘀 𝘁𝗼𝗼 𝗳𝗮𝗿\n\nThere are clear signals that your data model is no longer fitting comfortably into tables:\n• Sparse tables with many unused columns\n• Storing JSON or XML because the schema cannot keep up\n• Complex many-to-many or deeply nested relationships\n• Frequent schema migrations for new types of data\n• Write bottlenecks on a single database server\n• Growing datasets that are hard to scale vertically\n\nThese are often early signs that you may need something beyond the relational world.\n\n𝗘𝘅𝗽𝗹𝗼𝗿𝗶𝗻𝗴 𝗻𝗼𝗻-𝗿𝗲𝗹𝗮𝘁𝗶𝗼𝗻𝗮𝗹 𝗼𝗽𝘁𝗶𝗼𝗻𝘀\n\nOver the past decade, several database models have emerged to handle new patterns in modern applications:\n• Key-value stores for fast lookups and caching\n• Document stores for flexible, evolving schemas\n• Column-family stores for high-write, large-scale workloads\n• Graph databases for deeply connected data\n• Distributed key-value systems for massive horizontal scaling\n\n𝗛𝗼𝘄 𝘁𝗼 𝗱𝗲𝗰𝗶𝗱𝗲\n\nAsk yourself:\n• Does my data fit a tabular structure, or is it semi-structured or highly connected\n• Do my scaling needs exceed what a single relational instance can deliver\n• How much operational complexity can my team manage\n\nRelational databases are not going anywhere, but they are not always the perfect fit. As your application evolves, choosing the right database model can simplify your architecture and improve performance where it matters most."
+      ]
+    }
+  },
+  {
+    "id": "post-7395131120352210944",
+    "kind": "post",
+    "title": "I recently came across an interesting concept in distributed systems called 𝗧𝗵𝗲 𝗖𝗲𝗹𝗲𝗯𝗿𝗶𝘁𝘆 𝗣𝗿𝗼𝗯𝗹𝗲𝗺, and I thought it would be helpful to break it down.",
+    "date": "2025-11-14",
+    "tags": [
+      "System Design",
+      "Distributed Systems"
+    ],
+    "original": {
+      "blocks": [
+        "I recently came across an interesting concept in distributed systems called 𝗧𝗵𝗲 𝗖𝗲𝗹𝗲𝗯𝗿𝗶𝘁𝘆 𝗣𝗿𝗼𝗯𝗹𝗲𝗺, and I thought it would be helpful to break it down.\n\nImagine you build a social media platform. For most users, a simple NoSQL setup partitioned by user ID works perfectly. Traffic is balanced and predictable.\n\nBut the moment a celebrity joins, everything changes.\n\nMillions of users want to follow them, view their posts, and like content in real time. Suddenly, one partition that was meant for normal traffic starts handling most of the platform’s read and write load. Your backend, which looked evenly distributed on paper, begins to struggle.\n\nHere is how engineering teams usually approach this problem:\n\n𝟭. 𝗔𝗱𝗱 𝗰𝗮𝗰𝗵𝗶𝗻𝗴\nA distributed cache like Redis or Memcached serves the frequent reads on celebrity posts. This prevents the hot partition from getting overwhelmed.\n\n𝟮. 𝗦𝗰𝗮𝗹𝗲 𝗼𝘂𝘁 𝘄𝗿𝗶𝘁𝗲𝘀 𝘁𝗵𝗿𝗼𝘂𝗴𝗵 𝘀𝗵𝗮𝗿𝗱𝗶𝗻𝗴\nReads are manageable with caching, but writes are different. Millions of likes per second cannot hit a single partition.\nSo you shard the writes. Likes or posts are split across multiple partitions so the workload is distributed horizontally.\n\n𝟯. 𝗨𝗽𝗱𝗮𝘁𝗲 𝘁𝗵𝗲 𝘀𝗲𝗿𝘃𝗶𝗰𝗲 𝗹𝗼𝗴𝗶𝗰\nOnce sharded, the application needs to know where data resides. To show total likes, it must aggregate counts from different shards. This adds complexity but removes the bottleneck.\n\n𝟰. 𝗣𝗿𝗲𝗽𝗮𝗿𝗲 𝗳𝗼𝗿 𝗿𝗲𝗮𝗹-𝘄𝗼𝗿𝗹𝗱 𝗯𝗲𝗵𝗮𝘃𝗶𝗼𝗿\nSharding and caching mean working with eventual consistency, building aggregation flows, and routing data intelligently.\n\n𝟱. 𝗧𝗵𝗶𝗻𝗸 𝘁𝗵𝗿𝗼𝘂𝗴𝗵 𝗲𝗱𝗴𝗲 𝗰𝗮𝘀𝗲𝘀\n• What happens if the cache fails\n• How you protect the system from sudden write spikes\n• How to keep the user experience stable during peak traffic\n\nIt is a fascinating problem because systems rarely break at average load. They break when something extraordinary happens, and the Celebrity Problem is the perfect example of designing for those extremes."
+      ]
+    }
+  },
+  {
+    "id": "post-7394279445479440385",
+    "kind": "post",
+    "title": "𝗪𝗵𝘆 𝗶𝘀 𝗥𝗲𝗱𝗶𝘀 𝘀𝗼 𝗳𝗮𝘀𝘁?",
+    "date": "2025-11-12",
+    "tags": [
+      "Redis",
+      "Databases"
+    ],
+    "original": {
+      "blocks": [
+        "𝗪𝗵𝘆 𝗶𝘀 𝗥𝗲𝗱𝗶𝘀 𝘀𝗼 𝗳𝗮𝘀𝘁?\n\nRedis is known for its exceptional speed and low-latency performance, capable of handling over 100,000 queries per second. Its design is optimized for in-memory operations, efficient I/O management, and data structure optimization.\n\n𝟭. 𝗥𝗔𝗠-𝗯𝗮𝘀𝗲𝗱 𝗮𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲\nRedis stores all data in RAM rather than on disk. Since RAM access times are measured in nanoseconds compared to milliseconds for disk access, Redis can perform read and write operations thousands of times faster than traditional disk-based databases. This eliminates I/O bottlenecks and enables real-time data processing.\n\n𝟮. 𝗜𝗢 𝗠𝘂𝗹𝘁𝗶𝗽𝗹𝗲𝘅𝗶𝗻𝗴 𝗮𝗻𝗱 𝗦𝗶𝗻𝗴𝗹𝗲-𝘁𝗵𝗿𝗲𝗮𝗱𝗲𝗱 𝗘𝘅𝗲𝗰𝘂𝘁𝗶𝗼𝗻\nRedis uses an event-driven model based on IO multiplexing. Multiple client connections are handled concurrently within a single thread using mechanisms like epoll, kqueue, or select. This avoids the overhead of thread context switching and locking, ensuring predictable performance under high concurrency. The single-threaded event loop processes commands sequentially, maintaining data consistency while maximizing CPU efficiency.\n\n𝟯. 𝗢𝗽𝘁𝗶𝗺𝗶𝘇𝗲𝗱 𝗗𝗮𝘁𝗮 𝗦𝘁𝗿𝘂𝗰𝘁𝘂𝗿𝗲𝘀\nRedis implements highly efficient, low-level data structures tailored for specific use cases.\n • SDS (Simple Dynamic Strings) for O(1) string length retrieval and pre-allocated buffer management.\n • HashTables and ZipLists for compact and fast key-value storage.\n • SkipLists and IntSets for quick sorted data retrieval and membership checks.\nThese structures minimize memory fragmentation, reduce reallocation costs, and support constant or logarithmic time complexity for most operations.\n\nIn essence, Redis achieves its performance through memory-based storage, non-blocking I/O design, and carefully engineered data structures that together ensure minimal latency and high throughput.",
+        {
+          "figure": {
+            "path": "assets/blogs/post-7394279445479440385-01.jpg",
+            "alt": "Redis product logo."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7379882844548055041",
+    "kind": "post",
+    "title": "1,00,000+ impressions in a single day 🚀",
+    "date": "2025-10-03",
+    "tags": [
+      "Writing",
+      "Community"
+    ],
+    "original": {
+      "blocks": [
+        "1,00,000+ impressions in a single day 🚀\n\n#Grateful",
+        {
+          "figure": {
+            "path": "assets/blogs/post-7379882844548055041-01.jpg",
+            "alt": "LinkedIn content analytics showing aggregate impressions from the author’s post."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7379081556218331137",
+    "kind": "post",
+    "title": "Have you ever wondered how apps like Instagram, X, or Google instantly tell you “𝘂𝘀𝗲𝗿𝗻𝗮𝗺𝗲 𝗮𝗹𝗿𝗲𝗮𝗱𝘆 𝘁𝗮𝗸𝗲𝗻” when you sign up?",
+    "date": "2025-10-01",
+    "tags": [
+      "System Design",
+      "Databases"
+    ],
+    "original": {
+      "blocks": [
+        "Have you ever wondered how apps like Instagram, X, or Google instantly tell you “𝘂𝘀𝗲𝗿𝗻𝗮𝗺𝗲 𝗮𝗹𝗿𝗲𝗮𝗱𝘆 𝘁𝗮𝗸𝗲𝗻” when you sign up?\n\nAt first glance, it seems like a simple database query. But at the scale of billions of users across the globe, it’s far from simple. Running a direct query every time would overwhelm databases and slow down the entire system.\n\nWhat actually happens under the hood is a fascinating layered approach:\n • 𝗖𝗮𝗰𝗵𝗶𝗻𝗴 helps with frequently checked names like “alex” or “john.”\n • 𝗕𝗹𝗼𝗼𝗺 𝗳𝗶𝗹𝘁𝗲𝗿𝘀 act as a lightning-fast probabilistic check, instantly ruling out most usernames without touching the database.\n • 𝗗𝗶𝘀𝘁𝗿𝗶𝗯𝘂𝘁𝗲𝗱 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲𝘀 handle the final confirmation when needed.\n • And to make things smarter, 𝗧𝗿𝗶𝗲𝘀 (Prefix Trees) enable features like autocomplete and instant username suggestions.\n\nThis combination is what makes the experience feel instant and seamless, even though trillions of possible checks are happening behind the scenes.\n\nFor me, it’s a reminder that what looks like “just a simple feature” often hides some of the most elegant engineering at scale.\n\nWhat other “small” features do you think hide massive engineering behind the curtain?",
+        {
+          "figure": {
+            "path": "assets/blogs/post-7379081556218331137-01.jpg",
+            "alt": "Example sign-up screen showing a username is taken and offering alternatives."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7371226672727052288",
+    "kind": "post",
+    "title": "Scaling backend systems often comes down to how background tasks are handled. Initially, our setup used Flask’s 𝗧𝗵𝗿𝗲𝗮𝗱𝗣𝗼𝗼𝗹𝗘𝘅𝗲𝗰𝘂𝘁𝗼𝗿, which tied tasks to the web container, lacked retries, and created scalability issues.",
+    "date": "2025-09-09",
+    "tags": [
+      "Backend Engineering",
+      "Python"
+    ],
+    "original": {
+      "blocks": [
+        "Scaling backend systems often comes down to how background tasks are handled. Initially, our setup used Flask’s 𝗧𝗵𝗿𝗲𝗮𝗱𝗣𝗼𝗼𝗹𝗘𝘅𝗲𝗰𝘂𝘁𝗼𝗿, which tied tasks to the web container, lacked retries, and created scalability issues.\n\nTo overcome these challenges, I implemented 𝗖𝗲𝗹𝗲𝗿𝘆 𝘄𝗶𝘁𝗵 𝗥𝗲𝗱𝗶𝘀. This allowed tasks to run independently of Flask, added automatic retries, improved fault tolerance, and enabled horizontal scaling across workers.\n\nThe impact was significant:\n • Eliminated task failures during crashes or restarts\n • Improved API responsiveness by offloading heavy background jobs\n • Enabled the system to handle surges in workload by distributing tasks across multiple workers\n • Provided clear monitoring of task lifecycle and errors\n\nThe result is a backend that is faster, more reliable, and scalable, ensuring a smoother experience for users and a stronger foundation for future growth.\n\nI’d love to hear your thoughts on scaling background task execution. How have you approached it in your projects?"
+      ]
+    }
+  },
+  {
+    "id": "post-7365948622934360064",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-08-26",
+    "tags": [
+      "Writing"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\n\"Monolith\" vs \"Microservices\" are two popular approaches to building applications. \n\nIn this article I have explained their working, pros and cons with real world examples to help you understand when to use each. \n\n",
+            {
+              "text": "Check it out!",
+              "href": "https://ashmita-dev.onrender.com/blogs/monolith-vs-microservices-architecture.html"
+            },
+            ""
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7359467646393757696",
+    "kind": "post",
+    "title": "OpenAI has released GPT-5, and it changes the way ChatGPT works!",
+    "date": "2025-08-08",
+    "tags": [
+      "AI",
+      "LLMs"
+    ],
+    "original": {
+      "blocks": [
+        "OpenAI has released GPT-5, and it changes the way ChatGPT works!\n\nThe new model can automatically switch between quick responses and deep reasoning depending on the question, removing the need to choose models manually.\n\nWith GPT-5, it is now possible to build and debug complete applications, get well-researched summaries, write context-aware content, analyze data, generate reports and visuals, plan projects, and connect with tools like Gmail or Calendar.\n\nIt is significantly more accurate than previous versions, especially for coding and reasoning, and is available to all ChatGPT users, including those on the free plan.\n\nThis is an exciting development. Do share findings and experiences with me!"
+      ]
+    }
+  },
+  {
+    "id": "post-7357251323894915072",
+    "kind": "post",
+    "title": "𝗪𝗵𝗮𝘁 𝗿𝗲𝗮𝗹𝗹𝘆 𝗵𝗮𝗽𝗽𝗲𝗻𝘀 𝘄𝗵𝗲𝗻 𝘆𝗼𝘂 𝗵𝗶𝘁 𝗮𝗻 𝗔𝗣𝗜 𝗲𝗻𝗱𝗽𝗼𝗶𝗻𝘁?",
+    "date": "2025-08-02",
+    "tags": [
+      "Backend Engineering",
+      "Networking"
+    ],
+    "original": {
+      "blocks": [
+        "𝗪𝗵𝗮𝘁 𝗿𝗲𝗮𝗹𝗹𝘆 𝗵𝗮𝗽𝗽𝗲𝗻𝘀 𝘄𝗵𝗲𝗻 𝘆𝗼𝘂 𝗵𝗶𝘁 𝗮𝗻 𝗔𝗣𝗜 𝗲𝗻𝗱𝗽𝗼𝗶𝗻𝘁?\n\nYou open Postman or your frontend makes a call to /api/v1/user/42.\nA few hundred milliseconds later, you get a structured JSON response.\n\nBut under the surface, here's the full picture:\n𝟭. 𝗗𝗡𝗦 𝗥𝗲𝘀𝗼𝗹𝘂𝘁𝗶𝗼𝗻\nThe domain name is resolved into an IP address using DNS. This step is crucial in directing your request to the correct server.\n\n𝟮. 𝗥𝗲𝗾𝘂𝗲𝘀𝘁 𝗥𝗼𝘂𝘁𝗶𝗻𝗴\nOnce the request reaches the server, the framework (Django, Express, Spring Boot, etc.) checks the HTTP method and URL pattern to route it to the appropriate handler.\nExample:\nGET /api/v1/user/42 routes to get_user_by_id().\n\n𝟯. 𝗠𝗶𝗱𝗱𝗹𝗲𝘄𝗮𝗿𝗲 𝗘𝘅𝗲𝗰𝘂𝘁𝗶𝗼𝗻\nBefore hitting the core logic, middleware processes the request. These layers might handle:\n • Authentication and authorization\n • Logging\n • Rate limiting\n • CORS checks\n • Input sanitization\nMiddleware ensures that only valid, safe, and authorized requests reach your application logic.\n\n𝟰. 𝗕𝘂𝘀𝗶𝗻𝗲𝘀𝘀 𝗟𝗼𝗴𝗶𝗰 / 𝗩𝗶𝗲𝘄 𝗙𝘂𝗻𝗰𝘁𝗶𝗼𝗻\nThis is where the actual processing happens:\n • Fetch data from the database\n • Apply business rules\n • Validate inputs\n • Format or serialize the output\n\nThis layer must be robust, testable, and free of unnecessary coupling.\n\n𝟱. 𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗶𝗼𝗻\nThe processed data is serialized (often as JSON), assigned an appropriate HTTP status code (like 200, 400, or 404), and wrapped in a response object.\nExample:return Response({\"name\": \"Ashmita\"}, status=200)\n\n𝟲. 𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲 𝗧𝗿𝗮𝗻𝘀𝗺𝗶𝘀𝘀𝗶𝗼𝗻\nThe server sends the HTTP response back to the client over the network. TLS encryption (HTTPS) secures the data during transit.\nClient-side rendering or further processing takes place after receiving the response.\n\n𝟳. 𝗕𝗲𝘆𝗼𝗻𝗱 𝘁𝗵𝗲 𝗕𝗮𝘀𝗶𝗰𝘀\nAn API isn't just about sending and receiving data. It should also account for:\n • Versioning (/api/v1/)\n • Pagination and filtering\n • Idempotency\n • Error design (consistent structure for error messages)\n • Throttling and performance optimization\n\n𝗙𝗶𝗻𝗮𝗹 𝘁𝗵𝗼𝘂𝗴𝗵𝘁 - A well-designed API is not about making the server respond it’s about crafting a reliable, predictable, and secure communication system between two independent systems."
+      ]
+    }
+  },
+  {
+    "id": "post-7355418898671820800",
+    "kind": "post",
+    "title": "You enter your username and password. Hit “Login”, and instantly, you’re inside your dashboard.",
+    "date": "2025-07-28",
+    "tags": [
+      "Backend Engineering",
+      "Authentication"
+    ],
+    "original": {
+      "blocks": [
+        "You enter your username and password. Hit “Login”, and instantly, you’re inside your dashboard.\n\nThat seamless experience is backed by a well-structured authentication system using middlewares, JWTs, access control, and secure session handling. These components form the backbone of any secure modern application.\n\n𝟭. 𝗥𝗼𝘂𝘁𝗲 𝗣𝗿𝗼𝘁𝗲𝗰𝘁𝗶𝗼𝗻 𝘄𝗶𝘁𝗵 𝗠𝗶𝗱𝗱𝗹𝗲𝘄𝗮𝗿𝗲\nMiddleware acts as a gatekeeper before routes are accessed. It checks for:\n • Valid access token\n • Session validity\n • Required permissions\nThis keeps security checks consistent and the codebase clean.\n\n𝟮. 𝗧𝗼𝗸𝗲𝗻-𝗕𝗮𝘀𝗲𝗱 𝗔𝘂𝘁𝗵𝗲𝗻𝘁𝗶𝗰𝗮𝘁𝗶𝗼𝗻 (𝗝𝗪𝗧)\nStateless authentication uses tokens like JWT. The process:\n • Client logs in\n • Server returns a signed token\n • Token is sent with each request\n • Server verifies and decodes user info\nCombine short-lived access tokens with refresh tokens for balance.\n\n𝟯. 𝗥𝗲𝗳𝗿𝗲𝘀𝗵 𝗧𝗼𝗸𝗲𝗻 𝗙𝗹𝗼𝘄\nRefresh tokens enable silent access token renewal. Best practices:\n • Store them securely (e.g., HTTP-only cookies)\n • Revoke on logout or breach\n • Use rotation to avoid reuse attacks\n\n𝟰. 𝗨𝘀𝗲𝗿 𝗖𝗼𝗻𝘁𝗲𝘅𝘁 𝗶𝗻 𝗥𝗲𝗾𝘂𝗲𝘀𝘁𝘀\nOnce verified, user info is attached to the request for:\n • Role checks\n • Personalization\n • Logging\nThis helps keep routes lightweight and secure.\n\n𝟱. 𝗣𝘂𝗯𝗹𝗶𝗰 𝘃𝘀 𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗔𝗣𝗜𝘀\nSeparate APIs clearly:\n • Public: No auth (e.g., blog posts)\n • Private: Auth required (e.g., user data)\nPrivate endpoints must validate tokens and enforce access rules.\n\n𝟲. 𝗦𝗲𝗰𝘂𝗿𝗶𝘁𝘆 𝘄𝗶𝘁𝗵 𝗚𝗼𝗼𝗱 𝗨𝗫\nSecurity must not disrupt user flow. Ensure:\n • Proper HTTP status codes\n • Graceful token expiry handling\n • Secure but smooth redirects\nAvoid exposing sensitive errors or forcing frequent logins.\n\n𝟳. 𝗠𝗶𝗱𝗱𝗹𝗲𝘄𝗮𝗿𝗲 𝗮𝘀 𝗖𝗼𝗿𝗲 𝗜𝗻𝗳𝗿𝗮𝘀𝘁𝗿𝘂𝗰𝘁𝘂𝗿𝗲\nMiddleware powers key backend workflows:\n • Auth checks\n • Data sanitization\n • Logging\n • Error handling\nWell-designed middleware improves scalability, clarity, and control.\n\n𝗔𝘂𝘁𝗵𝗲𝗻𝘁𝗶𝗰𝗮𝘁𝗶𝗼𝗻 𝗶𝗻𝘃𝗼𝗹𝘃𝗲𝘀:\n • Route protection\n • Secure token handling\n • Role-based access\n • API segregation\n • Middleware-driven architecture\n\nThat simple login interaction is the surface of a layered security design ensuring both protection and performance."
+      ]
+    }
+  },
+  {
+    "id": "post-7354371536272666625",
+    "kind": "post",
+    "title": "If we had to implement the 𝗹𝘀 𝗰𝗼𝗺𝗺𝗮𝗻𝗱 from scratch, how would we even start?",
+    "date": "2025-07-25",
+    "tags": [
+      "Backend Engineering",
+      "Linux"
+    ],
+    "original": {
+      "blocks": [
+        "If we had to implement the 𝗹𝘀 𝗰𝗼𝗺𝗺𝗮𝗻𝗱 from scratch, how would we even start?\n\nThis seems like a very basic thing, but it gives a lot of clarity. Let’s find out by checking it step by step.\n\nWhen the 𝗹𝘀 command is typed into a terminal, it lists the contents of the current directory.\n\nSeems simple on the surface, but what’s happening underneath?\n\nFirst, the shell parses the command. Then, it hands control to the underlying program that knows how to interact with the filesystem.\n\nNow think, how would a custom version of 𝗹𝘀 know\n • Where to look?\n • What files exist?\n • What to show (hidden files, file types, permissions)?\n\nLet’s break the approach into layers of thought:\n\n𝟭. 𝗜𝗻𝗽𝘂𝘁 𝗜𝗻𝘁𝗲𝗿𝗽𝗿𝗲𝘁𝗮𝘁𝗶𝗼𝗻:\nStart with the base case - no arguments. The goal is to list the current directory’s contents. So the first task is to figure out what the current directory is.\n\n𝟮. 𝗥𝗲𝗮𝗱𝗶𝗻𝗴 𝗗𝗶𝗿𝗲𝗰𝘁𝗼𝗿𝘆 𝗖𝗼𝗻𝘁𝗲𝗻𝘁𝘀:\nNext, we need to retrieve the list of entries - files, folders, symlinks - everything. That means finding a way to scan or iterate through that directory.\n\n𝟯. 𝗙𝗶𝗹𝘁𝗲𝗿𝗶𝗻𝗴 𝗮𝗻𝗱 𝗙𝗼𝗿𝗺𝗮𝘁𝘁𝗶𝗻𝗴:\nNot all entries are shown the same way. Hidden files (starting with .), color-coded outputs, or even just sorting alphabetically are all part of this stage.\n\n𝟰. 𝗔𝗱𝗱𝗶𝘁𝗶𝗼𝗻𝗮𝗹 𝗙𝗹𝗮𝗴𝘀 𝗮𝗻𝗱 𝗢𝗽𝘁𝗶𝗼𝗻𝘀:\nOver time, more complexity can be added. For example, ls -a, ls -l, ls -lh, etc. Each flag should trigger a variation in logic, whether to show all files, display detailed metadata, or format sizes in human-readable units.\n\nSo even a basic utility like 𝗹𝘀 teaches a lot:\n • How the shell parses commands\n • How programs interact with the filesystem\n • How data is presented to the user\n\nSometimes, the best way to understand systems is by mentally re-building the tools that are relied on every day."
+      ]
+    }
+  },
+  {
+    "id": "post-7353980875971211264",
+    "kind": "post",
+    "title": "\"𝗔𝗰𝗰𝗲𝘀𝘀 𝘁𝗼 𝗳𝗲𝘁𝗰𝗵 𝗮𝘁 '𝗮𝗽𝗶.𝗲𝘅𝗮𝗺𝗽𝗹𝗲.𝗰𝗼𝗺' 𝗳𝗿𝗼𝗺 𝗼𝗿𝗶𝗴𝗶𝗻 '𝗳𝗿𝗼𝗻𝘁𝗲𝗻𝗱.𝗲𝘅𝗮𝗺𝗽𝗹𝗲.𝗰𝗼𝗺' 𝗵𝗮𝘀 𝗯𝗲𝗲𝗻 𝗯𝗹𝗼𝗰𝗸𝗲𝗱 𝗯𝘆 𝗖𝗢𝗥𝗦 𝗽𝗼𝗹𝗶𝗰𝘆.\"",
+    "date": "2025-07-24",
+    "tags": [
+      "Networking",
+      "Backend Engineering"
+    ],
+    "original": {
+      "blocks": [
+        "\"𝗔𝗰𝗰𝗲𝘀𝘀 𝘁𝗼 𝗳𝗲𝘁𝗰𝗵 𝗮𝘁 '𝗮𝗽𝗶.𝗲𝘅𝗮𝗺𝗽𝗹𝗲.𝗰𝗼𝗺' 𝗳𝗿𝗼𝗺 𝗼𝗿𝗶𝗴𝗶𝗻 '𝗳𝗿𝗼𝗻𝘁𝗲𝗻𝗱.𝗲𝘅𝗮𝗺𝗽𝗹𝗲.𝗰𝗼𝗺' 𝗵𝗮𝘀 𝗯𝗲𝗲𝗻 𝗯𝗹𝗼𝗰𝗸𝗲𝗱 𝗯𝘆 𝗖𝗢𝗥𝗦 𝗽𝗼𝗹𝗶𝗰𝘆.\"\n\nThis is a common error. Right after deploying frontend and backend separately, everything seems fine… until the browser throws this dreaded message.\n\n𝗖𝗢𝗥𝗦 𝗲𝗿𝗿𝗼𝗿.\nIt may seem as if the browser is unnecessarily blocking progress. But here's what’s actually happening.\n\n𝗖𝗢𝗥𝗦 (𝗖𝗿𝗼𝘀𝘀-𝗢𝗿𝗶𝗴𝗶𝗻 𝗥𝗲𝘀𝗼𝘂𝗿𝗰𝗲 𝗦𝗵𝗮𝗿𝗶𝗻𝗴) 𝗶𝘀 𝗮 𝗯𝗿𝗼𝘄𝘀𝗲𝗿 𝘀𝗲𝗰𝘂𝗿𝗶𝘁𝘆 𝗳𝗲𝗮𝘁𝘂𝗿𝗲. Its job is to prevent malicious sites from making unauthorized requests to servers.\n\nWhy does it happen? When frontend and backend are hosted on different domains or ports, any API call across these is treated as a cross-origin request. The browser blocks it unless the server explicitly permits it.\n\n𝗣𝗿𝗲𝗳𝗹𝗶𝗴𝗵𝘁 𝗥𝗲𝗾𝘂𝗲𝘀𝘁𝘀: Before sending certain types of requests (like those with custom headers or non-simple methods like PUT or DELETE), the browser sends a preflight request using the OPTIONS method to check if the actual request is safe. If the server doesn't respond with appropriate headers, the actual request is never sent.\n\n𝗛𝗼𝘄 𝘁𝗼 𝗳𝗶𝘅 𝗶𝘁: The backend needs to send the correct CORS headers:\n • 𝗔𝗰𝗰𝗲𝘀𝘀-𝗖𝗼𝗻𝘁𝗿𝗼𝗹-𝗔𝗹𝗹𝗼𝘄-𝗢𝗿𝗶𝗴𝗶𝗻: Specifies which origins are permitted\n • 𝗔𝗰𝗰𝗲𝘀𝘀-𝗖𝗼𝗻𝘁𝗿𝗼𝗹-𝗔𝗹𝗹𝗼𝘄-𝗠𝗲𝘁𝗵𝗼𝗱𝘀: Lists allowed HTTP methods (GET, POST, etc.)\n • 𝗔𝗰𝗰𝗲𝘀𝘀-𝗖𝗼𝗻𝘁𝗿𝗼𝗹-𝗔𝗹𝗹𝗼𝘄-𝗛𝗲𝗮𝗱𝗲𝗿𝘀: Lists allowed custom headers\n\nFrameworks like 𝗘𝘅𝗽𝗿𝗲𝘀𝘀, 𝗗𝗷𝗮𝗻𝗴𝗼, and 𝗦𝗽𝗿𝗶𝗻𝗴 𝗕𝗼𝗼𝘁 provide easy ways to handle this:\n • In Express (Node.js), use the cors middleware\n • In Django, use the django-cors-headers package\n • In Spring Boot, configure CORS mappings via annotations or config classes\n\n𝗕𝗲𝘀𝘁 𝗽𝗿𝗮𝗰𝘁𝗶𝗰𝗲𝘀:\n • In production, always be specific with allowed origins. Avoid * unless building a public API.\n • Test both simple and preflighted requests.\n • Understand request types. The method and headers influence whether a preflight is triggered.\n\n𝗖𝗢𝗥𝗦 𝗶𝘀 𝗻𝗼𝘁 𝗮 𝗯𝘂𝗴. It's a 𝘀𝗲𝗰𝘂𝗿𝗶𝘁𝘆 𝗽𝗿𝗼𝘁𝗼𝗰𝗼𝗹 that exists for good reason. It protects applications and users from cross-site attacks and misuse."
+      ]
+    }
+  },
+  {
+    "id": "post-7353630430379630592",
+    "kind": "post",
+    "title": "Coupon code valid for first 100 users only.",
+    "date": "2025-07-23",
+    "tags": [
+      "Backend Engineering",
+      "Concurrency",
+      "System Design"
+    ],
+    "original": {
+      "blocks": [
+        "Coupon code valid for first 100 users only.\n\n𝗪𝗲 𝗮𝗹𝗹 𝗵𝗮𝘃𝗲 𝘀𝗲𝗲𝗻 𝘁𝗵𝗶𝘀 𝗺𝗲𝘀𝘀𝗮𝗴𝗲, 𝗿𝗶𝗴𝗵𝘁? And just as you are about to complete your payment, you realize you might be the 𝟵𝟴𝘁𝗵, 𝟵𝟵𝘁𝗵, 𝗼𝗿 𝟭𝟬𝟬𝘁𝗵 𝘂𝘀𝗲𝗿.\n\nBut here is where things get interesting.\n\nWhat if, at that exact moment:\n • One person is entering their 𝗢𝗧𝗣\n • Another has just clicked on 𝗣𝗮𝘆 𝗡𝗼𝘄\n • Someone else is reviewing their cart\n\nNow the real question is: 𝘄𝗵𝗼 𝘄𝗶𝗹𝗹 𝗮𝗰𝘁𝘂𝗮𝗹𝗹𝘆 𝗴𝗲𝘁 𝘁𝗵𝗲 𝗱𝗶𝘀𝗰𝗼𝘂𝗻𝘁?\n\nIs it the person who clicked first?\nIs it the one whose payment gateway processed the transaction faster?\nOr is it the person who completed OTP verification before others?\n\nSuch situations happen more often than we realize. Whether it is a limited-use coupon, a flash sale on smartphones, or booking tickets for a concert, backend systems face such race conditions daily.\n\nAnd solving this is not as simple as writing a few conditional statements.\n\nBehind the scenes, the backend has to manage:\n • 𝗔𝘁𝗼𝗺𝗶𝗰 𝗰𝗼𝘂𝗻𝘁𝗲𝗿𝘀 to precisely track how many coupons have been claimed, even when hundreds or thousands of people are transacting at the same moment.\n • 𝗥𝗲𝗮𝗹-𝘁𝗶𝗺𝗲 𝗶𝗻𝘃𝗲𝗻𝘁𝗼𝗿𝘆 𝗹𝗼𝗰𝗸𝗶𝗻𝗴 to temporarily hold a coupon or seat while the payment is being processed.\n • 𝗖𝗼𝗻𝗰𝘂𝗿𝗿𝗲𝗻𝗰𝘆 𝗰𝗼𝗻𝘁𝗿𝗼𝗹, using optimistic or pessimistic locking to ensure fairness without sacrificing performance.\n • 𝗦𝘁𝗿𝗶𝗰𝘁 𝘁𝗿𝗮𝗻𝘀𝗮𝗰𝘁𝗶𝗼𝗻 𝘀𝗮𝗳𝗲𝘁𝘆 to avoid overselling or assigning more coupons than promised.\n\nEvery 𝗺𝗶𝗹𝗹𝗶𝘀𝗲𝗰𝗼𝗻𝗱 𝗰𝗼𝘂𝗻𝘁𝘀. A single wrong decision can lead to 𝗼𝘃𝗲𝗿𝘀𝗲𝗹𝗹𝗶𝗻𝗴, 𝗯𝗹𝗼𝗰𝗸𝗲𝗱 𝘁𝗿𝗮𝗻𝘀𝗮𝗰𝘁𝗶𝗼𝗻𝘀, or 𝗳𝗿𝘂𝘀𝘁𝗿𝗮𝘁𝗲𝗱 𝘂𝘀𝗲𝗿𝘀.\n\nThese are the kinds of real-world problems that make backend development so exciting for me. Designing systems that can handle high-concurrency, real-time allocation challenges is not just about good code; it is about thinking strategically and planning for chaos.\n\nSo next time you are racing to grab a discount or a concert ticket, remember this: While you are competing, the backend is too.\n\nUnder the hood, solving such race conditions often involves using 𝗺𝘂𝘁𝗲𝘅𝗲𝘀 (𝗺𝘂𝘁𝘂𝗮𝗹 𝗲𝘅𝗰𝗹𝘂𝘀𝗶𝗼𝗻 𝗹𝗼𝗰𝗸𝘀) to ensure that shared counters or resources are not accessed by multiple processes at the same time.\n\nWithout proper locking, two users might end up grabbing the same coupon or seat and that's where mutexes help maintain consistency in high-concurrency situations."
+      ]
+    }
+  },
+  {
+    "id": "post-7353334970553110528",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-07-22",
+    "tags": [
+      "Writing"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\nHow does your app handle increasing traffic without crashing? \nThe answer lies in Load Balancing.\n\nIn this article, I’ve explained Load Balancing Algorithms with Real-World Examples covering how Round Robin, Weighted Round Robin, Least Connections, Least Response Time, and IP Hash work, when to use them, and their pros and cons.\n\nIf you’ve ever wondered how traffic gets distributed across servers in large-scale systems, this guide will help you understand the strategies behind it.\n\n",
+            {
+              "text": "Read the full breakdown in the article.",
+              "href": "https://ashmita-dev.onrender.com/blogs/load-balancing-algorithms-with-real-world-examples.html"
+            },
+            ""
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7352268588986109953",
+    "kind": "post",
+    "title": "𝗪𝗵𝘆 𝗘𝗿𝗿𝗼𝗿 𝗛𝗮𝗻𝗱𝗹𝗶𝗻𝗴 𝗠𝗮𝘁𝘁𝗲𝗿𝘀 ?",
+    "date": "2025-07-19",
+    "tags": [
+      "Backend Engineering",
+      "Reliability"
+    ],
+    "original": {
+      "blocks": [
+        "𝗪𝗵𝘆 𝗘𝗿𝗿𝗼𝗿 𝗛𝗮𝗻𝗱𝗹𝗶𝗻𝗴 𝗠𝗮𝘁𝘁𝗲𝗿𝘀 ?\n\nError handling is not optional. It can never be ignored because unexpected situations always occur in real-world applications, and no one wants their app to break when something goes wrong.\n\nIf you’ve used apps like Swiggy, Zomato, or Amazon, you’ve probably noticed how smooth and reliable they feel. That’s not because everything always works perfectly. It’s because these apps are designed to handle failures properly.\n\nIn the screenshot below, I searched for a completely random and meaningless input on Swiggy. Instead of crashing or showing a confusing error, Swiggy handled it gracefully with a clear message:\n“𝗪𝗲 𝗰𝗼𝘂𝗹𝗱𝗻’𝘁 𝗳𝗶𝗻𝗱 𝗮𝗻𝘆 𝗿𝗲𝘀𝘂𝗹𝘁𝘀 𝗳𝗼𝗿 𝘆𝗼𝘂𝗿 𝘀𝗲𝗮𝗿𝗰𝗵.”\n\nThis is what proper error handling looks like. The app was ready to deal with the unexpected without failing.\n\n𝗥𝗲𝗮𝗹-𝗪𝗼𝗿𝗹𝗱 𝗘𝘅𝗮𝗺𝗽𝗹𝗲𝘀 𝗼𝗳 𝗚𝗼𝗼𝗱 𝗘𝗿𝗿𝗼𝗿 𝗛𝗮𝗻𝗱𝗹𝗶𝗻𝗴:\n\n 𝟭. 𝗢𝘂𝘁-𝗼𝗳-𝗦𝘁𝗼𝗰𝗸 𝗜𝘁𝗲𝗺 𝗼𝗻 𝗔𝗺𝗮𝘇𝗼𝗻\nWhen a product is marked as \"Currently unavailable,\" Amazon does not let you add it to your cart.\nThe app does not crash. It simply displays the message:\n\"This item is currently unavailable.\"\n\n 𝟮. 𝗠𝗶𝘀𝘀𝗶𝗻𝗴 𝗥𝗲𝗾𝘂𝗶𝗿𝗲𝗱 𝗙𝗶𝗲𝗹𝗱𝘀 𝗼𝗻 𝗦𝘄𝗶𝗴𝗴𝘆\nTry placing an order without entering your delivery address.\nSwiggy does not fail. It prompts you to complete the missing details before proceeding.\n\n𝟯. 𝗙𝗮𝗶𝗹𝗲𝗱 𝗣𝗮𝘆𝗺𝗲𝗻𝘁 𝗣𝗿𝗼𝗰𝗲𝘀𝘀\nCancel a payment midway on Swiggy or Amazon.\nInstead of freezing or failing, the app shows:\n\"Payment failed. Please try again.\"\n\nEven critical failures are handled smoothly.\n\n𝗪𝗵𝘆 𝗥𝗼𝗯𝘂𝘀𝘁 𝗘𝗿𝗿𝗼𝗿 𝗛𝗮𝗻𝗱𝗹𝗶𝗻𝗴 𝗜𝘀 𝗘𝘀𝘀𝗲𝗻𝘁𝗶𝗮𝗹:\n • Prevents sudden crashes and keeps your app stable\n • Improves user experience with clear, helpful message\n • Simplifies debugging with meaningful error logs\n • Protects data integrity in critical systems\n • Prevents security risks by not exposing sensitive system details\n • Reflects engineering maturity by preparing for real-world issues\n\nAlways ask these questions while building any feature\n • What could go wrong?\n • Am I handling that situation properly?\n\nLet me know your thoughts on this.",
+        {
+          "figure": {
+            "path": "assets/blogs/post-7352268588986109953-01.jpg",
+            "alt": "The author’s Swiggy search example showing that no matching results were found."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7352013107742896128",
+    "kind": "post",
+    "title": "Just tried OpenAI’s ChatGPT Agent Mode and honestly… I’m amazed!",
+    "date": "2025-07-18",
+    "tags": [
+      "AI",
+      "Agents"
+    ],
+    "original": {
+      "blocks": [
+        "Just tried OpenAI’s ChatGPT Agent Mode and honestly… I’m amazed!\n\nYou can now ask it to actually do things, not just answer questions or generate content.\n\nYou can:\n • Create a full competitor analysis report by scanning multiple websites and get it as a ready-to-share presentation.\n • Plan a complete team trip, including flights, hotels, and activities, all organized neatly in a spreadsheet.\n • Find potential hires from LinkedIn, shortlist profiles, and compile details into a document without manual searching.\n • Draft follow-up emails or client messages and schedule them directly from your calendar events.\n • Summarize unread emails and upcoming meetings every morning to help you start your day prepared.\n\nThe fact that all of this runs in the background while you continue working… that’s next level.\n\nThe idea of being a one-person team feels more realistic now.\n\nHave you tried Agent Mode yet? Curious what tasks you'd automate."
+      ]
+    }
+  },
+  {
+    "id": "post-7351851766948278272",
+    "kind": "post",
+    "title": "Hi everyone!",
+    "date": "2025-07-18",
+    "tags": [
+      "Writing"
+    ],
+    "original": {
+      "blocks": [
+        {
+          "paragraph": [
+            "Hi everyone!\nThe way services communicate in system design plays a key role in shaping both performance and scalability. In this article, I’ve explained Synchronous vs Asynchronous Communication using simple language and real-world examples. You’ll learn how each works, their pros and cons, and when to use them.\n\nIf you’ve ever wondered why some systems respond instantly while others handle tasks in the background, this guide will make things clearer.\n\n",
+            {
+              "text": "Read the full article to explore the details.",
+              "href": "https://ashmita-dev.onrender.com/blogs/synchronous-vs-asynchronous-communication.html"
+            },
+            ""
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "post-7350739647678877696",
+    "kind": "post",
+    "title": "𝗛𝗼𝘄 𝗔𝗿𝗲 𝗖𝗼𝗺𝗽𝘂𝘁𝗲𝗿𝘀 𝗮𝗻𝗱 𝗣𝗿𝗼𝗴𝗿𝗮𝗺𝗺𝗶𝗻𝗴 𝗔𝗰𝘁𝘂𝗮𝗹𝗹𝘆 𝗥𝗲𝗹𝗮𝘁𝗲𝗱?",
+    "date": "2025-07-15",
+    "tags": [
+      "Programming",
+      "Computer Science"
+    ],
+    "original": {
+      "blocks": [
+        "𝗛𝗼𝘄 𝗔𝗿𝗲 𝗖𝗼𝗺𝗽𝘂𝘁𝗲𝗿𝘀 𝗮𝗻𝗱 𝗣𝗿𝗼𝗴𝗿𝗮𝗺𝗺𝗶𝗻𝗴 𝗔𝗰𝘁𝘂𝗮𝗹𝗹𝘆 𝗥𝗲𝗹𝗮𝘁𝗲𝗱?\n\nThink of a computer as a machine, like a car engine. On its own, it just sits there. To make it do something, you need to give it instructions.\n\nThat’s where programming comes in.\n\nProgramming is like writing a recipe that the computer follows step by step. Whether it’s:\n • Showing a website\n • Running a mobile app\n • Calculating your expenses\n\nEvery task happens because someone wrote code to tell the computer how to do it.\n\nA simple real-world example:\nWhen you click ‘Pay Now’ on a shopping site, the computer doesn’t automatically know what to do. A programmer wrote the logic behind what happens next i.e. verifying payment, sending confirmation, updating inventory, and more.\n\nAt the core:\nComputer = Machine\nProgramming = Instructions for the Machine\n\nIt’s as simple and as powerful as that.\n\nIf you're starting out, remember:\nComputers aren’t “smart” until you tell them what to do."
+      ]
+    }
   }
 ]

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sometimes, the fastest database query is the one you never execute. · Ashmita Pandey</title>
+<meta name="description" content="Sometimes, the fastest database query is the one you never execute.">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7492263669331054592.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>Sometimes, the fastest database query is the one you never execute.</h1>
+<p>Ashmita Pandey · <time datetime="2026-08-09">Aug 9, 2026</time> · System Design · Databases</p>
+<div class="original-body"><p>Sometimes, the fastest database query is the one you never execute.
+
+That&#x27;s the basic idea behind Bloom Filters.
+
+Before performing an expensive lookup, a Bloom Filter helps answer a simple question:
+
+Could this key exist?
+
+The answer can be:
+
+Definitely not
+or
+Probably yes
+
+If it&#x27;s definitely not present, we can skip the lookup.
+
+If it&#x27;s probably present, we perform the actual lookup.
+
+The interesting part is that Bloom Filters don&#x27;t store the actual data.
+
+They use a bit array and multiple hash functions to keep just enough information to determine whether an element could exist.
+
+This makes them extremely memory efficient.
+
+But there is a trade-off.
+
+Bloom Filters can have false positives, but they can never have false negatives.
+
+This simple idea is useful in systems such as Cassandra, Bigtable, HBase, Redis, and other large-scale systems where avoiding unnecessary disk or database reads can make a significant difference.
+
+I recently wrote an article explaining how Bloom Filters work, why false positives happen, how they save disk I/O, and where they are used in real-world systems.
+
+If you&#x27;ve heard about Bloom Filters but never quite understood how they work, <a href="https://ashmita-dev.onrender.com/blogs/bloom-filters-how-databases-avoid-millions-of-unnecessary-disk-reads.html">check it out.</a></p></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

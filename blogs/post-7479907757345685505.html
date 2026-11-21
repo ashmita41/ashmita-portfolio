@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTTP just got its first new standardized request method in more than 20 years. · Ashmita Pandey</title>
+<meta name="description" content="HTTP just got its first new standardized request method in more than 20 years.">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7479907757345685505.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>HTTP just got its first new standardized request method in more than 20 years.</h1>
+<p>Ashmita Pandey · <time datetime="2026-07-06">Jul 6, 2026</time> · Networking · HTTP</p>
+<div class="original-body"><p>HTTP just got its first new standardized request method in more than 20 years.
+
+It&#x27;s called QUERY.
+
+At first, it might seem like just another HTTP method. But it actually solves a problem that many backend engineers have encountered while designing APIs.
+
+Suppose you&#x27;re building a product search endpoint where users can filter by:
+
+• Multiple brands
+• Price range
+• Categories
+• Rating
+• Availability
+• Sorting options
+
+Traditionally, we&#x27;d use a GET request.
+
+http
+GET /products?brands=Apple,Samsung&amp;minPrice=30000&amp;maxPrice=80000&amp;rating=4...
+
+This works well for simple queries, but as more filters are added, the URL quickly becomes long, difficult to read, and harder to maintain. It can also run into URL length limitations imposed by browsers, proxies, or servers.
+
+To avoid this, many APIs use POST instead and send the filters as a JSON request body.
+
+{
+ &quot;brands&quot;: [&quot;Apple&quot;, &quot;Samsung&quot;],
+ &quot;price&quot;: {
+  &quot;min&quot;: 30000,
+  &quot;max&quot;: 80000
+ },
+ &quot;rating&quot;: 4,
+ &quot;inStock&quot;: true
+}
+
+While this makes the request much cleaner, there&#x27;s one issue.
+
+A search operation doesn&#x27;t create or modify anything. It&#x27;s simply asking the server to return data. Using POST works technically, but it doesn&#x27;t accurately describe the intent of the request.
+
+That&#x27;s where QUERY comes in.
+
+It allows clients to send a request body while explicitly indicating that the operation is read-only.
+
+In other words:
+
+• You get the flexibility of a request body.
+• The request still represents a read operation.
+• API semantics become clearer and more consistent.
+
+This may seem like a small addition, but it&#x27;s significant because it&#x27;s the first new standardized HTTP request method in more than two decades.
+
+Even technologies that have been around for decades continue to evolve as new engineering challenges emerge.
+
+Official RFC: <a href="https://www.rfc-editor.org/info/rfc10008/">https://lnkd.in/ez6ZZyyr</a>
+
+Have you ever used POST for search endpoints because GET wasn&#x27;t sufficient? I&#x27;d be interested to know how you&#x27;ve approached this in your APIs.</p></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>
