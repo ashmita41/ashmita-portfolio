@@ -45,14 +45,14 @@ def shell(title, description, canonical, body, *, prefix="", script=""):
 <meta name="description" content="{t(description)}">
 <meta name="author" content="Ashmita Pandey">
 <link rel="canonical" href="{HOST}/{canonical}">
-<link rel="icon" href="{prefix}favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="{prefix}styles.css">
+<link rel="icon" href="{prefix}favicon.svg?v=20261121-blue" type="image/svg+xml">
+<link rel="stylesheet" href="{prefix}styles.css?v=20261121-blue">
 {script}
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header"><div class="shell nav-row">
-  <a class="brand" href="{prefix}index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <a class="brand" href="{prefix}index.html" aria-label="Ashmita Pandey home">Ashmita Pandey</a>
   <nav aria-label="Main"><a href="{prefix}index.html#home">Home</a><a href="{prefix}index.html#speaking">Speaking</a><a href="{prefix}blogs.html" aria-current="page">Blogs</a><a href="{prefix}index.html#contact">Contact</a></nav>
 </div></header>
 <main class="shell" id="main" tabindex="-1">
@@ -103,7 +103,7 @@ def to_index(entries):
         tags_html=" · ".join(t(tag) for tag in item["tags"])
         tags_data=escape(json.dumps(item["tags"],ensure_ascii=False))
         results.append(f'<li class="archive-item" id="{eid}" data-topics="{tags_data}">{date_label(item)}<div><h2>{title}</h2><p class="topic">{tags_html}</p></div></li>')
-    body=f'''<header class="archive-head"><p class="eyebrow"><span class="status-dot"></span> The technical notebook</p><h1>Blogs<span class="pink">.</span></h1><p>Distributed systems, databases, AI, and the details that make them work.</p></header>
+    body=f'''<header class="archive-head"><h1>Blogs</h1><p>Articles on distributed systems, databases, and AI.</p></header>
 <p class="archive-note">This index lists verified article titles and topics. Full original articles and cover images will be added here from the source files.</p>
 <div class="controls" hidden><label for="filter">Filter by topic</label><select id="filter">{options}</select><span id="result-count" aria-live="polite"></span></div>
 <ul class="archive-list">{"".join(results)}</ul>'''
