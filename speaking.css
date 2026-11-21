@@ -29,7 +29,14 @@
 .speaking-carousel .talk-copy p:not(.small-label) { color:var(--muted); margin:0; }
 .speaking-carousel .talk-card-feature .talk-copy p:not(.small-label) { color:#dee5fb; }
 .speaking-carousel .talk-card-feature .small-label { color:#bdc6ff; }
-.speaking-carousel .talk-copy a { margin-top:auto; padding-block:.45rem .1rem; }
+.speaking-carousel .talk-card-link {
+  display:flex; flex:1; flex-direction:column; min-width:0; color:inherit; text-decoration:none;
+}
+.speaking-carousel .talk-card-link:focus-visible { outline-offset:-4px; border-radius:inherit; }
+.speaking-carousel .talk-card-feature .talk-card-link:focus-visible { outline-color:#b6c5ff; }
+.speaking-carousel .talk-cta { margin-top:auto; padding-block:.45rem .1rem; color:var(--brand); font-weight:750; }
+.speaking-carousel .talk-card-feature .talk-cta { color:#d5dfff; }
+.speaking-carousel .talk-card-link:is(:hover,:focus-visible) .talk-cta { text-decoration:underline; text-underline-offset:.24em; }
 .speaking-carousel .talk-controls { display:flex; align-items:center; justify-content:center; gap:1rem; margin-block:.45rem 0; }
 .speaking-carousel .talk-controls[hidden] { display:none; }
 .speaking-carousel .talk-controls button {

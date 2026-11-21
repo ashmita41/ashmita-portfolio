@@ -209,3 +209,8 @@ nav a:hover,nav a[aria-current=page] { color:var(--accent); text-decoration:unde
 @media (max-width: 620px) {
   #toolkit .tool-list>div { grid-template-columns:minmax(0,1fr); }
 }
+
+.leadership-teaching-photo { margin:.85rem 0 0; width:min(100%,33rem); }
+.leadership-teaching-photo img { width:100%; height:auto; border-radius:.52rem; }
+#contact .copy-address { display:inline-grid; place-items:center; width:44px; padding:.35rem; }
+#contact .copy-address[hidden] { display:none; }
