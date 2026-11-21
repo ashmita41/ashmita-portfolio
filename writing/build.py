@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the linkable on-site Writing archive and article pages."""
+"""Generate the linkable on-site Articles archive and article pages."""
 from datetime import date
 from html import escape
 from pathlib import Path
@@ -99,7 +99,7 @@ def document(*, title, description, slug, prefix, body, script=""):
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header"><div class="shell header-inner">
 <a class="brand" href="{prefix}index.html">Ashmita Pandey</a>
-<nav aria-label="Main"><a href="{prefix}index.html#work">Work</a><a href="{prefix}index.html#speaking">Speaking</a><a href="{prefix}writing.html" aria-current="page">Writing</a><a href="{prefix}index.html#leadership">Leadership</a></nav>
+<nav aria-label="Main"><a href="{prefix}index.html#work">Work</a><a href="{prefix}index.html#speaking">Talks</a><a href="{prefix}writing.html" aria-current="page">Articles</a><a href="{prefix}index.html#leadership">Leadership</a></nav>
 </div></header>
 <main id="main" tabindex="-1">
 {body}
@@ -130,7 +130,7 @@ def render_index(entries, tags):
     body = f'''<div class="shell">
 <header class="read-header">
 <p class="kicker">Ashmita Pandey</p>
-<h1>Writing</h1>
+<h1>Articles</h1>
 <p class="intro">Plain-language explainers on backend systems, AI, and software design, plus conversations with educators.</p>
 </header>
 <div class="article-filters" role="group" aria-label="Filter by topic" hidden>{"".join(buttons)}</div>
@@ -138,7 +138,7 @@ def render_index(entries, tags):
 {group("technical-articles", "Technical articles", [e for e in entries if e["type"] != "Interview"])}
 {group("studybase-interviews", "Studybase interviews", [e for e in entries if e["type"] == "Interview"])}
 </div>'''
-    return document(title="Writing", description="On-site articles and interviews from Ashmita Pandey.", slug="writing.html", prefix="", body=body, script='<script src="writing/filter.js" defer></script>')
+    return document(title="Articles", description="On-site articles and interviews from Ashmita Pandey.", slug="writing.html", prefix="", body=body, script='<script src="writing/filter.js" defer></script>')
 
 def read_article(entry):
     blocks = entry.get("body", [])
@@ -160,7 +160,7 @@ def read_article(entry):
         image = f'<figure><img src="../{file}" alt="{escape(alt)}" loading="lazy" decoding="async"></figure>'
     body = f'''<article class="article-shell">
 <header class="read-header">
-<a class="back-link" href="../writing.html">← All writing</a>
+<a class="back-link" href="../writing.html">← All articles</a>
 <p class="kicker">{"Studybase interview" if entry["type"] == "Interview" else "Technical article"}</p>
 <h1>{clean(entry["title"])}</h1>
 {meta}
