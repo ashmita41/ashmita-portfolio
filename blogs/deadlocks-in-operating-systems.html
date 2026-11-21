@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deadlocks in Operating Systems · Ashmita Pandey</title>
+<meta name="description" content="Deadlocks in Operating Systems">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/deadlocks-in-operating-systems.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>Deadlocks in Operating Systems</h1>
+<p>Ashmita Pandey · <time datetime="2025-06-22">Jun 22, 2025</time> · Operating Systems</p>
+<div class="original-body"><figure><img src="../assets/blogs/deadlocks-in-operating-systems/cover.png" alt="Deadlock diagram showing processes and resources waiting on each other in a cycle." loading="lazy" decoding="async"></figure><div class="source-document"><p>
+      Hi everyone, I&#x27;m Ashmita!
+    </p><p>
+      Understanding how systems handle multiple tasks is crucial to building efficient and reliable software. One of the most important issues in this area is <strong>Deadlock</strong>. This is a situation where processes are stuck waiting for resources that other processes are holding.
+    </p><p>
+      In this article, let&#x27;s explore <strong>Deadlocks in Operating Systems</strong>, how they occur, and how they can be prevented, detected, or resolved.
+    </p><h2>
+      What is Deadlock?
+    </h2><p>
+      A <strong>deadlock</strong> is a situation where two or more processes cannot proceed because each is waiting for a resource that the other holds. This creates a cycle of dependencies with no process able to move forward.
+    </p><h2>
+      Real-World Example:
+    </h2><p>
+      Imagine two trains on a single track coming from opposite directions. Each train waits for the other to move, but neither can proceed unless the other backs up. Since both are waiting, no train moves. This is a real-life example of deadlock.
+    </p><p>
+      Another relatable example is two people trying to pass each other in a narrow hallway. If both move in the same direction at the same time and block each other&#x27;s path, they may stay stuck, unless one steps aside.
+    </p><h2>
+      How Does Deadlock Occur?
+    </h2><p>
+      In an operating system, a process typically:
+    </p><p>
+            </p><ol><li>Requests a resource</li><li>Uses the resource</li><li>Releases the resource</li></ol><p>
+      A deadlock happens when multiple processes are holding resources and waiting to acquire resources held by each other.
+    </p><h2>
+      Example:
+    </h2><p>
+            </p><ul><li>Process 1 holds Resource A and wants Resource B.</li><li>Process 2 holds Resource B and wants Resource A.</li></ul><p>
+      Neither process can continue, and both are stuck in a deadlock.
+    </p><h2>
+      Conditions for Deadlock
+    </h2><p>
+      A deadlock can occur only if all of the following four conditions are true:
+    </p><p>
+            </p><ol><li><strong>Mutual Exclusion</strong>: At least one resource must be non-shareable.</li><li><strong>Hold and Wait</strong>: A process holding one resource is waiting for additional resources.</li><li><strong>No Preemption</strong>: A resource cannot be forcibly taken away from a process holding it.</li><li><strong>Circular Wait</strong>: A set of processes are each waiting for a resource that the next process in the cycle holds.</li></ol><p>
+      If any one of these conditions is eliminated, a deadlock cannot occur.
+    </p><h2>
+      Methods for Handling Deadlock
+    </h2><p>
+      There are several strategies to handle deadlocks:
+    </p><p>
+            </p><ol><li><strong>Deadlock Prevention or Avoidance</strong></li><li><strong>Deadlock Detection and Recovery</strong></li><li><strong>Deadlock Ignorance</strong></li></ol><h2>
+      1. Deadlock Prevention
+    </h2><p>
+      In this approach, the system is designed to prevent any of the four necessary conditions from holding.
+    </p><h2>
+      Strategies:
+    </h2><p>
+            </p><ul><li><strong>Mutual Exclusion</strong>: Use it only for truly non-shareable resources like printers.</li><li><strong>Hold and Wait</strong>: Ensure processes request all required resources at once.</li><li><strong>No Preemption</strong>: If a process waits, it must release its currently held resources.</li><li><strong>Circular Wait</strong>: Impose a strict resource ordering. Processes can only request resources in a predefined increasing order.</li></ul><h2>
+      2. Deadlock Avoidance
+    </h2><p>
+      This approach uses prior knowledge about future requests.
+    </p><h2>
+      Banker&#x27;s Algorithm:
+    </h2><p>
+      Before granting a resource request, the system simulates the allocation and checks if it leads to a safe state. If it does, the request is granted.
+    </p><p>
+      This ensures the system always stays in a safe state, avoiding deadlocks.
+    </p><h2>
+      3. Deadlock Detection and Recovery
+    </h2><p>
+      Deadlocks are allowed to occur, but the system must detect and resolve them.
+    </p><h2>
+      Detection:
+    </h2><p>
+            </p><ul><li>Use <strong>Resource Allocation Graph</strong> or <strong>Banker&#x27;s Algorithm</strong> periodically to check for deadlocks.</li></ul><h2>
+      Recovery Techniques:
+    </h2><p>
+            </p><ul><li><strong>Process Termination</strong>:</li><li><strong>Resource Preemption</strong>:</li></ul><p>
+      Factors to consider:
+    </p><p>
+            </p><ul><li>Priority of process</li><li>Resources held and required</li><li>Process progress</li><li>Type of process (interactive or batch)</li></ul><h2>
+      Example:
+    </h2><p>
+      If Process A is using a file and waiting for a printer, and Process B is using the printer and waiting for the file, one process must be terminated or its resource preempted to recover.
+    </p><h2>
+      4. Deadlock Ignorance
+    </h2><p>
+      Used by systems like Windows and UNIX.
+    </p><p>
+            </p><ul><li>Assumes deadlocks are rare</li><li>If they occur, restart the system</li><li>Known as the <strong>ostrich algorithm</strong></li></ul><p>
+      Useful in simple systems where overhead of prevention and detection is not justified.
+    </p><h2>
+      Safe State vs Unsafe State
+    </h2><p>
+      A <strong>safe state</strong> allows processes to run in an order that avoids deadlocks.
+    </p><p>
+      An <strong>unsafe state</strong> may not lead to a deadlock immediately but has the potential to reach one if resource allocation continues without caution.
+    </p><h2>
+      Summary
+    </h2><p>
+            </p><ul><li>A <strong>deadlock</strong> is a system-wide freeze caused by resource conflict.</li><li>It occurs when processes wait indefinitely for resources held by each other.</li><li>Deadlocks require four conditions: mutual exclusion, hold and wait, no preemption, and circular wait.</li><li>Methods to handle deadlocks include <strong>prevention</strong>, <strong>avoidance</strong>, <strong>detection and recovery</strong>, and <strong>ignorance</strong>.</li><li>Tools like <strong>Banker&#x27;s Algorithm</strong> and <strong>Resource Allocation Graphs</strong> are used in handling deadlocks.</li></ul><p>
+      By understanding these concepts, we can design systems that are more robust, responsive, and efficient.
+    </p><p>
+      Thanks for reading!
+    </p></div></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

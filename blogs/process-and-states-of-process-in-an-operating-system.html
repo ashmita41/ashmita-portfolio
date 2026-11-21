@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Process and States of Process in an Operating System · Ashmita Pandey</title>
+<meta name="description" content="Process and States of Process in an Operating System">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/process-and-states-of-process-in-an-operating-system.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>Process and States of Process in an Operating System</h1>
+<p>Ashmita Pandey · <time datetime="2025-06-23">Jun 23, 2025</time> · Operating Systems</p>
+<div class="original-body"><figure><img src="../assets/blogs/process-and-states-of-process-in-an-operating-system/cover.png" alt="Flow chart showing the states of a process and transitions between them." loading="lazy" decoding="async"></figure><div class="source-document"><p>
+      Hi everyone, I&#x27;m Ashmita 👋
+    </p><p>
+      Understanding how operating systems manage running programs is fundamental to designing reliable and efficient software. At the heart of this functionality lies the concept of <strong>Processes</strong>. In this article, we will explore what a process is, how it operates in memory, and the different states it goes through during execution.
+    </p><h2>
+      What is a Process?
+    </h2><p>
+      A <strong>process</strong> is a program in execution. While a program is a passive set of instructions, a process is an active instance of these instructions being executed.
+    </p><h2>
+      Real-World Example:
+    </h2><p>
+      Imagine a music player application installed on your computer. When you click on it to play a song, the operating system loads the application into memory and starts execution. That running instance is a process. If you open the same music player again, a new process is created. So, one program can run multiple processes simultaneously.
+    </p><p>
+      Another example is opening a web browser like Chrome multiple times. Each tab or window operates as a separate process to isolate tasks and enhance performance.
+    </p><h2>
+      Memory Layout of a Process
+    </h2><p>
+      When a process is loaded into memory, it is divided into several distinct sections, each serving a specialized function during execution. These memory sections interact in real-time as the process progresses.
+    </p><p>
+            </p><ul><li><strong>Text Section</strong>: Contains the compiled code of the program that is to be executed. It is usually marked as read-only to prevent accidental modification of instructions.</li><li><strong>Stack</strong>: Used for static memory allocation. It stores temporary data such as function parameters, return addresses, and local variables. It grows and shrinks as functions are called and return.</li><li><strong>Data Section</strong>: Holds global and static variables that are initialized by the programmer. It is a fixed-size region allocated when the process starts.</li><li><strong>Heap</strong>: Used for dynamic memory allocation. The size of this segment can change during execution as the process requests memory using functions like malloc() in C or new in Java.</li></ul><h2>
+      Visual Breakdown of Memory Layout:
+    </h2><p>
+      Here is a top-to-bottom representation of how a process is typically arranged in memory:
+    </p><p>
+&#32;&#32;&#32;&#32;&#32;&#32;
+        <br>
+    </p><figure><img src="../assets/blogs/process-and-states-of-process-in-an-operating-system/inline-01.png" alt="Process memory layout with stack, heap, data, and text sections." loading="lazy" decoding="async"></figure><h2>
+      Real-World Analogy:
+    </h2><p>
+      Imagine a process as a workshop:
+    </p><p>
+            </p><ul><li>The <strong>Text Section</strong> is the instruction manual for the worker.</li><li>The <strong>Stack</strong> is a set of labeled trays where temporary tools and components are placed while working.</li><li>The <strong>Data Section</strong> is a locked cabinet containing permanent items known at the start.</li><li>The <strong>Heap</strong> is a dynamic supply shelf from which the worker can request more items during work.</li></ul><h2>
+      Interaction During Execution:
+    </h2><p>
+      As a function is called, the stack grows to include new frames for local variables. If the function creates objects or requests memory at runtime, the heap expands. Meanwhile, instructions from the text section guide these operations. Data needed across function calls are accessed from the data section. This layout enables efficient and structured execution, making it easier for the operating system to manage each running process.
+    </p><p>
+            </p><ul><li><strong>Text Section</strong>: Contains the compiled instructions of the program. It is typically read-only.</li><li><strong>Stack</strong>: Stores temporary data like function parameters, return addresses, and local variables.</li><li><strong>Data Section</strong>: Holds global variables used by the process.</li><li><strong>Heap</strong>: Used for dynamic memory allocation during runtime.</li></ul><h2>
+      Real-World Analogy:
+    </h2><p>
+      Think of a process as a chef in a kitchen. The recipe book is the text section. The ingredients that are always available are the data section. The bowls and utensils used for temporary tasks represent the stack. When the chef decides to make extra portions during cooking, the new ingredients used are from the heap.
+    </p><h2>
+      Process Control Block (PCB)
+    </h2><p>
+      The operating system manages each process using a data structure called the <strong>Process Control Block (PCB)</strong>. It stores all the crucial details about the process such as:
+    </p><p>
+            </p><ul><li><strong>Process ID (PID)</strong>: Unique identifier for the process.</li><li><strong>Process State</strong>: Current status (Running, Waiting, Ready, etc).</li><li><strong>CPU Scheduling Information</strong>: Priority, pointers to queues, etc.</li><li><strong>Memory Management Information</strong>: Page tables, segment tables.</li><li><strong>I/O Status Information</strong>: List of I/O devices and open files.</li><li><strong>Accounting Information</strong>: CPU usage, time limits, etc.</li></ul><h2>
+      Real-World Analogy:
+    </h2><p>
+      The PCB is like a file maintained by restaurant management for each chef. It tracks which dish they are cooking, tools they are using, ingredients used so far, and their performance.
+    </p><h2>
+      Process States
+    </h2><p>
+      A process can exist in several states throughout its life cycle, representing different phases of execution and resource interaction. These states are essential to understand how the operating system manages processes efficiently. Let us dive deeper into each state and how transitions happen with practical examples.
+    </p><h2>
+      Common Process States:
+    </h2><p>
+            </p><ul><li><strong>New</strong>: The process is just being created.</li><li><strong>Ready</strong>: The process is loaded into memory and waiting for CPU allocation.</li><li><strong>Running</strong>: The process is currently being executed by the CPU.</li><li><strong>Waiting (Blocked)</strong>: The process is waiting for a resource or event (such as I/O completion).</li><li><strong>Terminated</strong>: The process has completed execution and is being cleaned up.</li><li><strong>Suspended Ready</strong>: The process was ready but moved to secondary storage to make room in main memory.</li><li><strong>Suspended Blocked</strong>: The process was in the waiting state but moved out of main memory.</li></ul><h2>
+      Real-World Example:
+    </h2><p>
+      Imagine a customer visiting a bank:
+    </p><p>
+            </p><ul><li><strong>New</strong>: The customer takes a token.</li><li><strong>Ready</strong>: The customer waits in the lounge.</li><li><strong>Running</strong>: The customer reaches the counter and is being served.</li><li><strong>Blocked</strong>: The customer is asked to wait for approval or document verification.</li><li><strong>Terminated</strong>: The customer’s work is done and they leave the bank.</li></ul><h2>
+      State Transitions with Examples:
+    </h2><p>
+            </p><ul><li><strong>New → Ready</strong>: A process is created and moved into memory, ready to execute. For instance, when a user launches a browser.</li><li><strong>Ready → Running</strong>: The scheduler selects the browser process to use the CPU.</li><li><strong>Running → Waiting</strong>: The browser is loading a webpage and waiting for data from the network.</li><li><strong>Waiting → Ready</strong>: The webpage data is received; the process is now ready to execute again.</li><li><strong>Running → Terminated</strong>: The user closes the browser tab, and the process completes.</li><li><strong>Running → Ready</strong>: The OS may preempt the browser process to run a higher priority one.</li><li><strong>Ready → Suspended Ready</strong>: When memory is low, the OS may move some ready processes to disk.</li></ul><p>
+      These detailed transitions help the operating system multitask efficiently, ensuring smooth user experience and optimal CPU utilization. The most common states include:
+    </p><p>
+            </p><ul><li><strong>New</strong>: The process is being created.</li><li><strong>Ready</strong>: The process is waiting to be assigned to a CPU.</li><li><strong>Running</strong>: Instructions are being executed.</li><li><strong>Waiting</strong>: The process is waiting for an event (like I/O completion).</li><li><strong>Terminated</strong>: The process has finished execution.</li></ul><p>
+      Some advanced operating systems also define:
+    </p><p>
+            </p><ul><li><strong>Suspended Ready</strong>: The process is in secondary storage, ready to be moved to main memory.</li><li><strong>Suspended Blocked</strong>: A waiting process swapped out of memory.</li></ul><h2>
+      Lifecycle Models of a Process
+    </h2><h2>
+      Two-State Model:
+    </h2><p>
+            </p><ul><li><strong>Running</strong></li><li><strong>Not Running</strong> (includes both Ready and Waiting)</li></ul><figure><img src="../assets/blogs/process-and-states-of-process-in-an-operating-system/inline-02.png" alt="Two-state process model with transitions between not running and running." loading="lazy" decoding="async"></figure><h2>
+      Five-State Model:
+    </h2><p>
+            </p><ul><li><strong>New</strong></li><li><strong>Ready</strong></li><li><strong>Running</strong></li><li><strong>Blocked</strong></li><li><strong>Terminated</strong></li></ul><figure><img src="../assets/blogs/process-and-states-of-process-in-an-operating-system/inline-03.png" alt="Five-state model showing new, ready, running, blocked, and exit states." loading="lazy" decoding="async"></figure><h2>
+      Seven-State Model:
+    </h2><p>
+            </p><ul><li><strong>New</strong></li><li><strong>Ready</strong></li><li><strong>Running</strong></li><li><strong>Blocked</strong></li><li><strong>Terminated</strong></li><li><strong>Suspended Ready</strong></li><li><strong>Suspended Blocked</strong></li></ul><figure><img src="../assets/blogs/process-and-states-of-process-in-an-operating-system/inline-04.png" alt="Seven-state process model with suspended ready and suspended blocked states." loading="lazy" decoding="async"></figure><p>
+      These models offer greater flexibility and control over process scheduling and resource allocation.
+    </p><h2>
+      State Transitions
+    </h2><p>
+      Processes move between states depending on various triggers:
+    </p><p>
+            </p><ul><li><strong>New to Ready</strong>: After creation, process moves to ready queue.</li><li><strong>Ready to Running</strong>: CPU is assigned by scheduler.</li><li><strong>Running to Waiting</strong>: Process waits for I/O or other event.</li><li><strong>Running to Ready</strong>: CPU is preempted for another process.</li><li><strong>Waiting to Ready</strong>: Event completes, process becomes ready.</li><li><strong>Running to Terminated</strong>: Process completes or is killed.</li></ul><h2>
+      Real-World Analogy:
+    </h2><p>
+      Imagine a chef who gets ready with ingredients (Ready state), then cooks (Running state), waits for an oven to preheat (Blocked state), and finishes the dish (Terminated).
+    </p><h2>
+      Types of Schedulers
+    </h2><p>
+      Schedulers are algorithms responsible for managing process transitions:
+    </p><p>
+            </p><ul><li><strong>Long-Term Scheduler</strong>: Controls how many processes enter the ready queue.</li><li><strong>Short-Term Scheduler (CPU Scheduler)</strong>: Chooses which process runs next.</li><li><strong>Medium-Term Scheduler</strong>: Manages swapping of processes in and out of memory.</li></ul><h2>
+      Multiprogramming and Scheduling Policies
+    </h2><p>
+            </p><ul><li><strong>Multiprogramming</strong> allows multiple processes to reside in memory, increasing CPU utilization.</li><li><strong>Preemptive Scheduling</strong>: CPU can be taken from a process before it finishes.</li><li><strong>Non-Preemptive Scheduling</strong>: CPU cannot be taken until the process voluntarily releases it.</li><li><strong>Degree of Multiprogramming</strong>: Number of processes in memory at one time.</li></ul><h2>
+      Process Operations
+    </h2><p>
+            </p><ul><li><strong>Creation</strong>: New processes are created via system calls.</li><li><strong>Scheduling</strong>: Scheduler selects a process from the ready queue.</li><li><strong>Execution</strong>: Process is executed by CPU.</li><li><strong>Termination</strong>: Process finishes or is terminated.</li><li><strong>Blocking/Waiting</strong>: Process waits for input or a specific event.</li><li><strong>Resumption</strong>: Process is moved back to ready state after event.</li><li><strong>Context Switching</strong>: OS saves the state of a running process and loads another.</li></ul><h2>
+      Conclusion
+    </h2><p>
+      Understanding what a process is and how it operates is key to mastering operating systems. A process is more than just a running program; it is a complex entity managed meticulously by the OS through memory structures, scheduling algorithms, and various states. Real-world analogies help us understand that processes are like skilled chefs in a kitchen, each with their own tasks and tools. As we delve deeper into OS concepts like process scheduling and synchronization, a strong grasp of processes becomes essential.
+    </p><p>
+      Thanks for reading!
+    </p></div></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

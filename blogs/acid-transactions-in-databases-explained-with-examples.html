@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ACID Transactions in Databases: Explained with Examples · Ashmita Pandey</title>
+<meta name="description" content="ACID Transactions in Databases: Explained with Examples">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/acid-transactions-in-databases-explained-with-examples.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>ACID Transactions in Databases: Explained with Examples</h1>
+<p>Ashmita Pandey · <time datetime="2025-06-14">Jun 14, 2025</time> · Databases</p>
+<div class="original-body"><figure><img src="../assets/blogs/acid-transactions-in-databases-explained-with-examples/cover.jpg" alt="Diagram showing the four ACID properties: atomicity, consistency, isolation, and durability." loading="lazy" decoding="async"></figure><div class="source-document"><p>
+      Hi everyone, I&#x27;m Ashmita 👋
+    </p><p>
+      <strong>Imagine you&#x27;re managing a ride-booking application</strong>
+    </p><p>
+      A user books a ride. Your system must match them with a nearby driver, reserve the fare estimate, update the driver&#x27;s availability, and notify both parties, all within a few seconds.
+    </p><p>
+      But what if the driver cancels after being assigned, or your service crashes midway through this process?
+    </p><p>
+      This is where <strong>ACID transactions</strong> come into play. They ensure that all steps of such operations happen reliably and consistently or not at all.
+    </p><p>
+      <strong>ACID</strong> stands for four essential properties of a reliable transaction:
+    </p><p>
+            </p><ul><li><strong>Atomicity</strong></li><li><strong>Consistency</strong></li><li><strong>Isolation</strong></li><li><strong>Durability</strong></li></ul><p>
+      Let us explore each one with examples and implementation details.
+    </p><hr><h2>
+      What is a Database Transaction?
+    </h2><p>
+      A <strong>transaction</strong> is a sequence of one or more operations, such as inserts, updates, or deletes, treated as a <strong>single logical unit of work</strong>. It either completes entirely or does not happen at all. There is no partial success.
+    </p><h2>
+      Example: Ride Assignment
+    </h2><p>
+      A user books a ride
+    </p><p>
+            </p><ul><li>A driver is assigned</li><li>Estimated fare is calculated</li><li>Driver&#x27;s status is set to &quot;busy&quot;</li><li>Notifications are triggered</li></ul><p>
+      If any step fails, the system must <strong>roll back</strong> everything to prevent inconsistencies.
+    </p><p>
+      Without transactions, you may encounter issues such as
+    </p><p>
+            </p><ul><li>A driver shown as busy without any ride actually assigned</li><li>A user being charged even though no ride was successfully booked</li></ul><p>
+      ACID transactions are designed to prevent such inconsistencies.
+    </p><hr><h2>
+      1. Atomicity
+    </h2><p>
+      <strong>Atomicity</strong> ensures that a transaction is <strong>all or nothing</strong>. If any step in the process fails, the entire transaction is rolled back, leaving the system unchanged.
+    </p><h2>
+      Example:
+    </h2><p>
+      Assigning a driver and updating their availability must both succeed. If assigning fails, the availability should not be updated either.
+    </p><h2>
+      Implementation:
+    </h2><p>
+            </p><ul><li><strong>Write-Ahead Logs (WAL)</strong>: All operations are recorded before they are executed. In case of failure, the log can be used to roll back the operations</li><li><strong>BEGIN, COMMIT, and ROLLBACK Protocols</strong>: A transaction starts with BEGIN. If all steps are successful, COMMIT saves the changes. If any step fails, ROLLBACK reverts them</li></ul><hr><h2>
+      2. Consistency
+    </h2><p>
+      <strong>Consistency</strong> ensures that a transaction moves the database from one valid state to another. It preserves all integrity rules defined in the schema.
+    </p><h2>
+      Example:
+    </h2><p>
+      A driver who is already on a trip should not be assigned to another ride. If the rule enforces driver_status = available, violating it should cancel the transaction.
+    </p><h2>
+      Implementation:
+    </h2><p>
+            </p><ul><li><strong>Schema Constraints</strong>: Includes NOT NULL, CHECK, UNIQUE, PRIMARY KEY, and FOREIGN KEY</li><li><strong>Stored Procedures and Triggers</strong>: Logic that validates business rules before data is committed</li><li><strong>Application Layer Validations</strong>: Validations done in the application before sending data to the database</li></ul><hr><h2>
+      3. Isolation
+    </h2><p>
+      <strong>Isolation</strong> ensures that multiple transactions can occur simultaneously without interfering with each other. It makes each transaction appear as if it is the only one running.
+    </p><h2>
+      Example:
+    </h2><p>
+      If two users try to book the same driver at the same time, isolation ensures that only one booking will be successful.
+    </p><h2>
+      Concurrency Issues Without Proper Isolation:
+    </h2><p>
+            </p><ul><li><strong>Dirty Reads</strong>: Reading uncommitted data</li><li><strong>Non-Repeatable Reads</strong>: Getting different data from the same query in one transaction</li><li><strong>Phantom Reads</strong>: New rows appearing during repeated execution of the same query</li></ul><h2>
+      Isolation Levels:
+    </h2><p>
+            </p><ul><li><strong>Read Uncommitted</strong>: Dirty reads are allowed</li><li><strong>Read Committed</strong>: Only committed data can be read</li><li><strong>Repeatable Read</strong>: Repeated reads return the same data</li><li><strong>Serializable</strong>: Transactions are executed one after another to avoid anomalies</li></ul><h2>
+      Techniques Used:
+    </h2><p>
+            </p><ul><li><strong>Locks</strong>: Pessimistic approach that locks rows or tables to prevent conflicts</li><li><strong>MVCC (Multi-Version Concurrency Control)</strong>: Uses snapshots for optimistic concurrency</li><li><strong>Snapshot Isolation</strong>: Ensures a consistent view of the data for each transaction</li></ul><hr><h2>
+      4. Durability
+    </h2><p>
+      <strong>Durability</strong> guarantees that once a transaction is committed, its results are permanent. They must survive system crashes, power failures, or other unexpected disruptions.
+    </p><h2>
+      Example:
+    </h2><p>
+      If a ride is booked and the system confirms it, the booking information must persist even if the server crashes immediately afterward.
+    </p><h2>
+      Implementation:
+    </h2><p>
+            </p><ul><li><strong>Write-Ahead Logging (WAL)</strong>: Records committed transactions before applying them to the database</li><li><strong>Replication</strong></li><li><strong>Backups</strong></li></ul><hr><h2>
+      Conclusion
+    </h2><p>
+      Understanding ACID transactions is fundamental to building <strong>robust, consistent, and scalable</strong> systems.
+    </p><p>
+      Whether the application involves banking, logistics, or a ride-booking platform
+    </p><p>
+            </p><ul><li>ACID ensures reliable data processing</li><li>It prevents errors during unexpected failures</li><li>It maintains user trust and data integrity</li></ul><p>
+      Always prioritize consistency and reliability in your applications.
+    </p><p>
+      Thank you for reading!
+    </p><p>
+      Would love to hear your thoughts and questions in the comments.
+    </p></div></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

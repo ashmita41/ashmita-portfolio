@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What is an API? A Fundamental Bridge in Modern Software · Ashmita Pandey</title>
+<meta name="description" content="What is an API? A Fundamental Bridge in Modern Software">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/what-is-an-api-a-fundamental-bridge-in-modern-software.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>What is an API? A Fundamental Bridge in Modern Software</h1>
+<p>Ashmita Pandey · <time datetime="2025-06-24">Jun 24, 2025</time> · Backend · APIs</p>
+<div class="original-body"><figure><img src="../assets/blogs/what-is-an-api-a-fundamental-bridge-in-modern-software/cover.png" alt="Two applications exchanging requests and responses through an API." loading="lazy" decoding="async"></figure><div class="source-document"><p>
+      Hi everyone, I&#x27;m Ashmita 👋
+    </p><p>
+      APIs are the invisible engines that power modern software. From social media and ride-sharing apps to online banking and e-commerce platforms, APIs enable different systems to interact and share data efficiently. They play a critical role in application architecture, enabling innovation, integration, and scalability.
+    </p><h2>
+      What is an API?
+    </h2><p>
+      API stands for <strong>Application Programming Interface</strong>. At its core, an API is a set of rules and protocols that allows one software application to interact with another.
+    </p><h2>
+      Real-World Analogy:
+    </h2><p>
+      Think of an API as a waiter in a restaurant. You (the client) give your order to the waiter (the API), who takes it to the kitchen (the server), and then returns with your food (the data). You do not need to know how the food is cooked or what goes on in the kitchen—you just interact with the waiter.
+    </p><h2>
+      Examples:
+    </h2><p>
+            </p><ul><li><strong>Weather API</strong>: You input a city, and it returns temperature, humidity, and weather data.</li><li><strong>Uber Ride API</strong>: Takes pickup and destination addresses, returns driver details and fare.</li><li><strong>Python </strong>sorted() API: Input a list like [5, 3, 8, 1], it returns [1, 3, 5, 8].</li></ul><p>
+      When engineers build APIs, they define what inputs are allowed and what outputs will be returned. This ensures consistency and predictability across applications.
+    </p><h2>
+      How APIs Work
+    </h2><p>
+      APIs follow a request-response cycle:
+    </p><p>
+            </p><ol><li>A <strong>client</strong> (such as a mobile or web app) sends a <strong>request</strong> to an API.</li><li>The <strong>API server</strong> processes the request, interacts with databases or services, and prepares a <strong>response</strong>.</li><li>The response, usually in JSON or XML format, is returned to the client.</li></ol><h2>
+      Inputs:
+    </h2><p>
+      APIs expect specific inputs. Sending the wrong input type will lead to errors.
+    </p><p>
+      <strong>Example</strong>: Google Maps API expects a valid address or coordinates. Sending a name like “Ashmita” would cause an error.
+    </p><h2>
+      Outputs:
+    </h2><p>
+      APIs return well-structured data. For instance:
+    </p><pre tabindex="0"><code>{
+  &quot;latitude&quot;: 40.6892,
+  &quot;longitude&quot;: -74.0445
+} </code></pre><p>
+      If an error occurs:
+    </p><pre tabindex="0"><code>{
+  &quot;error&quot;: &quot;Invalid address format&quot;,
+  &quot;code&quot;: 400
+} </code></pre><h2>
+      APIs in Real-World Applications
+    </h2><p>
+      Most applications are built using a <strong>frontend/backend</strong> model:
+    </p><p>
+            </p><ul><li><strong>Frontend</strong>: Interface users interact with (mobile or web app).</li><li><strong>Backend</strong>: Contains the APIs that manage data processing and logic.</li></ul><h2>
+      Real-World Example: Uber
+    </h2><p>
+            </p><ul><li><strong>Backend APIs</strong>: Match drivers with riders, calculate fares, handle payments, track rides.</li><li><strong>Frontend</strong>: A sleek interface for users to book rides, track drivers, and make payments.</li></ul><p>
+      The frontend sends requests to backend APIs which process data and return results to be displayed.
+    </p><h2>
+      Types of APIs
+    </h2><h2>
+      1. Open APIs (Public APIs)
+    </h2><p>
+      Accessible by external developers.
+    </p><p>
+      <strong>Example</strong>: YouTube Data API allows developers to search videos, access metadata, or manage playlists.
+    </p><h2>
+      2. Internal APIs (Private APIs)
+    </h2><p>
+      Used only within a company to allow internal systems to communicate.
+    </p><p>
+      <strong>Example</strong>: Amazon’s order processing system uses internal APIs to coordinate logistics, inventory, and payment.
+    </p><h2>
+      3. Code Interfaces (Library APIs)
+    </h2><p>
+      These are functions provided by programming languages or frameworks.
+    </p><p>
+      <strong>Example</strong>:
+    </p><pre tabindex="0"><code>numbers = [5, 3, 8, 1]
+numbers.sort()  # Built-in sort API </code></pre><p>
+      Libraries like TensorFlow provide APIs to build complex AI models without handling the underlying math manually.
+    </p><h2>
+      API Communication Methods
+    </h2><p>
+      APIs communicate using different protocols and formats. These determine how clients request data and how servers respond. Let&#x27;s explore them in depth.
+    </p><h2>
+      1. REST (Representational State Transfer)
+    </h2><p>
+            </p><ul><li>REST is the most commonly used API architecture.</li><li>It uses standard HTTP methods like GET, POST, PUT, DELETE.</li><li>Stateless communication: each request is self-contained.</li><li>Typically exchanges data in JSON format.</li></ul><p>
+      <strong>Example: Bookstore API</strong> Endpoint: GET https://api.bookstore.com/books
+    </p><pre tabindex="0"><code>[
+  {
+    &quot;id&quot;: 1,
+    &quot;title&quot;: &quot;Clean Code&quot;,
+    &quot;author&quot;: &quot;Robert C. Martin&quot;
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;title&quot;: &quot;The Pragmatic Programmer&quot;,
+    &quot;author&quot;: &quot;Andrew Hunt&quot;
+  }
+] </code></pre><p>
+      <strong>Strengths</strong>:
+    </p><p>
+            </p><ul><li>Lightweight and scalable.</li><li>Simple to use across platforms.</li></ul><p>
+      <strong>Weaknesses</strong>:
+    </p><p>
+            </p><ul><li>Can lead to over-fetching or under-fetching of data.</li><li>No strict typing for data structures.</li></ul><h2>
+      2. SOAP (Simple Object Access Protocol)
+    </h2><p>
+            </p><ul><li>SOAP is a protocol-based architecture using XML for message formatting.</li><li>It requires a WSDL document to define the API interface.</li></ul><p>
+      <strong>Example: Banking SOAP API</strong>
+    </p><pre tabindex="0"><code>&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+  &lt;soapenv:Body&gt;
+    &lt;GetAccountBalance&gt;
+      &lt;accountNumber&gt;123456&lt;/accountNumber&gt;
+    &lt;/GetAccountBalance&gt;
+  &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt; </code></pre><p>
+      <strong>Strengths</strong>:
+    </p><p>
+            </p><ul><li>Built-in security and transactional reliability.</li><li>Highly structured, suitable for complex operations.</li></ul><p>
+      <strong>Weaknesses</strong>:
+    </p><p>
+            </p><ul><li>Verbose and less human-readable.</li><li>More difficult to work with compared to REST.</li></ul><h2>
+      3. GraphQL
+    </h2><p>
+            </p><ul><li>A query language for APIs developed by Facebook.</li><li>Allows clients to request only the data they need.</li><li>All requests go through a single endpoint.</li></ul><p>
+      <strong>Example</strong>:
+    </p><pre tabindex="0"><code>{
+  user(id: 123) {
+    name
+    posts {
+      title
+      likes
+    }
+  }
+} </code></pre><p>
+      <strong>Strengths</strong>:
+    </p><p>
+            </p><ul><li>Eliminates over-fetching and under-fetching.</li><li>Strongly typed schema.</li></ul><p>
+      <strong>Weaknesses</strong>:
+    </p><p>
+            </p><ul><li>Steeper learning curve.</li><li>Caching and tooling can be more complex.</li></ul><h2>
+      4. gRPC (Google Remote Procedure Call)
+    </h2><p>
+            </p><ul><li>Developed by Google for high-performance communication.</li><li>Uses Protocol Buffers (Protobuf) for compact, fast data serialization.</li><li>Supports synchronous and asynchronous streaming.</li></ul><p>
+      <strong>Example Use Case</strong>:
+    </p><p>
+            </p><ul><li>Real-time messaging apps and media streaming platforms.</li></ul><p>
+      <strong>Strengths</strong>:
+    </p><p>
+            </p><ul><li>Efficient and lightweight.</li><li>Great for microservices and polyglot environments.</li></ul><p>
+      <strong>Weaknesses</strong>:
+    </p><p>
+            </p><ul><li>Not human-readable.</li><li>Requires client libraries and code generation.</li></ul><h2>
+      Conclusion
+    </h2><p>
+      APIs are at the heart of how modern software operates. Understanding the different types of APIs such as open, internal, and code interfaces, along with their communication methods like REST, SOAP, GraphQL, and gRPC, gives developers and product builders a powerful toolkit. Whether you are building the next big mobile app, integrating with a third-party platform, or optimizing internal systems, APIs provide the flexibility and scalability needed to innovate.
+    </p><p>
+      Thanks for reading!
+    </p></div></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

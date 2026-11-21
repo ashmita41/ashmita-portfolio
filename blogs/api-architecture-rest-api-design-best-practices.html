@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API Architecture: REST API Design Best Practices · Ashmita Pandey</title>
+<meta name="description" content="API Architecture: REST API Design Best Practices">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/api-architecture-rest-api-design-best-practices.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>API Architecture: REST API Design Best Practices</h1>
+<p>Ashmita Pandey · <time datetime="2025-06-25">Jun 25, 2025</time> · Backend · APIs</p>
+<div class="original-body"><figure><img src="../assets/blogs/api-architecture-rest-api-design-best-practices/cover.png" alt="Branching diagram on a System Design Building Blocks cover about REST API design." loading="lazy" decoding="async"></figure><div class="source-document"><p>
+      Hi everyone, I&#x27;m Ashmita 👋
+    </p><p>
+      APIs are the backbone of modern web and mobile applications. REST APIs, in particular, are the most widely used architectural style for building scalable and maintainable backend systems. Understanding how to design efficient and robust REST APIs is essential for any developer working in today’s connected software ecosystem.
+    </p><p>
+      In this article, we’ll dive deep into REST API architecture and cover best practices with real-world examples so you can build APIs that are intuitive, consistent, and developer-friendly.
+    </p><h2>
+      1. Understand the Basics of HTTP
+    </h2><p>
+      REST APIs are built on top of the HTTP protocol. To design efficient RESTful services, it&#x27;s important to understand how HTTP works.
+    </p><h2>
+      Key Concepts:
+    </h2><p>
+            </p><ul><li><strong>HTTP Verbs</strong>: GET, POST, PUT, PATCH, DELETE</li><li><strong>URIs (Endpoints)</strong>: Represent resources, e.g., /books/</li><li><strong>Status Codes</strong>:</li></ul><h2>
+      Real-World Example:
+    </h2><p>
+            </p><ul><li><strong>GET /books/</strong> → Retrieve a list of books</li><li><strong>POST /books/</strong> → Add a new book</li><li><strong>GET /books/1/</strong> → Retrieve the book with ID 1</li></ul><p>
+      Each action on a resource should be clearly expressed by the combination of HTTP verb and endpoint.
+    </p><h2>
+      2. Use JSON and Set Proper Content-Type
+    </h2><p>
+      Most modern APIs use JSON as the standard format for requests and responses.
+    </p><p>
+      Always set the response header:
+    </p><pre tabindex="0"><code>Content-Type: application/json </code></pre><h2>
+      Why it Matters:
+    </h2><p>
+      Clients (including browsers and apps) rely on the content type to parse and display data correctly.
+    </p><h2>
+      3. Avoid Using Verbs in URIs
+    </h2><p>
+      Let the HTTP method (verb) describe the action, not the URI.
+    </p><h2>
+      Bad:
+    </h2><pre tabindex="0"><code>GET /books/create
+POST /books/deleteBook </code></pre><h2>
+      Good:
+    </h2><pre tabindex="0"><code>GET /books/
+POST /books/
+DELETE /books/123 </code></pre><p>
+      The URI should represent a resource, and the method should represent the action.
+    </p><h2>
+      4. Use Plural Nouns for Resource Names
+    </h2><p>
+      Using plural nouns helps standardize the API and reduces ambiguity.
+    </p><h2>
+      Recommended:
+    </h2><pre tabindex="0"><code>/books/
+/authors/ </code></pre><p>
+      Singular resources can be accessed using their ID:
+    </p><pre tabindex="0"><code>GET /books/12 </code></pre><h2>
+      Return Detailed Error Responses
+    </h2><p>
+      Help developers debug easily by returning structured error messages.
+    </p><h2>
+      Example:
+    </h2><pre tabindex="0"><code>{
+  &quot;error&quot;: &quot;Invalid request payload&quot;,
+  &quot;details&quot;: {
+    &quot;title&quot;: &quot;This field is required.&quot;
+  }
+} </code></pre><h2>
+      Use Correct HTTP Status Codes
+    </h2><p>
+      Using appropriate HTTP status codes builds trust with API consumers.
+    </p><h2>
+      Recommended Mapping:
+    </h2><p>
+            </p><ul><li><strong>GET</strong>: 200 OK</li><li><strong>POST</strong>: 201 Created</li><li><strong>PUT/PATCH</strong>: 200 OK</li><li><strong>DELETE</strong>: 204 No Content</li></ul><h2>
+      Example of Bad Practice:
+    </h2><p>
+      Returning 200 OK even for errors:
+    </p><pre tabindex="0"><code>{
+  &quot;status&quot;: &quot;error&quot;,
+  &quot;message&quot;: &quot;Item not found&quot;
+} </code></pre><h2>
+      Correct Practice:
+    </h2><pre tabindex="0"><code>HTTP 404 Not Found
+Content-Type: application/json
+{
+  &quot;error&quot;: &quot;Item not found&quot;
+} </code></pre><h2>
+      Avoid Deep Resource Nesting
+    </h2><p>
+      Avoid overly nested URIs that can become hard to manage.
+    </p><h2>
+      Instead of:
+    </h2><pre tabindex="0"><code>GET /authors/123/books/5/chapters/7 </code></pre><h2>
+      Use:
+    </h2><pre tabindex="0"><code>GET /chapters/7 </code></pre><p>
+      Or filter:
+    </p><pre tabindex="0"><code>GET /books?authorId=123 </code></pre><p>
+      Flat URIs are easier to read, maintain, and document.
+    </p><h2>
+      8. Use Query Parameters for Filtering, Sorting, and Pagination
+    </h2><p>
+      Allow users to control what data they receive.
+    </p><h2>
+      Examples:
+    </h2><pre tabindex="0"><code>GET /books?author=Ashmita&amp;page=2&amp;pageSize=10
+GET /books?sort=title&amp;order=asc </code></pre><p>
+      Avoid making custom endpoints for filters like /books/published. Instead, use:
+    </p><pre tabindex="0"><code>GET /books?published=true </code></pre><h2>
+      Handle Trailing Slashes Gracefully
+    </h2><p>
+      Choose one URI style (with or without trailing slash) and stick to it. Redirect incorrect styles to the correct one.
+    </p><h2>
+      Recommendation:
+    </h2><p>
+      If you use /books/, redirect /books to it automatically.
+    </p><h2>
+      10. Differentiate 401 Unauthorized vs. 403 Forbidden
+    </h2><p>
+            </p><ul><li><strong>401 Unauthorized</strong>: No valid authentication credentials were provided.</li><li><strong>403 Forbidden</strong>: Authentication was valid but access is not allowed.</li></ul><h2>
+      Example:
+    </h2><pre tabindex="0"><code>401: &quot;Token expired. Please log in again.&quot;
+403: &quot;You are not authorized to access this resource.&quot; </code></pre><h2>
+      11. Use 202 Accepted for Async Processing
+    </h2><p>
+      If a resource is not ready yet but processing has started:
+    </p><pre tabindex="0"><code>HTTP 202 Accepted
+{
+  &quot;message&quot;: &quot;Resource is being processed.&quot;
+} </code></pre><p>
+      Useful for operations like file uploads, background jobs, or large data imports.
+    </p><h2>
+      12. Choose the Right Framework for Building REST APIs
+    </h2><p>
+      Using a framework built for APIs helps maintain standards and reduce repetitive code.
+    </p><h2>
+      Examples:
+    </h2><p>
+            </p><ul><li><strong>Python</strong>: Django REST Framework, FastAPI, Falcon</li><li><strong>Node.js</strong>: Express with middleware, Restify, NestJS</li></ul><p>
+      They come with built-in support for routing, validation, serialization, and error handling.
+    </p><h2>
+      Conclusion
+    </h2><p>
+      REST API design is more than just writing routes and controllers. It’s about crafting an interface that is logical, predictable, and easy to use. From mastering HTTP verbs and status codes to handling pagination and input validation, following these best practices ensures your API is robust, scalable, and enjoyable to work with.
+    </p><p>
+      If you’re working on APIs or want to learn more, feel free to ask me questions or share your experience.&#32;
+    </p><p>
+      Thanks for reading!
+    </p></div></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

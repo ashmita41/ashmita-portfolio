@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stop Vibe Coding. Start Writing Specifications. · Ashmita Pandey</title>
+<meta name="description" content="Why a clear specification matters when you write code with AI.">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/stop-vibe-coding-start-writing-specifications.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>Stop Vibe Coding. Start Writing Specifications.</h1>
+<p>Ashmita Pandey · <time datetime="2026-07-13">Jul 13, 2026</time> · AI · Engineering Practices</p>
+<div class="original-body"><figure><img src="../assets/blogs/stop-vibe-coding-start-writing-specifications/cover.png" alt="Ashmita beside a checklist and gear icon; the cover reads “Start Writing Specs.”" loading="lazy" decoding="async"></figure><div class="source-document"><p>
+      <em>&quot;Code is the implementation. The specification is the product.&quot;</em>
+    </p><p>
+      It sounds counterintuitive.
+    </p><p>
+      In a world obsessed with &quot;move fast and break things,&quot; spending an entire week writing a technical specification feels like a bottleneck.
+    </p><p>
+      Why document requirements when AI can generate hundreds of lines of code in seconds?
+    </p><p>
+      Because software has changed.
+    </p><p>
+      The bottleneck is no longer writing code.
+    </p><p>
+      The bottleneck is communicating intent.
+    </p><p>
+      We&#x27;re witnessing one of the biggest shifts in software engineering since the rise of cloud computing: the transition from <strong>AI-assisted development</strong> to <strong>AI-driven development</strong>.
+    </p><p>
+      The difference may sound subtle, but it changes everything.
+    </p><hr><h2>
+      The Era of Vibe Coding
+    </h2><p>
+      Over the last two years, &quot;vibe coding&quot; has become incredibly popular.
+    </p><p>
+      The workflow is simple:
+    </p><blockquote>
+      Prompt.
+    </blockquote><p>
+      Need authentication?
+    </p><p>
+      Prompt AI.
+    </p><p>
+      Need pagination?
+    </p><p>
+      Prompt AI.
+    </p><p>
+      Need a dashboard?
+    </p><p>
+      Prompt AI.
+    </p><p>
+      For prototypes, hackathons, personal projects, and experimentation, this approach is phenomenal.
+    </p><p>
+      You can go from idea to working application in hours instead of weeks.
+    </p><p>
+      But the cracks begin to appear as projects become larger.
+    </p><p>
+      AI doesn&#x27;t understand your business.
+    </p><p>
+      It doesn&#x27;t know your architecture.
+    </p><p>
+      It doesn&#x27;t know why a particular design decision was made six months ago.
+    </p><p>
+      It simply predicts the next most likely solution based on the context it receives.
+    </p><p>
+      If your prompt leaves gaps, AI fills them with assumptions.
+    </p><p>
+      Sometimes those assumptions are correct.
+    </p><p>
+      Sometimes they become tomorrow&#x27;s production incident.
+    </p><p>
+      The result?
+    </p><p>
+            </p><ul><li>endless prompt iterations</li><li>architectural inconsistencies</li><li>undocumented decisions</li><li>hidden technical debt</li><li>features that technically work but solve the wrong problem</li></ul><p>
+      The issue isn&#x27;t that AI writes poor code.
+    </p><p>
+      The issue is that we often give it incomplete instructions.
+    </p><hr><h2>
+      The Rise of Spec-Driven Development
+    </h2><p>
+      A new philosophy is beginning to emerge across the industry.
+    </p><p>
+      Instead of asking AI to figure out what we meant...
+    </p><p>
+      ...we tell it exactly what we mean.
+    </p><p>
+      This is <strong>Spec-Driven Development (SDD).</strong>
+    </p><p>
+      Instead of code being the source of truth, the specification becomes the source of truth.
+    </p><p>
+      Developers spend more time defining:
+    </p><p>
+            </p><ul><li>business requirements</li><li>user stories</li><li>constraints</li><li>acceptance criteria</li><li>security requirements</li><li>performance expectations</li><li>edge cases</li></ul><p>
+      Only then does AI generate implementation.
+    </p><p>
+      The specification becomes a living artifact that evolves alongside the codebase.
+    </p><p>
+      If implementation is wrong...
+    </p><p>
+      don&#x27;t fix the implementation first.
+    </p><p>
+      Improve the specification.
+    </p><p>
+      Regenerate.
+    </p><p>
+      Repeat.
+    </p><p>
+      That&#x27;s a fundamental mindset shift.
+    </p><hr><h2>
+      Why This Matters More Than Ever
+    </h2><p>
+      Large language models are extraordinary pattern recognizers.
+    </p><p>
+      They are not mind readers.
+    </p><p>
+      The better the context...
+    </p><p>
+      the better the output.
+    </p><p>
+      This is exactly why <a href="https://www.linkedin.com/company/microsoft/">Microsoft</a> introduced <strong>Spec-Driven Development</strong> and why <a href="https://www.linkedin.com/company/github/">GitHub</a> released <strong>Spec Kit</strong>, an open-source toolkit that structures development into clear phases such as Constitution, Specification, Planning, Tasks, and Implementation. Similarly, <a href="https://www.linkedin.com/company/amazon-web-services/">Amazon Web Services (AWS)</a> &#x27;s Kiro IDE adopts a spec-first workflow where requirements become executable plans before code generation begins. The common philosophy is simple:
+    </p><p>
+      <strong>Define intent before generating implementation.</strong>
+    </p><p>
+      Instead of writing prompts...
+    </p><p>
+      we start writing contracts.
+    </p><hr><h2>
+      Specifications Are Becoming Engineering Assets
+    </h2><p>
+      Traditionally, documentation was treated as an afterthought.
+    </p><p>
+      Requirements were written.
+    </p><p>
+      Developers implemented them.
+    </p><p>
+      Documentation became outdated.
+    </p><p>
+      Eventually nobody trusted it.
+    </p><p>
+      Spec-driven development changes this completely.
+    </p><p>
+      Specifications become:
+    </p><p>
+            </p><ul><li>version controlled</li><li>reviewable</li><li>testable</li><li>traceable</li><li>continuously updated</li></ul><p>
+      Instead of documenting software...
+    </p><p>
+      they generate software.
+    </p><p>
+      That distinction is massive.
+    </p><hr><h2>
+      Governance Becomes Easier
+    </h2><p>
+      Imagine explaining this during a production incident.
+    </p><p>
+      &quot;Why was this API implemented this way?&quot;
+    </p><p>
+      With traditional AI development...
+    </p><p>
+      The answer might be:
+    </p><blockquote>
+      &quot;Claude generated it.&quot;
+    </blockquote><p>
+      or
+    </p><blockquote>
+      &quot;Cursor suggested it.&quot;
+    </blockquote><p>
+      That isn&#x27;t governance.
+    </p><p>
+      That isn&#x27;t accountability.
+    </p><p>
+      Spec-driven development creates an audit trail.
+    </p><p>
+      Every architectural decision originates from a requirement.
+    </p><p>
+      Every implementation traces back to a specification.
+    </p><p>
+      Every test validates the specification instead of someone&#x27;s memory.
+    </p><p>
+      For industries like banking, healthcare, insurance, aviation, and enterprise SaaS, this isn&#x27;t optional.
+    </p><p>
+      It&#x27;s essential.
+    </p><hr><h2>
+      The Question Every Early-Career Developer Should Be Asking
+    </h2><p>
+      One question has been on my mind as AI becomes a bigger part of software development.
+    </p><p>
+      <strong>How do junior developers become great engineers in an AI-first world?</strong>
+    </p><p>
+      For decades, the learning path was straightforward.
+    </p><p>
+      You wrote code.
+    </p><p>
+      You made mistakes.
+    </p><p>
+      You debugged failures that took hours to understand.
+    </p><p>
+      You reviewed pull requests.
+    </p><p>
+      You designed APIs that looked great on paper but didn&#x27;t always work in production.
+    </p><p>
+      Every bug taught you something.
+    </p><p>
+      Every production issue sharpened your intuition.
+    </p><p>
+      Over time, those experiences shaped you into a better engineer.
+    </p><p>
+      Today, AI can generate that first implementation in minutes.
+    </p><p>
+      That&#x27;s an incredible productivity boost.
+    </p><p>
+      But it also raises an important question.
+    </p><p>
+      If AI writes most of the first draft, <strong>are early-career developers getting enough opportunities to struggle, experiment, and truly understand systems?</strong>
+    </p><p>
+      As someone who&#x27;s still early in my own software engineering journey, I find this fascinating.
+    </p><p>
+      AI can generate CRUD APIs.
+    </p><p>
+      It can scaffold microservices.
+    </p><p>
+      It can explain algorithms.
+    </p><p>
+      But understanding <strong>why</strong> a distributed system slows down under load, why a database query suddenly becomes a bottleneck, or why a seemingly harmless change causes cascading failures in production still comes from experience.
+    </p><p>
+      Those lessons aren&#x27;t downloaded through prompts.
+    </p><p>
+      They&#x27;re earned through curiosity, debugging, code reviews, production incidents, and working alongside experienced engineers.
+    </p><p>
+      I don&#x27;t think AI eliminates the need for junior developers.
+    </p><p>
+      If anything, it makes <strong>mentorship, thoughtful code reviews, and strong engineering culture even more important.</strong>
+    </p><p>
+      AI can accelerate learning.
+    </p><p>
+      But it shouldn&#x27;t replace the learning process itself.
+    </p><p>
+      The goal isn&#x27;t just to become someone who can generate code.
+    </p><p>
+      It&#x27;s to become someone who understands <strong>why</strong> that code should exist in the first place.
+    </p><hr><h2>
+      The New Role of Software Engineers
+    </h2><p>
+      I don&#x27;t think software engineers are disappearing.
+    </p><p>
+      I think our responsibilities are changing.
+    </p><p>
+      Tomorrow&#x27;s engineers will spend less time typing code.
+    </p><p>
+      They&#x27;ll spend more time:
+    </p><p>
+            </p><ul><li>defining systems</li><li>identifying constraints</li><li>reviewing AI decisions</li><li>validating architecture</li><li>writing specifications</li><li>designing tests</li><li>thinking about edge cases</li></ul><p>
+      In other words...
+    </p><p>
+      Engineering becomes less about typing.
+    </p><p>
+      More about thinking.
+    </p><hr><h2>
+      Does This Mean Vibe Coding Is Dead?
+    </h2><p>
+      Absolutely not.
+    </p><p>
+      Vibe coding is still one of the fastest ways to:
+    </p><p>
+            </p><ul><li>build prototypes</li><li>validate ideas</li><li>explore APIs</li><li>automate repetitive work</li><li>create internal tools</li></ul><p>
+      The mistake is assuming the same workflow scales to enterprise software.
+    </p><p>
+      Prototypes reward speed.
+    </p><p>
+      Production systems reward clarity.
+    </p><p>
+      Different problems deserve different approaches.
+    </p><p>
+      The future probably isn&#x27;t choosing one over the other.
+    </p><p>
+      It&#x27;s knowing when to use each.
+    </p><p>
+      Prototype with vibes.
+    </p><p>
+      Ship with specifications.
+    </p><hr><h2>
+      Building Better Teams in the AI Era
+    </h2><p>
+      If AI is writing more code, organizations need to invest more heavily in mentorship.
+    </p><p>
+      Junior developers should rotate across:
+    </p><p>
+            </p><ul><li>architecture discussions</li><li>code reviews</li><li>requirement analysis</li><li>testing</li><li>production debugging</li><li>system design</li></ul><p>
+      AI should remove repetitive work.
+    </p><p>
+      It shouldn&#x27;t remove learning opportunities.
+    </p><p>
+      Otherwise we&#x27;ll eventually face an industry full of AI operators but very few software engineers capable of designing complex systems.
+    </p><hr><h2>
+      Final Thoughts
+    </h2><p>
+      Every major technology shift changes what becomes valuable.
+    </p><p>
+      Compilers reduced assembly programming.
+    </p><p>
+      Frameworks reduced boilerplate.
+    </p><p>
+      Cloud platforms reduced infrastructure management.
+    </p><p>
+      AI is reducing manual coding.
+    </p><p>
+      The scarce skill is no longer producing code.
+    </p><p>
+      The scarce skill is producing clarity.
+    </p><p>
+      The engineers who thrive over the next decade won&#x27;t necessarily be those who write the fastest code.
+    </p><p>
+      They&#x27;ll be the ones who ask the best questions.
+    </p><p>
+      Write the clearest specifications.
+    </p><p>
+      Design the strongest systems.
+    </p><p>
+      And know when to trust AI...
+    </p><p>
+      and when not to.
+    </p><p>
+      Because in the age of AI-driven software development,
+    </p><p>
+      <strong>code is becoming cheaper.</strong>
+    </p><p>
+      <strong>Clear thinking is becoming priceless.</strong>
+    </p></div></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

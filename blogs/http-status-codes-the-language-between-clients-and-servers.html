@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTTP Status Codes: The Language Between Clients and Servers · Ashmita Pandey</title>
+<meta name="description" content="How clients and servers communicate outcomes through HTTP status codes.">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/http-status-codes-the-language-between-clients-and-servers.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>HTTP Status Codes: The Language Between Clients and Servers</h1>
+<p>Ashmita Pandey · <time datetime="2025-07-07">Jul 7, 2025</time> · Backend · Engineering Practices</p>
+<div class="original-body"><figure><img src="../assets/blogs/http-status-codes-the-language-between-clients-and-servers/cover.png" alt="Color-coded categories of HTTP status codes on a System Design Building Blocks cover." loading="lazy" decoding="async"></figure><div class="source-document"><p>
+      Hi everyone, I&#x27;m Ashmita 👋
+    </p><p>
+      Every web developer, whether working on frontend, backend, or full-stack, interacts with HTTP status codes on a daily basis. These three-digit codes returned by the server are essential for understanding the result of any HTTP request. A deep understanding of HTTP status codes helps in debugging, designing APIs, enhancing user experience, and monitoring application health.
+    </p><p>
+      This article dives deep into all five categories of status codes, offers real-world examples, and explains their importance in software development.
+    </p><h2>
+      1xx: Informational Responses
+    </h2><p>
+      These codes indicate that the server has received the request headers and the client should proceed with the request body or ignore it if already sent.
+    </p><p>
+      <strong>100 Continue</strong>
+    </p><p>
+            </p><ul><li>Used in situations where the client sends a request body but wants to make sure the server is ready to accept it.</li><li><em>Example</em>: Uploading a large file in chunks.</li></ul><p>
+      <strong>101 Switching Protocols</strong>
+    </p><p>
+            </p><ul><li>The server understands and is willing to switch protocols, as requested by the client.</li><li><em>Example</em>: Upgrading HTTP connection to WebSocket.</li></ul><p>
+      <strong>103 Early Hints</strong>
+    </p><p>
+            </p><ul><li>Used to preload resources while the final response is still being prepared.</li><li><em>Example</em>: Preloading CSS/JS files to speed up rendering.</li></ul><h2>
+      2xx: Successful Responses
+    </h2><p>
+      Indicates that the client’s request was successfully received, understood, and accepted.
+    </p><p>
+      <strong>200 OK</strong>
+    </p><p>
+            </p><ul><li>General success status for GET, PUT, POST, DELETE, etc.</li><li><em>Example</em>: Successfully retrieving user profile data.</li></ul><p>
+      <strong>201 Created</strong>
+    </p><p>
+            </p><ul><li>Indicates a resource was created as a result of the request.</li><li><em>Example</em>: Creating a new user via a POST request.</li></ul><p>
+      <strong>202 Accepted</strong>
+    </p><p>
+            </p><ul><li>The request has been accepted for processing but is not yet completed.</li><li><em>Example</em>: Submitting a background job.</li></ul><p>
+      <strong>204 No Content</strong>
+    </p><p>
+            </p><ul><li>The request was successful but there’s no content to send.</li><li><em>Example</em>: A successful DELETE operation.</li></ul><h2>
+      3xx: Redirection Messages
+    </h2><p>
+      Indicates that further action needs to be taken by the client to complete the request.
+    </p><p>
+      <strong>301 Moved Permanently</strong>
+    </p><p>
+            </p><ul><li>The resource has been permanently moved to a new URL.</li><li><em>Example</em>: SEO-friendly URL redirects.</li></ul><p>
+      <strong>302 Found</strong>
+    </p><p>
+            </p><ul><li>Temporary redirect to another URL.</li><li><em>Example</em>: Redirecting to login page.</li></ul><p>
+      <strong>304 Not Modified</strong>
+    </p><p>
+            </p><ul><li>Used for caching. The resource has not changed since the last request.</li><li><em>Example</em>: Loading cached static assets.</li></ul><p>
+      <strong>307 Temporary Redirect</strong>
+    </p><p>
+            </p><ul><li>Same as 302 but method and body remain unchanged.</li><li><em>Example</em>: Redirecting API clients temporarily during maintenance.</li></ul><h2>
+      4xx: Client Error Responses
+    </h2><p>
+      The server thinks the client has made an error.
+    </p><p>
+      <strong>400 Bad Request</strong>
+    </p><p>
+            </p><ul><li>The request is malformed.</li><li><em>Example</em>: Sending invalid JSON in API request.</li></ul><p>
+      <strong>401 Unauthorized</strong>
+    </p><p>
+            </p><ul><li>Authentication required and has either failed or not been provided.</li><li><em>Example</em>: Missing API token.</li></ul><p>
+      <strong>403 Forbidden</strong>
+    </p><p>
+            </p><ul><li>Authenticated but not authorized.</li><li><em>Example</em>: Regular user accessing admin dashboard.</li></ul><p>
+      <strong>404 Not Found</strong>
+    </p><p>
+            </p><ul><li>The server can’t find the requested resource.</li><li><em>Example</em>: Typo in URL or non-existent endpoint.</li></ul><p>
+      <strong>405 Method Not Allowed</strong>
+    </p><p>
+            </p><ul><li>The method is not supported for the resource.</li><li><em>Example</em>: Sending DELETE to an endpoint that supports only GET.</li></ul><p>
+      <strong>409 Conflict</strong>
+    </p><p>
+            </p><ul><li>The request could not be processed because of a conflict.</li><li><em>Example</em>: Registering with an email that already exists.</li></ul><p>
+      <strong>429 Too Many Requests</strong>
+    </p><p>
+            </p><ul><li>The user has sent too many requests in a given amount of time.</li><li><em>Example</em>: Triggering rate limits on a login form.</li></ul><h2>
+      5xx: Server Error Responses
+    </h2><p>
+      The server failed to fulfill a valid request.
+    </p><p>
+      <strong>500 Internal Server Error</strong>
+    </p><p>
+            </p><ul><li>A generic error message.</li><li><em>Example</em>: Unhandled exception in backend logic.</li></ul><p>
+      <strong>501 Not Implemented</strong>
+    </p><p>
+            </p><ul><li>The server does not recognize the request method.</li><li><em>Example</em>: PATCH method not supported.</li></ul><p>
+      <strong>502 Bad Gateway</strong>
+    </p><p>
+            </p><ul><li>Invalid response from an upstream server.</li><li><em>Example</em>: Reverse proxy cannot reach the backend.</li></ul><p>
+      <strong>503 Service Unavailable</strong>
+    </p><p>
+            </p><ul><li>Server is down or overloaded.</li><li><em>Example</em>: Application down for maintenance.</li></ul><p>
+      <strong>504 Gateway Timeout</strong>
+    </p><p>
+            </p><ul><li>Upstream server timed out.</li><li><em>Example</em>: Third-party API response delay.</li></ul><h2>
+      Best Practices for Using HTTP Status Codes
+    </h2><p>
+            </p><ul><li>Use <strong>2xx</strong> codes for successful operations.</li><li>Use <strong>4xx</strong> codes to inform users or clients what they did wrong.</li><li>Use <strong>5xx</strong> codes to signal server issues and retry logic.</li><li>Avoid using 200 for all responses. Reflect the actual result of the operation.</li><li>Combine with response bodies for better debugging and client handling.</li></ul><h2>
+      Conclusion
+    </h2><p>
+      HTTP status codes are not just about debugging. They are essential for communicating clearly between clients and servers, designing clean APIs, handling errors gracefully, and improving the overall developer experience.
+    </p><p>
+      Resources:
+    </p><p>
+            </p><ul><li><a href="https://www.httpstatuses.com/">https://www.httpstatuses.com/</a></li><li><a href="https://www.restapitutorial.com/httpstatuscodes.html">https://www.restapitutorial.com/httpstatuscodes.html</a></li></ul><p>
+      Thanks for reading!
+    </p></div></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

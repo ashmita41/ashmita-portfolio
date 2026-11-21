@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On 12 November, millions of people opened Outlook and nothing loaded. · Ashmita Pandey</title>
+<meta name="description" content="On 12 November, millions of people opened Outlook and nothing loaded.">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7527053609952448512.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>On 12 November, millions of people opened Outlook and nothing loaded.</h1>
+<p>Ashmita Pandey · <time datetime="2026-11-13">Nov 13, 2026</time> · System Design · Distributed Systems · Cloud Computing</p>
+<div class="original-body"><p>On 12 November, millions of people opened Outlook and nothing loaded.
+
+Teams messages wouldn&#x27;t send. Microsoft 365 apps kept spinning. Even some outside tools that connect to Microsoft stopped working. For some users it went on for more than 20 hours.
+
+So what knocked out one of the biggest clouds in the world?
+
+Not hackers, and not a sudden rush of users.
+
+It started with a few servers that suddenly became unavailable.
+
+Normally that&#x27;s no big deal. If one server goes down, its traffic moves to the others. Think of a supermarket: when one counter closes, those customers join the other queues.
+
+But this time, the other counters couldn&#x27;t keep up.
+
+The servers that were still running got all that extra traffic. They became overloaded, started failing too, and pushed even more traffic onto whatever was left.
+
+One failure set off the next, and the next. 🧱🧱🧱
+
+This is called a cascading failure.
+
+Microsoft restarted servers and moved traffic around. But some servers came back up and went unresponsive again as soon as traffic returned. That&#x27;s why the fix took so long.
+
+The lesson for anyone building software:
+- Redundancy means having enough backup capacity that losing a few servers doesn&#x27;t sink the rest.
+- Throttling means that when a server is overloaded, it accepts only what it can handle and politely says &quot;try again later&quot; to the rest, instead of slowing down for everyone and crashing.
+- Fault tolerance means planning for &quot;what if several things fail at once?&quot;
+- Recovery should be gradual. Bring traffic back slowly, not all at once.
+
+If this can happen to Microsoft, it can happen to any system. Good engineering isn&#x27;t about never failing. It&#x27;s about stopping one failure from taking everything down.
+
+Have you ever seen one small failure spread across a system? 👇
+
+#SystemDesign #DistributedSystems #BackendEngineering #CloudComputing</p><figure><img src="../assets/blogs/post-7527053609952448512-01.jpg" alt="Microsoft 365 outage diagram: traffic from one failed server overloads the remaining servers. Throttling keeps the remaining servers stable." loading="lazy" decoding="async"></figure></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

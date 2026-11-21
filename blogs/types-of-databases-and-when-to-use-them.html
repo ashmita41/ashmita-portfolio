@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Types of Databases and When to Use Them · Ashmita Pandey</title>
+<meta name="description" content="Types of Databases and When to Use Them">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/types-of-databases-and-when-to-use-them.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>Types of Databases and When to Use Them</h1>
+<p>Ashmita Pandey · <time datetime="2025-06-28">Jun 28, 2025</time> · Databases</p>
+<div class="original-body"><figure><img src="../assets/blogs/types-of-databases-and-when-to-use-them/cover.png" alt="A database symbol between two rows of server racks." loading="lazy" decoding="async"></figure><div class="source-document"><p>
+      Hi everyone, I&#x27;m Ashmita 👋
+    </p><p>
+      Databases are one of the foundational components of any system design. Whether you&#x27;re building a small web app or designing a complex distributed system, choosing the right type of database plays a key role in performance, scalability, and maintainability.
+    </p><p>
+      In this article, we will explore <strong>15 types of databases</strong> that are widely used in industry. We’ll break down how each works, when to use them, and look at real-world use cases and examples.
+    </p><h2>
+      1. Relational Databases (RDBMS)
+    </h2><p>
+      Relational databases structure data in tables consisting of rows and columns. Each table represents a specific entity, and rows correspond to individual records while columns define the attributes. Relationships between tables are established using keys (primary and foreign keys).
+    </p><p>
+      They provide strong consistency and support for complex queries and transactions using SQL. ACID properties (Atomicity, Consistency, Isolation, Durability) ensure reliable processing.
+    </p><p>
+      <strong>When to Use:</strong>
+    </p><p>
+            </p><ul><li>Enterprise resource planning (ERP) systems</li><li>Customer Relationship Management (CRM) tools</li><li>E-commerce platforms handling user orders, inventory, and transactions</li></ul><p>
+      <strong>Examples:</strong> MySQL, PostgreSQL, Oracle Database
+    </p><h2>
+      2. Key-Value Stores
+    </h2><p>
+      Key-Value stores are simple databases where data is stored as a collection of key-value pairs. Each key must be unique and directly maps to a single data value. They are highly performant and scale horizontally.
+    </p><p>
+      They offer minimal querying capabilities but are ideal for storing simple, unstructured data.
+    </p><p>
+      <strong>When to Use:</strong>
+    </p><p>
+            </p><ul><li>Session management</li><li>User profile storage</li><li>Real-time analytics or counters</li></ul><p>
+      <strong>Examples:</strong> Redis, DynamoDB
+    </p><h2>
+      3. Document Databases
+    </h2><p>
+      Document databases store data as documents (usually JSON, BSON, or XML). Each document is a self-contained unit that can include nested structures, making them suitable for semi-structured data.
+    </p><p>
+      They allow flexible schemas and dynamic data models which evolve over time.
+    </p><p>
+      <strong>When to Use:</strong>
+    </p><p>
+            </p><ul><li>Online retail product catalogs</li><li>Content management systems</li><li>Applications with frequently changing data structures</li></ul><p>
+      <strong>Examples:</strong> MongoDB, Couchbase
+    </p><h2>
+      4. Graph Databases
+    </h2><p>
+      Graph databases store data in the form of nodes (entities), edges (relationships), and properties. They are optimized for traversing relationships and enable real-time querying across complex networks.
+    </p><p>
+      <strong>When to Use:</strong>
+    </p><p>
+            </p><ul><li>Social networking platforms</li><li>Fraud detection systems</li><li>Recommendation engines</li></ul><p>
+      <strong>Examples:</strong> Neo4j, Amazon Neptune
+    </p><h2>
+      5. Wide-Column Stores
+    </h2><p>
+      Wide-column stores manage data in tables, rows, and columns but allow each row to have different columns. This makes them efficient for sparse datasets and high write throughput scenarios.
+    </p><p>
+      They are designed for horizontal scaling and are schema-flexible.
+    </p><p>
+      <strong>When to Use:</strong>
+    </p><p>
+            </p><ul><li>IoT data ingestion</li><li>Real-time analytics dashboards</li><li>Logging systems</li></ul><p>
+      <strong>Examples:</strong> Apache Cassandra, Google Bigtable
+    </p><h2>
+      6. In-Memory Databases
+    </h2><p>
+      In-memory databases store data in RAM instead of disk, delivering ultra-fast read and write performance. They are volatile and often used as a caching layer.
+    </p><p>
+      <strong>When to Use:</strong>
+    </p><p>
+            </p><ul><li>High-speed financial transactions</li><li>Real-time gaming state</li><li>Caching for web apps</li></ul><p>
+      <strong>Examples:</strong> Redis, Memcached
+    </p><h2>
+      7. Time-Series Databases (TSDBs)
+    </h2><p>
+      Time-series databases are optimized for time-stamped data points, typically collected at regular intervals. They offer efficient data ingestion, aggregation, and downsampling.
+    </p><p>
+      <strong>When to Use:</strong>
+    </p><p>
+            </p><ul><li>Performance monitoring</li><li>Sensor or telemetry data</li><li>Trading systems tracking stock prices</li></ul><p>
+      <strong>Examples:</strong> InfluxDB, TimescaleDB, Prometheus
+    </p><h2>
+      8. Object-Oriented Databases
+    </h2><p>
+      These databases store data as objects, consistent with object-oriented programming languages. Data and methods are encapsulated together, preserving object relationships.
+    </p><p>
+      <strong>When to Use:</strong>
+    </p><p>
+            </p><ul><li>Simulation-based applications</li><li>Multimedia management</li><li>Systems needing direct object persistence</li></ul><p>
+      <strong>Examples:</strong> ObjectDB, db4o
+    </p><h2>
+      9. Text Search Databases
+    </h2><p>
+      Text search databases are built for indexing and querying large volumes of unstructured text. They offer features like full-text search, ranking, tokenization, and stemming.
+    </p><p>
+      <strong>When to Use:</strong>
+    </p><p>
+            </p><ul><li>Web search engines</li><li>E-commerce product search</li><li>Log aggregation and filtering</li></ul><p>
+      <strong>Examples:</strong> Elasticsearch, Apache Solr
+    </p><h2>
+      10. Spatial Databases
+    </h2><p>
+      Spatial databases manage geospatial data like coordinates, shapes, and locations. They provide spatial indexing, distance queries, and geometry functions.
+    </p><p>
+      <strong>When to Use:</strong>
+    </p><p>
+            </p><ul><li>Navigation and mapping apps</li><li>Urban planning GIS tools</li><li>Fleet tracking systems</li></ul><p>
+      <strong>Examples:</strong> PostGIS, Oracle Spatial
+    </p><h2>
+      11. Blob Datastores
+    </h2><p>
+      Blob (Binary Large Object) datastores are optimized for storing unstructured binary data. They are used for storing media files and large documents.
+    </p><p>
+      <strong>When to Use:</strong>
+    </p><p>
+            </p><ul><li>Cloud storage systems</li><li>Video streaming platforms</li><li>Backup and archival solutions</li></ul><p>
+      <strong>Examples:</strong> Amazon S3, Azure Blob Storage
+    </p><h2>
+      12. Ledger Databases
+    </h2><p>
+      Ledger databases are tamper-evident and provide immutable transaction logs. They are often used where auditability and transparency are crucial.
+    </p><p>
+      <strong>When to Use:</strong>
+    </p><p>
+            </p><ul><li>Financial transactions</li><li>Voting systems</li><li>Supply chain traceability</li></ul><p>
+      <strong>Examples:</strong> AWS QLDB, Hyperledger Fabric
+    </p><h2>
+      13. Hierarchical Databases
+    </h2><p>
+      Hierarchical databases organize data in a tree-like structure with one-to-many relationships. While not commonly used today, they are foundational in mainframe environments.
+    </p><p>
+      <strong>When to Use:</strong>
+    </p><p>
+            </p><ul><li>File system indexing</li><li>Directory-based organizational charts</li></ul><p>
+      <strong>Examples:</strong> IBM IMS, Windows Registry
+    </p><h2>
+      14. Vector Databases
+    </h2><p>
+      Vector databases store high-dimensional vector embeddings used in machine learning and AI applications. They support fast similarity searches for nearest neighbor lookups.
+    </p><p>
+      <strong>When to Use:</strong>
+    </p><p>
+            </p><ul><li>Image and document similarity search</li><li>Recommender systems</li><li>Anomaly detection</li></ul><p>
+      <strong>Examples:</strong> Faiss, Milvus, Pinecone
+    </p><h2>
+      15. Embedded Databases
+    </h2><p>
+      Embedded databases run inside the host application as a library. They are lightweight and require minimal setup.
+    </p><p>
+      <strong>When to Use:</strong>
+    </p><p>
+            </p><ul><li>Mobile and desktop software</li><li>Browser-based applications</li><li>Games saving local state</li></ul><p>
+      <strong>Examples:</strong> SQLite, RocksDB, Berkeley DB
+    </p><h2>
+      Final Thoughts
+    </h2><p>
+      There is no one-size-fits-all database. The right choice depends on the structure of your data, scalability needs, consistency requirements, and access patterns. Understanding the trade-offs of each database type will help you design systems that are both efficient and scalable.
+    </p><p>
+      Thanks for reading!
+    </p></div></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding Apache Kafka and Its Role in Modern System Design · Ashmita Pandey</title>
+<meta name="description" content="An introduction to Apache Kafka and its place in modern system design.">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/understanding-apache-kafka-and-its-role-in-modern-system-design.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>Understanding Apache Kafka and Its Role in Modern System Design</h1>
+<p>Ashmita Pandey · <time datetime="2026-01-23">Jan 23, 2026</time> · System Design · Distributed Systems · Kafka</p>
+<div class="original-body"><figure><img src="../assets/blogs/understanding-apache-kafka-and-its-role-in-modern-system-design/cover.png" alt="Apache Kafka logo on a System Design Building Blocks cover." loading="lazy" decoding="async"></figure><div class="source-document"><p>
+      When building large scale applications, one of the biggest challenges is handling data reliably and in real time. As systems grow, direct communication between services becomes difficult to manage, scale, and maintain. Apache Kafka addresses this challenge by enabling systems to communicate through events instead of direct calls.
+    </p><p>
+      Apache Kafka is widely used in modern backend systems to build scalable, fault tolerant, and real time data pipelines.
+    </p><h2>
+      What is Apache Kafka?
+    </h2><p>
+      Apache Kafka is a distributed event streaming platform designed to publish, store, and process streams of data in real time. It allows multiple systems to produce and consume events asynchronously.
+    </p><p>
+      Instead of one service directly calling another, Kafka acts as an intermediary where events are written once and consumed by multiple systems independently. This design improves scalability and system reliability.
+    </p><h2>
+      Core Components of Kafka
+    </h2><p>
+      <strong>Producer</strong> A producer is responsible for sending data to Kafka. Producers publish events to specific topics without needing to know which services will consume them.
+    </p><p>
+      <strong>Topic</strong> A topic represents a stream of events. All messages related to a particular domain or feature are stored under a topic.
+    </p><p>
+      <strong>Partition</strong> Topics are divided into partitions. Each partition is an ordered, immutable sequence of records. Partitions allow Kafka to scale horizontally and handle large volumes of data efficiently.
+    </p><p>
+      <strong>Consumer</strong> Consumers read data from topics. They can be grouped into consumer groups to distribute the load and process data in parallel.
+    </p><p>
+      <strong>Broker</strong> A broker is a Kafka server that stores data and serves read and write requests from producers and consumers.
+    </p><h2>
+      How Kafka Works
+    </h2><p>
+      When a producer sends data, it is written to a topic partition on a broker. The data is stored on disk and replicated across multiple brokers to ensure fault tolerance.
+    </p><p>
+      Consumers read data by maintaining offsets, which indicate how much data has already been processed. This allows consumers to replay data if needed, making Kafka suitable for both real time and batch processing use cases.
+    </p><h2>
+      Key Characteristics of Apache Kafka
+    </h2><p>
+            </p><ul><li>High throughput messaging with low latency</li><li>Horizontal scalability through partitions</li><li>Fault tolerance using replication</li><li>Decoupled communication between services</li><li>Persistent storage of events</li></ul><p>
+      These characteristics make Kafka a strong foundation for event driven systems.
+    </p><h2>
+      Real World Use Case
+    </h2><p>
+      Consider an online food delivery platform handling thousands of orders per minute.
+    </p><p>
+      When a user places an order:
+    </p><p>
+            </p><ul><li>The order service publishes an event to Kafka</li><li>The payment service consumes the event and processes payment</li><li>The delivery service assigns a delivery partner</li><li>The notification service sends updates to the user</li><li>The analytics system records the event for reporting</li></ul><p>
+      Each service operates independently, and failures in one service do not block others. Kafka ensures reliable event delivery across the system.
+    </p><h2>
+      Advantages of Using Kafka
+    </h2><p>
+            </p><ul><li>Enables event driven architecture</li><li>Improves system scalability and resilience</li><li>Supports multiple consumers for the same data</li><li>Handles large data volumes efficiently</li><li>Allows replaying events for recovery and debugging</li></ul><h2>
+      Challenges of Using Kafka
+    </h2><p>
+            </p><ul><li>Requires operational expertise to manage clusters</li><li>Monitoring and alerting are essential</li><li>Message ordering is guaranteed only within a partition</li><li>Overkill for small or simple applications</li></ul><h2>
+      When Should You Use Kafka?
+    </h2><p>
+      Kafka is a good choice when your system:
+    </p><p>
+            </p><ul><li>Requires real time data processing</li><li>Needs high availability and fault tolerance</li><li>Has multiple independent services consuming the same data</li><li>Handles continuous streams of events</li></ul><p>
+      For early stage applications or small systems, simpler messaging solutions may be more appropriate.
+    </p><h2>
+      Key Takeaway
+    </h2><p>
+      Apache Kafka enables a shift from tightly coupled systems to event driven architectures. It helps build scalable and reliable systems, but it should be adopted with a clear understanding of its complexity and operational requirements.
+    </p><p>
+      Used correctly, Kafka becomes a powerful backbone for modern distributed systems.
+    </p><p>
+      Thanks for reading!
+    </p></div></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

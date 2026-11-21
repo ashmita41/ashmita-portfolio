@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bloom Filters: How Databases Avoid Millions of Unnecessary Disk Reads · Ashmita Pandey</title>
+<meta name="description" content="How bloom filters help a database avoid checking data that is definitely not there.">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/bloom-filters-how-databases-avoid-millions-of-unnecessary-disk-reads.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>Bloom Filters: How Databases Avoid Millions of Unnecessary Disk Reads</h1>
+<p>Ashmita Pandey · <time datetime="2026-08-09">Aug 9, 2026</time> · Databases · System Design</p>
+<div class="original-body"><figure><img src="../assets/blogs/bloom-filters-how-databases-avoid-millions-of-unnecessary-disk-reads/cover.png" alt="Bloom filter diagram: if a key might be present, read from disk; if it is definitely absent, skip the disk read." loading="lazy" decoding="async"></figure><div class="source-document"><p>
+      Hello everyone 👋
+    </p><p>
+      If you&#x27;ve worked with databases or distributed systems, chances are you&#x27;ve come across <strong>Bloom Filters</strong>.
+    </p><p>
+      At first, Bloom Filters can seem a little unusual.
+    </p><p>
+      They can tell you whether an element might exist in a set, but they don&#x27;t actually store the elements themselves.
+    </p><p>
+      So how does that work?
+    </p><p>
+      And more importantly, why are Bloom Filters useful for databases and other large-scale systems?
+    </p><p>
+      In this article, we&#x27;ll explore:
+    </p><p>
+            </p><ul><li>What a Bloom Filter is</li><li>How Bloom Filters work</li><li>How hash functions are used</li><li>Why false positives occur</li><li>Why false negatives are impossible</li><li>How Bloom Filters reduce unnecessary disk reads</li><li>Where Bloom Filters are used</li><li>What Counting Bloom Filters are</li><li>When Bloom Filters are not the right choice</li></ul><hr><h2>
+      What Is a Bloom Filter?
+    </h2><p>
+      A Bloom Filter is a <strong>probabilistic data structure</strong> used to test whether an element belongs to a set.
+    </p><p>
+      It can return two possible answers:
+    </p><p>
+            </p><ul><li><strong>Definitely not present</strong></li><li><strong>Probably present</strong></li></ul><p>
+      The important part is the guarantee behind these answers.
+    </p><p>
+      If a Bloom Filter says that an element is <strong>not present</strong>, it is guaranteed to be absent.
+    </p><p>
+      However, if it says that an element is <strong>probably present</strong>, there is a possibility that it is actually not present.
+    </p><p>
+      This is known as a <strong>false positive</strong>.
+    </p><p>
+      There are no false negatives.
+    </p><p>
+      This property is what makes Bloom Filters useful for avoiding expensive operations such as database lookups, disk reads, and network requests.
+    </p><hr><h2>
+      The Basic Idea
+    </h2><p>
+      Consider a simple example.
+    </p><p>
+      Suppose an application receives a request to fetch a user by ID.
+    </p><p>
+      The application could directly query the database every time.
+    </p><p>
+      But what happens if the user doesn&#x27;t exist?
+    </p><p>
+      The database still has to perform the lookup before returning:
+    </p><pre tabindex="0"><code>User not found</code></pre><p>
+      Now imagine if we could perform a much cheaper check before querying the database.
+    </p><p>
+      Something that could tell us:
+    </p><blockquote>
+      This user is definitely not present.
+    </blockquote><p>
+      In that case, we can skip the database lookup completely.
+    </p><p>
+      This is one of the problems Bloom Filters help solve.
+    </p><p>
+      They don&#x27;t replace the database.
+    </p><p>
+      Instead, they act as a <strong>first layer of filtering</strong> before an expensive operation.
+    </p><hr><h2>
+      How Bloom Filters Work
+    </h2><p>
+      A Bloom Filter consists of two main components:
+    </p><p>
+            </p><ul><li>A <strong>bit array</strong></li><li>Multiple <strong>hash functions</strong></li></ul><p>
+      Initially, all bits in the array are set to 0.
+    </p><p>
+      For example:
+    </p><pre tabindex="0"><code>0 0 0 0 0 0 0 0 0 0 0 0</code></pre><p>
+      Now suppose we want to insert:
+    </p><pre tabindex="0"><code>apple</code></pre><p>
+      We pass &quot;apple&quot; through multiple hash functions.
+    </p><p>
+      Assume the hash functions return:
+    </p><pre tabindex="0"><code>2
+7
+11</code></pre><p>
+      We set those positions to 1.
+    </p><p>
+      The array now becomes:
+    </p><pre tabindex="0"><code>0 0 1 0 0 0 0 1 0 0 0 1</code></pre><p>
+      Notice that we haven&#x27;t stored the actual value:
+    </p><pre tabindex="0"><code>apple</code></pre><p>
+      We only stored the information that certain positions in the bit array are set.
+    </p><p>
+      This is one of the reasons Bloom Filters require very little memory.
+    </p><hr><h2>
+      Checking Whether an Element Exists
+    </h2><p>
+      Now suppose we want to check whether:
+    </p><pre tabindex="0"><code>apple</code></pre><p>
+      exists in the set.
+    </p><p>
+      We run the same hash functions again.
+    </p><p>
+      They return:
+    </p><pre tabindex="0"><code>2
+7
+11</code></pre><p>
+      We check those positions in the bit array.
+    </p><p>
+      All three positions contain 1.
+    </p><p>
+      So the Bloom Filter says:
+    </p><pre tabindex="0"><code>Probably present</code></pre><p>
+      But now consider a different situation.
+    </p><p>
+      Suppose we search for:
+    </p><pre tabindex="0"><code>banana</code></pre><p>
+      and the hash functions return:
+    </p><pre tabindex="0"><code>2
+5
+11</code></pre><p>
+      If position 5 contains 0, we immediately know:
+    </p><pre tabindex="0"><code>banana is definitely not present</code></pre><p>
+      There is no need to query the database.
+    </p><hr><h2>
+      Why False Positives Happen
+    </h2><p>
+      This is the most important part to understand about Bloom Filters.
+    </p><p>
+      Suppose we insert:
+    </p><pre tabindex="0"><code>cat
+dog</code></pre><p>
+      Each element is passed through the hash functions, which set different positions in the bit array.
+    </p><p>
+      Now suppose we search for:
+    </p><pre tabindex="0"><code>fox</code></pre><p>
+      Fox was never inserted.
+    </p><p>
+      However, it is possible that the hash functions for &quot;fox&quot; point to positions that were already set to 1 by &quot;cat&quot; and &quot;dog&quot;.
+    </p><p>
+      For example:
+    </p><pre tabindex="0"><code>cat → 2, 5, 7
+dog → 1, 3, 5
+fox → 1, 5, 7</code></pre><p>
+      All positions required for &quot;fox&quot; are already set to 1.
+    </p><p>
+      The Bloom Filter therefore says:
+    </p><pre tabindex="0"><code>Probably present</code></pre><p>
+      But &quot;fox&quot; was never inserted.
+    </p><p>
+      This is a <strong>false positive</strong>.
+    </p><p>
+      The important point is that the Bloom Filter has not produced an incorrect database result.
+    </p><p>
+      The database can still perform the actual lookup and return:
+    </p><pre tabindex="0"><code>Not found</code></pre><p>
+      The false positive only means that we performed an unnecessary lookup.
+    </p><hr><h2>
+      Why False Negatives Are Impossible
+    </h2><p>
+      Now consider the opposite situation.
+    </p><p>
+      Suppose an element was actually inserted into the Bloom Filter.
+    </p><p>
+      When it was inserted, all of its hash positions were set to 1.
+    </p><p>
+      Those bits may also be shared by other elements, but they cannot become 0 in a standard Bloom Filter.
+    </p><p>
+      Therefore, when we later check that element, all of its required positions will still be 1.
+    </p><p>
+      The Bloom Filter can therefore never say:
+    </p><pre tabindex="0"><code>Definitely not present</code></pre><p>
+      for an element that was actually inserted.
+    </p><p>
+      This is why Bloom Filters have:
+    </p><p>
+      <strong>No false negatives.</strong>
+    </p><hr><h2>
+      The Space Advantage
+    </h2><p>
+      Another important property of Bloom Filters is their memory efficiency.
+    </p><p>
+      Suppose we need to track <strong>10 million elements</strong>.
+    </p><p>
+      A traditional hash set needs to store the actual keys and the associated data structures.
+    </p><p>
+      The memory requirement can be around <strong>1 GB</strong> in this example.
+    </p><p>
+      A Bloom Filter configured for a <strong>1% false positive rate</strong> can require roughly <strong>12 MB</strong>.
+    </p><p>
+      That&#x27;s around <strong>80× less memory</strong>.
+    </p><p>
+      The Bloom Filter doesn&#x27;t store the original keys.
+    </p><p>
+      It only stores bits.
+    </p><p>
+      The exact memory requirement depends on:
+    </p><p>
+            </p><ul><li>Number of elements</li><li>Size of the bit array</li><li>Number of hash functions</li><li>Desired false positive rate</li></ul><p>
+      There is therefore a trade-off between memory usage and the probability of false positives.
+    </p><hr><h2>
+      How Bloom Filters Help Databases
+    </h2><p>
+      Now let&#x27;s connect this to database systems.
+    </p><p>
+      Consider a database that stores data across multiple files on disk.
+    </p><p>
+      A query arrives asking for a particular key.
+    </p><p>
+      Without a Bloom Filter, the database may need to check multiple files to determine whether the key exists.
+    </p><p>
+      Disk I/O is expensive.
+    </p><p>
+      So instead, the database can maintain a Bloom Filter for each file.
+    </p><p>
+      Before reading the file, it checks the Bloom Filter.
+    </p><p>
+      If the result is:
+    </p><pre tabindex="0"><code>Definitely not present</code></pre><p>
+      the database skips that file.
+    </p><p>
+      If the result is:
+    </p><pre tabindex="0"><code>Probably present</code></pre><p>
+      the database performs the actual lookup.
+    </p><p>
+      This means the Bloom Filter does not tell the database where the data is.
+    </p><p>
+      It simply tells the database:
+    </p><blockquote>
+      You don&#x27;t need to look here.
+    </blockquote><p>
+      This can significantly reduce unnecessary disk reads.
+    </p><hr><h2>
+      Where Are Bloom Filters Used?
+    </h2><p>
+      Bloom Filters are not just a theoretical data structure.
+    </p><p>
+      They are used in several large-scale systems.
+    </p><h2>
+      Apache Cassandra
+    </h2><p>
+      Cassandra uses Bloom Filters to determine whether an SSTable might contain a particular key before performing an expensive read.
+    </p><p>
+      If the filter says the key is definitely absent, Cassandra can skip that SSTable.
+    </p><h2>
+      Google BigTable
+    </h2><p>
+      Bloom Filters can be used to avoid unnecessary reads from storage files when the requested data is not present.
+    </p><h2>
+      Redis
+    </h2><p>
+      Redis provides Bloom Filter functionality through RedisBloom.
+    </p><p>
+      Applications can use Bloom Filters to determine whether a key might exist before performing an expensive database lookup.
+    </p><h2>
+      Google Chrome
+    </h2><p>
+      Bloom Filters have also been used for URL-related security checks, where a local filter can determine whether a URL might require further verification.
+    </p><h2>
+      CDNs
+    </h2><p>
+      Bloom Filters can also be used in caching systems to identify whether an object has been requested before.
+    </p><p>
+      This can help avoid filling cache space with objects that are rarely accessed.
+    </p><hr><h2>
+      Counting Bloom Filters
+    </h2><p>
+      There is one important limitation of a standard Bloom Filter.
+    </p><p>
+      It does not support deletion.
+    </p><p>
+      Suppose two elements happen to use the same bit.
+    </p><pre tabindex="0"><code>A → bit 5
+B → bit 5 </code></pre><p>
+      The bit becomes:
+    </p><pre tabindex="0"><code>bit 5 = 1 </code></pre><p>
+      Now suppose we remove A.
+    </p><p>
+      If we simply change bit 5 back to 0, we would also remove the information that B was inserted.
+    </p><p>
+      That could introduce a false negative.
+    </p><p>
+      Counting Bloom Filters solve this problem by replacing each bit with a small counter.
+    </p><p>
+      Instead of:
+    </p><pre tabindex="0"><code>0 1 0 1 1 </code></pre><p>
+      we can have:
+    </p><pre tabindex="0"><code>0 2 0 1 3 </code></pre><p>
+      When an element is inserted, the corresponding counters are incremented.
+    </p><p>
+      When an element is removed, they are decremented.
+    </p><p>
+      This allows deletion while maintaining the membership information.
+    </p><p>
+      The trade-off is additional memory usage.
+    </p><hr><h2>
+      When Should You Use a Bloom Filter?
+    </h2><p>
+      Bloom Filters work particularly well when:
+    </p><p>
+            </p><ul><li>You have a large number of elements.</li><li>Membership checks are frequent.</li><li>The underlying operation is expensive.</li><li>Memory efficiency is important.</li><li>False positives are acceptable.</li></ul><p>
+      For example:
+    </p><pre tabindex="0"><code>Bloom Filter
+      ↓
+Definitely not present?
+      ↓
+Skip expensive operation
+
+Probably present?
+      ↓
+Perform actual lookup</code></pre><p>
+      This pattern is useful for databases, caches, storage systems, search systems, and distributed applications.
+    </p><hr><h2>
+      When Bloom Filters Are Not the Right Choice
+    </h2><p>
+      Bloom Filters are not suitable for every problem.
+    </p><h2>
+      When you need the actual data
+    </h2><p>
+      A Bloom Filter only answers a membership question.
+    </p><p>
+      It cannot return the stored object.
+    </p><p>
+      If you need:
+    </p><pre tabindex="0"><code>user_id → user details</code></pre><p>
+      you still need a database, hash map, or another data structure.
+    </p><h2>
+      When false positives are unacceptable
+    </h2><p>
+      A false positive can cause an unnecessary lookup.
+    </p><p>
+      If even that possibility is unacceptable for your application, another approach may be more appropriate.
+    </p><h2>
+      When frequent deletion is required
+    </h2><p>
+      Standard Bloom Filters don&#x27;t support deletion.
+    </p><p>
+      Counting Bloom Filters can solve this problem, but they require additional memory.
+    </p><h2>
+      When the dataset is small
+    </h2><p>
+      If you only have a small number of elements and they can easily fit into memory, a regular hash set may be simpler.
+    </p><p>
+      Not every performance problem requires a probabilistic data structure.
+    </p><hr><h2>
+      What Makes Bloom Filters Useful?
+    </h2><p>
+      The interesting part about Bloom Filters is that they don&#x27;t try to answer the complete question.
+    </p><p>
+      They don&#x27;t tell us:
+    </p><blockquote>
+      &quot;Is this element definitely present?&quot;
+    </blockquote><p>
+      Instead, they answer a slightly different question:
+    </p><blockquote>
+      &quot;Can I confidently say that this element is not present?&quot;
+    </blockquote><p>
+      That small change in the problem makes it possible to use very little memory while eliminating many expensive operations.
+    </p><p>
+      The trade-off is straightforward:
+    </p><p>
+      <strong>A false positive can cause extra work.</strong>
+    </p><p>
+      <strong>A false negative is impossible.</strong>
+    </p><p>
+      This makes Bloom Filters particularly useful as a first layer before expensive operations.
+    </p><hr><h2>
+      Final Thoughts
+    </h2><p>
+      Bloom Filters are a good example of how a relatively simple data structure can have a significant impact on system performance.
+    </p><p>
+      They combine:
+    </p><p>
+            </p><ul><li>Bit arrays</li><li>Hash functions</li><li>Probabilistic membership testing</li><li>Very low memory usage</li><li>No false negatives</li></ul><p>
+      to reduce unnecessary database, disk, and network operations.
+    </p><p>
+      The important lesson is not just how Bloom Filters work.
+    </p><p>
+      It is the design principle behind them:
+    </p><p>
+      <strong>You don&#x27;t always need to make an expensive operation faster. Sometimes, the better approach is to avoid performing it in the first place.</strong>
+    </p><p>
+      Understanding this kind of trade-off becomes increasingly important when designing systems that need to handle large amounts of data and high request volumes.
+    </p></div></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How does Blinkit get milk to your door in 10 minutes? 🛵 · Ashmita Pandey</title>
+<meta name="description" content="How does Blinkit get milk to your door in 10 minutes? 🛵">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7518575427465216000.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>How does Blinkit get milk to your door in 10 minutes? 🛵</h1>
+<p>Ashmita Pandey · <time datetime="2026-10-21">Oct 21, 2026</time> · System Design · Distributed Systems · Retail Tech</p>
+<div class="original-body"><p>How does Blinkit get milk to your door in 10 minutes? 🛵
+
+It&#x27;s not faster riders. It&#x27;s system design.
+
+Here&#x27;s what happens in the few seconds after you tap &quot;Order&quot;:
+
+1️⃣ Your location picks the store
+You&#x27;re mapped to the nearest dark store, a small warehouse just 2–3 km away. The 10 minutes are decided before you even start browsing.
+
+2️⃣ You only see what&#x27;s really there
+The catalog is filtered by that one store&#x27;s live inventory, usually served from a cache like Redis so it loads instantly.
+
+3️⃣ The last packet of milk problem
+Two people order the last unit at the same moment. Without an atomic decrement or a row lock, both orders succeed and one customer gets a cancellation. Inventory reservation has to be race-proof.
+
+4️⃣ Events, not waiting
+The order goes onto a queue (think Kafka). The picker&#x27;s app gets a pick list ordered by the store&#x27;s layout, so packing takes about 2 minutes.
+
+5️⃣ The rider is already there
+Riders wait at the dark store. Assignment just picks the nearest free one, and GPS updates stream to your screen over WebSockets.
+
+6️⃣ The real secret is overnight
+Demand forecasting decides what each dark store stocks for tomorrow. Get that wrong and no amount of speed helps.
+
+I work on backend systems for grocery retail, and the hardest part is never the happy path. It&#x27;s inventory consistency at scale.
+
+Which part would you want me to go deeper on next? 👇
+
+#SystemDesign #BackendEngineering #DistributedSystems</p><figure><img src="../assets/blogs/post-7518575427465216000-01.jpg" alt="A vertical diagram showing the service flow for 10-minute grocery delivery, from location and catalog to inventory, picking, rider assignment, and live tracking." loading="lazy" decoding="async"></figure></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

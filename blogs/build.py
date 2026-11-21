@@ -6,6 +6,7 @@ from html import escape
 import json
 from pathlib import Path
 import re
+from urllib.parse import quote, urlsplit
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
@@ -16,6 +17,17 @@ PREVIEW = re.compile(r"(<!-- blog-previews:start -->).*?(<!-- blog-previews:end 
 def t(value):
     assert isinstance(value, str) and value.strip(), value
     return escape(value.strip())
+
+def body_text(value):
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError("Original text blocks must contain text")
+    return escape(value)
+
+def kind(item):
+    result = item.get("kind", "article")
+    if result not in ("article", "post"):
+        raise ValueError(f"Unknown archive entry type: {result!r}")
+    return result
 
 def date_label(record):
     day = date.fromisoformat(record["date"])
@@ -30,12 +42,13 @@ def load():
         assert len(item["tags"]) and len(set(item["tags"])) == len(item["tags"])
         date_label(item)
         t(item["title"])
+        kind(item)
         if item.get("original"):
             assert item["original"].get("blocks"), item["id"]
             render_original(item)
     return sorted(entries,key=lambda item:item["date"],reverse=True)
 
-def shell(title, description, canonical, body, *, prefix="", script=""):
+def shell(title, description, canonical, body, *, prefix="", script="", css_version="creative-blue"):
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -46,7 +59,7 @@ def shell(title, description, canonical, body, *, prefix="", script=""):
 <meta name="author" content="Ashmita Pandey">
 <link rel="canonical" href="{HOST}/{canonical}">
 <link rel="icon" href="{prefix}favicon.svg?v=creative-blue" type="image/svg+xml">
-<link rel="stylesheet" href="{prefix}styles.css?v=creative-blue">
+<link rel="stylesheet" href="{prefix}styles.css?v={css_version}">
 {script}
 </head>
 <body>
@@ -63,35 +76,139 @@ def shell(title, description, canonical, body, *, prefix="", script=""):
 </html>
 '''
 
+IMAGE_SUFFIXES = {".webp", ".png", ".jpg", ".jpeg"}
+
+def render_image(image):
+    raw = image.get("path")
+    alt = image.get("alt")
+    if not isinstance(raw, str) or not raw.startswith("assets/") or "\\" in raw:
+        raise ValueError("Image path must be relative to assets/")
+    if any(part in ("", ".", "..") for part in raw.split("/")):
+        raise ValueError("Image path must not contain empty or traversal segments")
+    path = Path(raw)
+    asset_root = (ROOT / "assets").resolve()
+    image_file = (ROOT / path).resolve()
+    if asset_root != ROOT.resolve() / "assets" or not image_file.is_relative_to(asset_root):
+        raise ValueError("Image path must stay inside this site's assets/")
+    if path.suffix.lower() not in IMAGE_SUFFIXES or not image_file.is_file():
+        raise ValueError(f"Image must be an existing local WebP, PNG or JPEG: {raw}")
+    if not isinstance(alt, str) or not alt.strip():
+        raise ValueError("Image alt text is required")
+    return f'<img src="../{quote(path.as_posix(), safe="/")}" alt="{t(alt)}" loading="lazy" decoding="async">'
+
+def render_figure(figure):
+    if not isinstance(figure, dict) or set(figure) - {"path", "alt", "caption", "credit"}:
+        raise ValueError("Figure accepts path, alt, and optional caption and credit")
+    image = render_image(figure)
+    caption = t(figure["caption"]) if "caption" in figure else ""
+    credit = f'<span class="figure-credit">Credit: {t(figure["credit"])}</span>' if "credit" in figure else ""
+    details = " · ".join(part for part in (caption, credit) if part)
+    return f'<figure>{image}' + (f'<figcaption>{details}</figcaption>' if details else "") + "</figure>"
+
+def safe_href(value):
+    if not isinstance(value, str) or any(ch.isspace() or ord(ch) < 32 for ch in value) or "\\" in value:
+        raise ValueError("Invalid original outbound link")
+    url = urlsplit(value)
+    if url.scheme not in ("https", "http") or not url.hostname or url.username or url.password:
+        raise ValueError("Original outbound links must be public HTTP(S) URLs")
+    return escape(value, quote=True)
+
+def render_inline(parts):
+    if not isinstance(parts, list) or not parts:
+        raise ValueError("Formatted paragraphs require a nonempty list of runs")
+    output = []
+    for part in parts:
+        if isinstance(part, str):
+            output.append(escape(part))
+        elif isinstance(part, dict) and set(part) == {"text", "href"}:
+            output.append(f'<a href="{safe_href(part["href"])}">{body_text(part["text"])}</a>')
+        elif isinstance(part, dict) and len(part) == 1 and next(iter(part)) in ("strong", "em", "code"):
+            tag, value = next(iter(part.items()))
+            output.append(f'<{tag}>{body_text(value)}</{tag}>')
+        else:
+            raise ValueError(f"Invalid original inline content: {part!r}")
+    return "".join(output)
+
+RICH_VOID = {"br", "hr"}
+RICH_CONTAINERS = {
+    "p", "h2", "h3", "h4", "h5", "h6", "strong", "em", "u", "s", "mark", "sup", "sub",
+    "ul", "ol", "li", "code", "pre", "blockquote", "table", "caption", "thead", "tbody",
+    "tfoot", "tr", "th", "td", "a",
+}
+
+def render_source_node(node):
+    if isinstance(node, str):
+        return escape(node)
+    if not isinstance(node, dict):
+        raise ValueError("Original nodes must be text or structured elements")
+    if set(node) == {"figure"}:
+        return render_figure(node["figure"])
+    tag = node.get("node")
+    if tag in RICH_VOID and set(node) == {"node"}:
+        return f'<{tag}>'
+    if tag not in RICH_CONTAINERS or set(node) - {"node", "children", "attrs"}:
+        raise ValueError(f"Invalid original element: {tag!r}")
+    children = node.get("children")
+    attrs = dict(node.get("attrs", {}))
+    if not isinstance(children, list):
+        raise ValueError("Original elements must have a children array")
+    html_attrs = ' tabindex="0"' if tag == "pre" else ""
+    if tag == "a":
+        html_attrs += f' href="{safe_href(attrs.pop("href"))}"'
+    number_attrs = {"ol": ("start",), "li": ("value",), "td": ("colspan", "rowspan"), "th": ("colspan", "rowspan")}
+    for name in number_attrs.get(tag, ()):
+        if name in attrs:
+            number = attrs.pop(name)
+            if not isinstance(number, int) or not -99999 <= number <= 99999:
+                raise ValueError(f"Invalid {name} number")
+            html_attrs += f' {name}="{number}"'
+    if attrs:
+        raise ValueError(f"Unexpected original attributes on {tag!r}")
+    return f'<{tag}{html_attrs}>' + "".join(render_source_node(child) for child in children) + f'</{tag}>'
+
 def render_original(item):
     original=item["original"]
     body=[]
     if cover:=original.get("cover"):
-        path=Path(cover["path"])
-        assert path.parts and path.parts[0]=="assets" and path.suffix.lower() in (".webp",".png",".jpg",".jpeg")
-        assert not path.is_absolute() and (ROOT/path).resolve().is_relative_to((ROOT/"assets").resolve())
-        assert (ROOT/path).is_file()
-        body.append(f'<img src="../{escape(path.as_posix())}" alt="{t(cover["alt"])}">')
+        body.append(render_figure(cover))
     for block in original["blocks"]:
         if isinstance(block,str):
-            body.append(f"<p>{t(block)}</p>")
+            body.append(f"<p>{body_text(block)}</p>")
+        elif set(block)=={"paragraph"}:
+            body.append(f'<p>{render_inline(block["paragraph"])}</p>')
         elif set(block)=={"heading"}:
-            body.append(f'<h2>{t(block["heading"])}</h2>')
-        elif set(block)=={"list"}:
-            body.append("<ul>"+"".join(f"<li>{t(line)}</li>" for line in block["list"])+"</ul>")
+            body.append(f'<h2>{body_text(block["heading"])}</h2>')
+        elif set(block)=={"subheading"}:
+            body.append(f'<h3>{body_text(block["subheading"])}</h3>')
+        elif set(block) in ({"list"}, {"ordered_list"}):
+            key, lines = next(iter(block.items()))
+            tag = "ul" if key == "list" else "ol"
+            content = "".join(f"<li>{render_inline(line) if isinstance(line,list) else body_text(line)}</li>" for line in lines)
+            body.append(f"<{tag}>{content}</{tag}>")
+        elif set(block)=={"quote"}:
+            body.append(f'<blockquote>{body_text(block["quote"])}</blockquote>')
         elif set(block)=={"code"}:
             body.append(f'<pre tabindex="0"><code>{escape(block["code"])}</code></pre>')
+        elif set(block)=={"figure"}:
+            body.append(render_figure(block["figure"]))
+        elif set(block)=={"document"} and isinstance(block["document"], list):
+            body.append('<div class="source-document">' + "".join(render_source_node(node) for node in block["document"]) + "</div>")
         else:
             raise ValueError(f"Unrecognized block in {item['id']}: {block!r}")
     content = f'''<article class="archive-head blog-detail">
 <a href="../blogs.html">← All blogs</a>
 <h1>{t(item["title"])}</h1>
-<p>{date_label(item)} · {" · ".join(t(tag) for tag in item["tags"])}</p>
-<div>{"".join(body)}</div>
+<p>Ashmita Pandey · {date_label(item)} · {" · ".join(t(tag) for tag in item["tags"])}</p>
+<div class="original-body">{"".join(body)}</div>
 </article>'''
-    return shell(item["title"],item.get("summary") or item["title"],f'blogs/{item["id"]}.html',content,prefix="../")
+    # Numeric references preserve literal end-of-line spaces in source text/code without trailing whitespace in generated HTML.
+    content = re.sub(r"[ \t]+(?=\n)", lambda m: "".join(f"&#{ord(c)};" for c in m[0]), content)
+    return shell(item["title"],item.get("summary") or item["title"],f'blogs/{item["id"]}.html',content,prefix="../",css_version="archive-originals")
 
 def to_index(entries):
+    articles = [entry for entry in entries if kind(entry) == "article"]
+    posts = [entry for entry in entries if kind(entry) == "post" and entry.get("original")]
+    entries = [entry for entry in entries if kind(entry) == "article" or entry.get("original")]
     tags=sorted({tag for e in entries for tag in e["tags"]},key=str.casefold)
     options='<option value="">All topics</option>'+''.join(f'<option value="{t(tag)}">{t(tag)}</option>' for tag in tags)
     results=[]
@@ -102,16 +219,30 @@ def to_index(entries):
             title=f'<a href="blogs/{eid}.html">{title}</a>'
         tags_html=" · ".join(t(tag) for tag in item["tags"])
         tags_data=escape(json.dumps(item["tags"],ensure_ascii=False))
-        results.append(f'<li class="archive-item" id="{eid}" data-topics="{tags_data}">{date_label(item)}<div><h2>{title}</h2><p class="topic">{tags_html}</p></div></li>')
-    body=f'''<header class="archive-head"><p class="eyebrow"><span class="status-dot"></span> Blog archive</p><h1>Blogs<span class="accent-dot">.</span></h1><p>Articles on distributed systems, databases, and AI.</p></header>
-<p class="archive-note">This index lists verified article titles and topics. Full original articles and cover images will be added here from the source files.</p>
-<div class="controls" hidden><label for="filter">Filter by topic</label><select id="filter">{options}</select><span id="result-count" aria-live="polite"></span></div>
+        k = kind(item)
+        meta = f'<span class="archive-kind">{"Article" if k == "article" else "Post"}</span> · ' if posts else ""
+        results.append(f'<li class="archive-item" id="{eid}" data-kind="{k}" data-topics="{tags_data}">{date_label(item)}<div><h2>{title}</h2><p class="topic">{meta}{tags_html}</p></div></li>')
+    original_count = sum(bool(entry.get("original")) for entry in articles)
+    if not articles and not posts:
+        note = "No articles are listed yet."
+    elif articles and original_count == 0:
+        note = "This index lists verified titles and topics. Original text and cover images are not included yet."
+    elif original_count < len(articles):
+        note = f"Full text is available for {original_count} of {len(articles)} articles. The others are listed by title and topic."
+    else:
+        note = ""
+    notice = f'<p class="archive-note">{t(note)}</p>' if note else ""
+    type_filter = '<label for="kind-filter">Type</label><select id="kind-filter"><option value="">All</option><option value="article">Articles</option><option value="post">Posts</option></select>' if posts else ""
+    header = "Articles and posts" if posts else "Articles"
+    body=f'''<header class="archive-head"><p class="eyebrow"><span class="status-dot"></span> Blog archive</p><h1>Blogs<span class="accent-dot">.</span></h1><p>{header} on distributed systems, databases, and AI.</p></header>
+{notice}
+<div class="controls" hidden>{type_filter}<label for="filter">Filter by topic</label><select id="filter">{options}</select><span id="result-count" aria-live="polite"></span></div>
 <ul class="archive-list">{"".join(results)}</ul>'''
-    return shell("Blogs","Technical articles by Ashmita Pandey: browse distributed systems, databases, system design, and practical AI.","blogs.html",body,script='<script src="blogs/filter.js" defer></script>')
+    return shell("Blogs",f"Technical {header.lower()} by Ashmita Pandey: browse distributed systems, databases, system design, and practical AI.","blogs.html",body,script='<script src="blogs/filter.js?v=2" defer></script>')
 
 def home_previews(entries):
     output=[]
-    for item in entries[:3]:
+    for item in [entry for entry in entries if kind(entry) == "article"][:3]:
         eid=item["id"]
         path=f"blogs/{eid}.html" if item.get("original") else f"blogs.html#{eid}"
         desc=t(item.get("summary") or " · ".join(item["tags"]))

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How does Zomato show your delivery partner moving live on the map without refreshing the app? 👀 · Ashmita Pandey</title>
+<meta name="description" content="How does Zomato show your delivery partner moving live on the map without refreshing the app? 👀">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7493281722042843136.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>How does Zomato show your delivery partner moving live on the map without refreshing the app? 👀</h1>
+<p>Ashmita Pandey · <time datetime="2026-08-12">Aug 12, 2026</time> · System Design · Distributed Systems · Real-time Systems</p>
+<div class="original-body"><p>How does Zomato show your delivery partner moving live on the map without refreshing the app? 👀
+
+Here’s the simplified system design behind it.
+
+The rider’s app periodically sends GPS coordinates to Zomato’s backend.
+
+The backend then:
+→ Validates the location
+→ Updates the ETA
+→ Filters unnecessary updates
+→ Pushes the latest location to your app through a persistent connection like WebSockets
+
+Since the connection stays open, your app receives tiny location updates instead of refreshing the entire screen.
+
+But there’s another neat trick.
+
+The GPS coordinates don’t arrive continuously.
+
+So how does the rider marker move smoothly instead of jumping from Point A to Point B?
+
+The frontend interpolates between GPS points, making the marker glide naturally across the map.
+
+At scale, this can be further optimized using:
+• Adaptive GPS polling
+• Smart throttling
+• Compressed payloads
+• Battery-aware tracking
+• Event-driven updates
+
+So that simple little moving icon on your screen?
+
+It’s backed by networking, real-time systems, location processing, optimization, and a lot of engineering.
+
+Simple to use.
+Complex to build.
+
+That’s the fun part of backend engineering.
+
+Which app or website should we break down next?</p><figure><img src="../assets/blogs/post-7493281722042843136-01.jpg" alt="Food delivery tracking screen showing the rider’s progress along a mapped route toward the destination." loading="lazy" decoding="async"></figure></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iPhone 17 at ₹50K during Big Billion Days 👀 · Ashmita Pandey</title>
+<meta name="description" content="iPhone 17 at ₹50K during Big Billion Days 👀">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7495798742541987840.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>iPhone 17 at ₹50K during Big Billion Days 👀</h1>
+<p>Ashmita Pandey · <time datetime="2026-08-19">Aug 19, 2026</time> · System Design · Distributed Systems · Retail Tech</p>
+<div class="original-body"><p>iPhone 17 at ₹50K during Big Billion Days 👀
+
+
+Haha, hold on. Forget the ₹50K for a second 😂
+
+Let’s say you open the app, see “Only 5 left”, and hit Buy Now.
+
+So do 10,000 other people.
+
+Now the interesting question:
+
+How does the backend decide who actually gets those 5 iPhones?
+
+It’s not as simple as:
+
+→ Check inventory
+→ If stock &gt; 0, place the order
+→ Reduce stock
+
+Because thousands of requests can reach the backend almost at the same time.
+
+Two requests could read:
+
+stock = 1
+
+before either one updates it.
+
+And suddenly, the same iPhone could be sold twice 😬
+
+So the system needs to make the inventory update atomic.
+
+For example:
+
+UPDATE inventory SET stock = stock - 1 WHERE product_id = X AND stock &gt; 0
+
+If the update succeeds:
+
+→ Inventory reserved
+→ Continue with the order
+
+If it affects 0 rows:
+
+→ Someone else got it
+→ Sorry, better luck next time 🥲
+
+But inventory is only the beginning.
+
+What if the payment succeeds but the order request times out?
+
+What if the user clicks Pay twice?
+
+What if the payment fails after the inventory was reserved?
+
+Now you need to think about:
+
+• Race conditions
+• Database transactions
+• Inventory reservation
+• Atomic operations
+• Idempotency
+• Payment/order consistency
+• Distributed systems
+
+All of this happens behind a button that simply says:
+
+“Buy Now.”
+
+Simple to use.
+
+Not so simple to build.
+
+That’s the fun part of backend engineering.
+
+Also, who else is waiting for BBD? 👀</p><figure><img src="../assets/blogs/post-7495798742541987840-01.jpg" alt="Flipkart Big Billion Days promotional graphic with a presenter pointing at the event logo." loading="lazy" decoding="async"></figure></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

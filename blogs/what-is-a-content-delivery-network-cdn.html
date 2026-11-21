@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What is a Content Delivery Network (CDN)? · Ashmita Pandey</title>
+<meta name="description" content="What a CDN does and why it puts content closer to users.">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/what-is-a-content-delivery-network-cdn.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>What is a Content Delivery Network (CDN)?</h1>
+<p>Ashmita Pandey · <time datetime="2025-07-10">Jul 10, 2025</time> · System Design · Infrastructure</p>
+<div class="original-body"><figure><img src="../assets/blogs/what-is-a-content-delivery-network-cdn/cover.png" alt="World map showing an origin server connected to edge servers around the globe, alongside the System Design Building Blocks series title." loading="lazy" decoding="async"></figure><div class="source-document"><h2>
+      The Infrastructure that Makes the Internet Feel Instant
+    </h2><p>
+      Hi everyone! I&#x27;m Ashmita 👋
+    </p><p>
+      In this post, I want to take you through a foundational piece of modern internet architecture that most users benefit from every day without even realizing it: the <strong>Content Delivery Network</strong>, or CDN.
+    </p><p>
+      Imagine you’ve launched an e-learning platform that serves video lessons, high-resolution PDFs, and interactive quizzes to users across the world. Initially, you host all your content on a server in Delhi. Users in India enjoy smooth and quick access. But then, students from the US, Europe, and Southeast Asia start using your platform, and suddenly you get complaints about buffering, videos loading slowly, or even failed requests.
+    </p><p>
+      This is where a CDN saves the day.
+    </p><h2>
+      What is a CDN?
+    </h2><p>
+      A <strong>Content Delivery Network (CDN)</strong> is a globally distributed network of servers that deliver content to users from the server nearest to them.
+    </p><p>
+      Instead of making every user request go all the way to your main (origin) server, CDNs bring copies of your content to various <strong>edge locations</strong> around the world. These edge locations cache your content so that the next time someone nearby makes the same request, it can be served locally.
+    </p><p>
+      It’s like having local copies of a best-selling book available in every city, instead of asking everyone to order it directly from the publisher’s warehouse.
+    </p><h2>
+      Real-World Analogy
+    </h2><p>
+      Think of Amazon&#x27;s distribution centers. If you ordered a product from the other side of the world, it would take days or weeks to reach you. But Amazon stores popular items in warehouses closer to you, allowing same-day or next-day delivery.
+    </p><p>
+      Similarly, CDNs store popular files (images, videos, JS, CSS, HTML) on servers around the world so your browser can fetch them quickly.
+    </p><h2>
+      How Does a CDN Work?
+    </h2><p>
+      Let’s break this down step by step with a scenario:
+    </p><p>
+            </p><ol><li><strong>User Request Initiated</strong></li><li><strong>DNS Resolution</strong></li><li><strong>Edge Server Cache Check</strong></li><li><strong>Subsequent Requests</strong></li></ol><h2>
+      Benefits of Using a CDN
+    </h2><h2>
+      1. Faster Load Times
+    </h2><p>
+      By reducing the geographical distance between users and servers, CDN improves response time and decreases page load latency.
+    </p><h2>
+      2. Reduced Load on Origin Servers
+    </h2><p>
+      Edge servers absorb much of the traffic, so your origin servers are less likely to be overwhelmed.
+    </p><h2>
+      3. Improved Reliability
+    </h2><p>
+      With multiple edge locations, your application stays available even if one server goes down.
+    </p><h2>
+      4. Scalability
+    </h2><p>
+      During traffic spikes (sales, product launches, viral moments), CDNs help manage high loads without crashing your main servers.
+    </p><h2>
+      5. Enhanced Security
+    </h2><p>
+      Many CDNs offer built-in DDoS protection, SSL support, and web application firewalls to safeguard your app.
+    </p><h2>
+      Real-World Applications of CDN
+    </h2><h2>
+      1. Video Streaming
+    </h2><p>
+      OTT platforms like Netflix or Disney+ serve vast amounts of video content using CDNs to reduce buffering and stream quality drops.
+    </p><h2>
+      2. E-commerce Platforms
+    </h2><p>
+      Sites like Flipkart or Amazon serve millions of users daily. CDNs ensure quick loading of product images, reviews, and search results.
+    </p><h2>
+      3. Online Gaming
+    </h2><p>
+      Game companies use CDNs to deliver low-latency gameplay, updates, and patches to global players.
+    </p><h2>
+      4. Software Updates
+    </h2><p>
+      Companies like Apple and Microsoft use CDNs to push large software updates to millions of users at the same time.
+    </p><h2>
+      5. Media and News
+    </h2><p>
+      News sites like BBC or CNN handle sudden spikes in traffic when big news breaks. CDNs help manage this demand smoothly.
+    </p><h2>
+      CDN Components Explained
+    </h2><h2>
+      1. Origin Server
+    </h2><p>
+            </p><ul><li>Your main content storage. Can be a cloud server or physical data center.</li></ul><h2>
+      2. Edge Server
+    </h2><p>
+            </p><ul><li>Servers placed in various geographic locations to cache and deliver content faster.</li></ul><h2>
+      3. PoPs (Points of Presence)
+    </h2><p>
+            </p><ul><li>Data centers where edge servers are located. These serve as regional access points for users.</li></ul><h2>
+      4. DNS Layer
+    </h2><p>
+            </p><ul><li>Smart routing layer that determines the best edge server to serve the user.</li></ul><h2>
+      Challenges in Using a CDN
+    </h2><p>
+            </p><ol><li><strong>Caching Complexity</strong></li><li><strong>Cost Management</strong></li><li><strong>Debugging Difficulty</strong></li></ol><h2>
+      Major CDN Providers
+    </h2><p>
+      Here are some of the most widely used CDN services:
+    </p><p>
+            </p><ul><li><strong>Cloudflare</strong> – Offers performance, DNS, and security tools with a strong free tier.</li><li><strong>Akamai</strong> – One of the pioneers in CDN technology, often used by enterprise clients.</li><li><strong>Amazon CloudFront</strong> – Part of AWS ecosystem, highly integrated with other AWS services.</li><li><strong>Google Cloud CDN</strong> – Powered by Google’s global infrastructure.</li><li><strong>Microsoft Azure CDN</strong> – Ideal for apps hosted in the Azure ecosystem.</li><li><strong>Fastly</strong> – Known for its developer-friendly real-time caching and edge computing.</li></ul><h2>
+      Summary
+    </h2><p>
+      A CDN is essential for modern websites and apps that want to deliver fast, reliable, and secure content across the globe.
+    </p><p>
+      If you’re building any web application that serves users outside a single region, integrating a CDN can drastically enhance user experience.
+    </p><p>
+      Thanks for reading! Let me know your thoughts or questions below.
+    </p></div></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

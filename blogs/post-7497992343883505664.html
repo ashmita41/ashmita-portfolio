@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Genius Behind Instagram’s “Infinite Scroll” 👀 · Ashmita Pandey</title>
+<meta name="description" content="The Genius Behind Instagram’s “Infinite Scroll” 👀">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7497992343883505664.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>The Genius Behind Instagram’s “Infinite Scroll” 👀</h1>
+<p>Ashmita Pandey · <time datetime="2026-08-25">Aug 25, 2026</time> · System Design · Video · CDNs</p>
+<div class="original-body"><p>The Genius Behind Instagram’s “Infinite Scroll” 👀
+
+You keep scrolling.
+
+And scrolling.
+
+And somehow, there’s always another Reel ready for you.
+
+That’s what makes infinite scroll feel so effortless. You don’t have to wait for the next piece of content. You just keep going.
+
+Read till the end for one interesting fact 👀
+
+So let’s break down how this works.
+
+First, the recommendation algorithm tries to predict what you’re likely to watch next.
+
+It can use signals like:
+
+→ What you’ve watched before
+→ What you’ve liked, shared, or saved
+→ How long you watched a Reel
+→ What you tend to skip
+→ What similar users are engaging with
+
+Based on these signals, it can rank a bunch of Reels and decide which ones are most relevant to you.
+
+And then comes the interesting part.
+
+The app can prefetch parts of the likely next Reel while you’re still watching the current one.
+A simplified flow looks something like:
+
+Recommendation → Prefetch → CDN → Local buffer → Play
+
+Instead of waiting for you to swipe and then downloading the video, the app can start fetching it in advance from a nearby CDN.
+
+The video is delivered in smaller chunks, so while you’re watching the current Reel, the next one can already be getting downloaded in the background.
+
+So when you swipe:
+
+→ The video is already partially downloaded
+→ The player already has data in its buffer
+→ Playback can start almost immediately
+But there’s another interesting problem.
+
+What if Instagram preloads a Reel you never watch?
+
+Doing this for every possible Reel would waste a huge amount of bandwidth.
+
+So the system has to balance:
+
+Relevance vs. playback speed vs. bandwidth vs. battery
+
+And then there’s adaptive bitrate streaming, which can adjust the video quality based on your network conditions.
+
+So that tiny swipe that feels instantaneous?
+
+Behind it, you have:
+
+• Recommendation algorithms
+• Prefetching
+• CDNs
+• Caching
+• Video chunking
+• Adaptive bitrate streaming
+• Bandwidth optimization
+
+Simple to use.
+
+Not so simple to build.
+
+And if you really read till the end, here’s the interesting fact 👀
+
+Instagram doesn’t need to download the entire Reel before you can start watching it.
+
+It can load enough of the video into your buffer to start playback, while the rest continues downloading in the background.
+
+So by the time you swipe, the video feels like it was already waiting for you.
+
+And that’s how the infinite scroll keeps rolling.
+
+What other everyday feature should we break down next?</p><figure><img src="../assets/blogs/post-7497992343883505664-01.jpg" alt="A person watches short-form video on a smartphone." loading="lazy" decoding="async"></figure></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

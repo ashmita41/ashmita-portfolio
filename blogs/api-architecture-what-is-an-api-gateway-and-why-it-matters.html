@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API Architecture: What is an API Gateway and Why It Matters · Ashmita Pandey</title>
+<meta name="description" content="API Architecture: What is an API Gateway and Why It Matters">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/api-architecture-what-is-an-api-gateway-and-why-it-matters.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>API Architecture: What is an API Gateway and Why It Matters</h1>
+<p>Ashmita Pandey · <time datetime="2025-06-26">Jun 26, 2025</time> · Backend · APIs</p>
+<div class="original-body"><figure><img src="../assets/blogs/api-architecture-what-is-an-api-gateway-and-why-it-matters/cover.png" alt="Clients routing through an API gateway to separate backend services." loading="lazy" decoding="async"></figure><div class="source-document"><p>
+      Hi everyone, I&#x27;m Ashmita 👋
+    </p><p>
+      In the modern software landscape, APIs form the backbone of communication between different services. As applications scale and adopt microservice-based architectures, the number of APIs grows significantly. Managing this complexity requires a powerful pattern i.e. the <strong>API Gateway</strong>.
+    </p><p>
+      An API Gateway serves as the single entry point for client requests, simplifying how users and services interact with backend systems. It improves performance, enhances security, and centralizes critical responsibilities.
+    </p><p>
+      Let&#x27;s dive deep into how API Gateways work, their importance, core features, and a real-world example to understand them in action.
+    </p><h2>
+      What is an API Gateway?
+    </h2><p>
+      An API Gateway is a server that acts as an intermediary between clients (such as web or mobile applications) and backend microservices. It receives incoming API requests, validates them, applies necessary logic (such as authentication or transformation), routes them to the correct service, and returns the response to the client.
+    </p><p>
+      Without an API Gateway, every client would need to communicate individually with multiple backend services, which would:
+    </p><p>
+            </p><ul><li>Increase complexity for the client</li><li>Expose internal architecture</li><li>Make consistency and security harder to manage</li></ul><p>
+      With an API Gateway in place:
+    </p><p>
+            </p><ul><li>Clients send requests to a single endpoint</li><li>The Gateway handles security, traffic control, request routing, and more</li></ul><h2>
+      Why Use an API Gateway? (Real-World Scenario)
+    </h2><p>
+      Imagine a food delivery app like Swiggy or Zomato. When a user places an order, the system needs to:
+    </p><p>
+            </p><ul><li>Authenticate the user</li><li>Verify inventory with the restaurant</li><li>Process payment</li><li>Assign a delivery driver</li></ul><p>
+      Each of these steps might involve a separate backend service. Instead of the client interacting directly with all of them, the API Gateway receives the request and coordinates these services behind the scenes.
+    </p><h2>
+      Core Features of an API Gateway
+    </h2><h2>
+      1. Authentication and Authorization
+    </h2><p>
+      The Gateway verifies the identity of users (Authentication) and checks what they are allowed to do (Authorization).
+    </p><p>
+            </p><ul><li>Supports tokens like JWT or OAuth</li><li>Prevents unauthorized access</li><li>Ensures all services follow the same access policies</li></ul><h2>
+      2. Rate Limiting
+    </h2><p>
+      Prevents abuse by limiting how many requests a client can make in a defined time.
+    </p><p>
+            </p><ul><li>Helps avoid server overload</li><li>Protects against DDoS attacks</li></ul><p>
+      <strong>Example</strong>: Allowing only 100 requests per minute per user.
+    </p><h2>
+      3. Load Balancing
+    </h2><p>
+      Distributes incoming traffic across multiple instances of a service.
+    </p><p>
+            </p><ul><li>Ensures even workload</li><li>Avoids bottlenecks or downtime</li></ul><p>
+      <strong>Example</strong>: If three instances of the payment service are running, the Gateway sends requests in a round-robin or least-connections pattern.
+    </p><h2>
+      4. Request and Response Transformation
+    </h2><p>
+      Modifies incoming or outgoing data to ensure compatibility between clients and backend services.
+    </p><p>
+            </p><ul><li>Converts formats (e.g., XML to JSON)</li><li>Renames fields or restructures payloads</li></ul><h2>
+      5. Caching
+    </h2><p>
+      Stores frequently accessed data temporarily.
+    </p><p>
+            </p><ul><li>Reduces repeated calls to backend</li><li>Improves response time</li></ul><p>
+      <strong>Example</strong>: Caching a restaurant menu or delivery fee calculation.
+    </p><h2>
+      6. Service Discovery
+    </h2><p>
+      Automatically identifies backend services dynamically without hardcoding their locations.
+    </p><p>
+            </p><ul><li>Supports microservices that scale dynamically</li><li>Ensures resilience even during server updates or failures</li></ul><h2>
+      7. Circuit Breaking
+    </h2><p>
+      Temporarily blocks requests to a failing service to prevent cascading failures.
+    </p><p>
+            </p><ul><li>Protects system stability</li><li>Automatically resumes once the service recovers</li></ul><h2>
+      8. Logging and Monitoring
+    </h2><p>
+      Captures detailed data for each API request.
+    </p><p>
+            </p><ul><li>Tracks request paths, response times, and errors</li><li>Helps debug issues and monitor system health</li></ul><h2>
+      How Does an API Gateway Work? (Step-by-Step with Example)
+    </h2><p>
+      Let’s walk through the steps using a real-world scenario: placing a food delivery order.
+    </p><h2>
+      Step 1: Client Sends a Request
+    </h2><p>
+      The user taps &quot;Place Order&quot; in the app. The app sends a POST request with user ID, items, address, and payment method to the API Gateway.
+    </p><pre tabindex="0"><code>{
+  &quot;userId&quot;: &quot;u123&quot;,
+  &quot;items&quot;: [&quot;burger&quot;, &quot;fries&quot;],
+  &quot;address&quot;: &quot;123 Main Street&quot;,
+  &quot;paymentToken&quot;: &quot;abcd1234&quot;
+} </code></pre><h2>
+      Step 2: Request Validation
+    </h2><p>
+      The Gateway checks if required fields exist, format is correct, and content type is valid.
+    </p><pre tabindex="0"><code>if (!req.headers[&#x27;content-type&#x27;].includes(&#x27;application/json&#x27;)) {
+  return res.status(400).send(&#x27;Invalid Content-Type&#x27;);
+} </code></pre><h2>
+      Step 3: Authentication and Authorization
+    </h2><p>
+      The Gateway verifies the token using an identity provider and confirms if the user has permission to place an order.
+    </p><pre tabindex="0"><code>const token = req.headers.authorization.split(&#x27; &#x27;)[1];
+const user = await verifyToken(token);
+if (!user.permissions.includes(&#x27;place_order&#x27;)) {
+  return res.status(403).send(&#x27;Forbidden&#x27;);
+} </code></pre><h2>
+      Step 4: Rate Limiting
+    </h2><p>
+      Checks if the user has exceeded the request threshold.
+    </p><pre tabindex="0"><code>const current = await redis.incr(`rate_limit:order:${user.id}`);
+if (current &gt; 10) {
+  return res.status(429).send(&#x27;Too Many Requests&#x27;);
+} </code></pre><h2>
+      Step 5: Request Transformation
+    </h2><p>
+      Converts delivery address to GPS coordinates for backend services.
+    </p><pre tabindex="0"><code>const coordinates = await geocode(address);
+req.body.location = coordinates; </code></pre><h2>
+      Step 6: Routing to Backend Services
+    </h2><p>
+      The Gateway routes requests to multiple services:
+    </p><p>
+            </p><ul><li>Order Service for creating order record</li><li>Inventory Service to verify item availability</li><li>Payment Service to process the transaction</li><li>Delivery Service to assign a driver</li></ul><pre tabindex="0"><code>const orderResponse = await axios.post(&#x27;http://orders/api/create&#x27;, req.body); </code></pre><h2>
+      Step 7: Response Transformation and Caching
+    </h2><p>
+      Transforms backend responses into a single unified format for the client and optionally caches data.
+    </p><pre tabindex="0"><code>const response = {
+  orderId: orderResponse.data.id,
+  deliveryETA: deliveryService.data.eta
+};
+cache.set(orderId, response); </code></pre><h2>
+      Step 8: Logging and Monitoring
+    </h2><p>
+      Records all relevant data to help monitor performance and troubleshoot problems.
+    </p><pre tabindex="0"><code>logger.log({
+  path: req.path,
+  method: req.method,
+  status: res.statusCode,
+  userId: user.id
+}); </code></pre><h2>
+      Conclusion
+    </h2><p>
+      An API Gateway is much more than a simple router. It is a powerful tool that enhances the performance, security, and scalability of distributed systems.
+    </p><p>
+      By centralizing tasks like authentication, request routing, transformation, and monitoring, it simplifies development and ensures consistency across services.
+    </p><p>
+      Whether you are building a simple web app or a large-scale microservices platform, incorporating an API Gateway into your architecture is a decision that can improve both developer productivity and user experience.
+    </p><p>
+      If you&#x27;re looking to implement one or explore this further, feel free to reach out or drop your questions!
+    </p><p>
+      Thanks for reading!
+    </p></div></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

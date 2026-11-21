@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAGA Design Pattern in Microservice Architecture · Ashmita Pandey</title>
+<meta name="description" content="An introduction to the Saga pattern for coordinating changes across services.">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/saga-design-pattern-in-microservice-architecture.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>SAGA Design Pattern in Microservice Architecture</h1>
+<p>Ashmita Pandey · <time datetime="2026-02-23">Feb 23, 2026</time> · Distributed Systems · Microservices</p>
+<div class="original-body"><figure><img src="../assets/blogs/saga-design-pattern-in-microservice-architecture/cover.jpg" alt="A sequence diagram showing the steps of a saga and its compensating actions." loading="lazy" decoding="async"></figure><div class="source-document"><p>
+      As systems scale and architectures move from monoliths to microservices, one of the first challenges engineers encounter is <strong>transaction management</strong>.
+    </p><p>
+      In a monolithic application, handling transactions is straightforward. Multiple operations are wrapped inside a single database transaction. If any step fails, the entire transaction is rolled back.
+    </p><p>
+      Microservices break this assumption.
+    </p><p>
+      Each service owns its data, communicates over the network, and operates independently. In this world, traditional transactions and global rollbacks are no longer viable. This is where the <strong>Saga Design Pattern</strong> plays a critical role.
+    </p><hr><h2>
+      The Problem with Transactions in Microservices
+    </h2><p>
+      Microservices introduce constraints that make traditional transaction handling impractical:
+    </p><p>
+            </p><ul><li>Each service has its own database</li><li>Cross-service database locks are not possible</li><li>Network calls introduce latency and failures</li><li>Distributed transactions (2PC) reduce availability and scalability</li></ul><p>
+      Yet, business workflows still require <strong>data consistency across services</strong>.
+    </p><p>
+      Saga addresses this gap.
+    </p><hr><h2>
+      What is the Saga Design Pattern?
+    </h2><p>
+      A <strong>Saga</strong> is a design pattern used to manage <strong>distributed transactions</strong> by breaking a long-running process into a sequence of <strong>local transactions</strong>.
+    </p><p>
+      Each local transaction:
+    </p><p>
+            </p><ul><li>Executes within a single service</li><li>Publishes an event or triggers the next step</li><li>Has a <strong>compensating transaction</strong> to undo its changes if a later step fails</li></ul><p>
+      Instead of strong consistency, Saga relies on <strong>eventual consistency</strong>.
+    </p><p>
+      The system may be temporarily inconsistent, but it will always converge to a valid state.
+    </p><hr><h2>
+      A Practical Example: Order Processing
+    </h2><p>
+      Consider a simple order workflow involving three services:
+    </p><p>
+            </p><ol><li><strong>Order Service</strong> – creates the order</li><li><strong>Payment Service</strong> – charges the customer</li><li><strong>Inventory Service</strong> – reserves the items</li></ol><h2>
+      Successful Flow
+    </h2><p>
+      Order created → Payment processed → Inventory reserved
+    </p><p>
+      The order is completed successfully.
+    </p><h2>
+      Failure Scenario
+    </h2><p>
+      Order created → Payment processed → Inventory reservation fails
+    </p><p>
+      At this point, the system cannot simply “roll back” the payment. Instead, the Saga executes <strong>compensating actions</strong>:
+    </p><p>
+            </p><ul><li>Refund the payment</li><li>Cancel the order</li></ul><p>
+      The workflow is reversed step by step, restoring consistency without a global transaction.
+    </p><hr><h2>
+      Saga Implementation Models
+    </h2><p>
+      There are two common ways to implement Saga in a microservice architecture.
+    </p><h2>
+      1. Choreography-Based Saga
+    </h2><p>
+      In choreography, there is <strong>no central coordinator</strong>.
+    </p><p>
+      Services communicate by publishing and subscribing to events. Each service decides what to do when it receives an event.
+    </p><p>
+      <strong>Example flow:</strong>
+    </p><p>
+            </p><ul><li>Order Service publishes OrderCreated</li><li>Payment Service processes payment and publishes PaymentCompleted</li><li>Inventory Service reserves stock and publishes InventoryReserved</li></ul><p>
+      <strong>Advantages</strong>
+    </p><p>
+            </p><ul><li>Loosely coupled services</li><li>Simple to implement for small systems</li></ul><p>
+      <strong>Challenges</strong>
+    </p><p>
+            </p><ul><li>Hard to visualize the complete workflow</li><li>Debugging becomes difficult as the number of services grows</li><li>Event chains can turn into tightly coupled logic over time</li></ul><hr><h2>
+      2. Orchestration-Based Saga
+    </h2><p>
+      In orchestration, a <strong>Saga Orchestrator</strong> explicitly controls the workflow.
+    </p><p>
+      The orchestrator sends commands to services and decides what the next step should be based on responses.
+    </p><p>
+      <strong>Example flow:</strong> Orchestrator → Create Order Orchestrator → Process Payment Orchestrator → Reserve Inventory
+    </p><p>
+      If any step fails, the orchestrator triggers compensating actions in the correct order.
+    </p><p>
+      <strong>Advantages</strong>
+    </p><p>
+            </p><ul><li>Clear business flow</li><li>Easier monitoring, retries, and error handling</li><li>Better suited for complex workflows</li></ul><p>
+      <strong>Challenges</strong>
+    </p><p>
+            </p><ul><li>Additional component to manage</li><li>Slightly tighter coupling between services and the orchestrator</li></ul><hr><h2>
+      Choosing Between Choreography and Orchestration
+    </h2><p>
+      There is no universal answer.
+    </p><p>
+            </p><ul><li>Use <strong>choreography</strong> for smaller systems with simple workflows</li><li>Prefer <strong>orchestration</strong> for complex, business-critical processes where visibility and control matter</li></ul><p>
+      The decision should be driven by <strong>system complexity, team size, and operational needs</strong>, not just architectural preference.
+    </p><hr><h2>
+      When Should You Use Saga?
+    </h2><p>
+      Saga is a good fit when:
+    </p><p>
+            </p><ul><li>You are building a microservice-based system</li><li>Transactions span multiple services</li><li>Eventual consistency is acceptable</li><li>Distributed transactions (2PC) are not an option</li></ul><p>
+      Saga may not be suitable when:
+    </p><p>
+            </p><ul><li>You are working with a monolith</li><li>Strong, immediate consistency is required</li><li>Business rules cannot tolerate temporary inconsistency</li></ul><hr><h2>
+      Final Thoughts
+    </h2><p>
+      Failures are not edge cases in distributed systems. They are expected.
+    </p><p>
+      The goal of good architecture is not to eliminate failure, but to <strong>design systems that recover predictably</strong>.
+    </p><p>
+      The Saga pattern provides a structured way to handle long-running, distributed workflows without sacrificing scalability or resilience.
+    </p><p>
+      Understanding and applying Saga correctly is a key step in building reliable microservice architectures.
+    </p></div></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

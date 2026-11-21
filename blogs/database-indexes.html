@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Database Indexes · Ashmita Pandey</title>
+<meta name="description" content="Database Indexes">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/database-indexes.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>Database Indexes</h1>
+<p>Ashmita Pandey · <time datetime="2025-07-05">Jul 5, 2025</time> · Databases</p>
+<div class="original-body"><figure><img src="../assets/blogs/database-indexes/cover.png" alt="Index entries linked to the matching rows in a separate database table." loading="lazy" decoding="async"></figure><div class="source-document"><p>
+      Hi everyone! I&#x27;m Ashmita 👋
+    </p><p>
+      In the world of software development and system design, performance is everything. Whether you’re building a small web app or a large-scale system with millions of users, how quickly your application can retrieve data matters a lot.
+    </p><p>
+      One of the most effective ways to speed up data access in databases is by using <strong>Indexes</strong>.
+    </p><p>
+      Let’s understand this with a real-world scenario.
+    </p><h2>
+      Imagine This:
+    </h2><p>
+      You walk into a large library with thousands of books and need to find a book about &quot;Ancient Greek Architecture.&quot; Without any system in place, you&#x27;d have to browse every shelf and read every title until you find it very time-consuming and inefficient.
+    </p><p>
+      But with a catalog or index system, you simply search for your topic in the catalog, find the category and book ID, then walk directly to the correct shelf.
+    </p><p>
+      <strong>That’s what indexes do in databases</strong>. Instead of scanning the entire database (table), an index directs the system to the exact location of the data.
+    </p><h2>
+      What Are Database Indexes?
+    </h2><p>
+      A database index is a data structure that allows quick retrieval of records from a table. Instead of scanning each row in a table, the index stores a reference (like a pointer) to the location of rows that match a certain condition.
+    </p><h2>
+      Real-World Example:
+    </h2><p>
+      Imagine an employee table with 1 million entries. A query like:
+    </p><pre tabindex="0"><code>SELECT * FROM employees WHERE last_name = &#x27;Smith&#x27;; </code></pre><p>
+      Without an index, the database checks every row — a full table scan. With an index on last_name, the system looks up &quot;Smith&quot; in the index, finds the matching references, and directly fetches the data — much faster.
+    </p><h2>
+      SQL Syntax:
+    </h2><pre tabindex="0"><code>CREATE INDEX idx_last_name ON employees(last_name); </code></pre><p>
+      For multiple columns:
+    </p><pre tabindex="0"><code>CREATE INDEX idx_full_name ON employees(first_name, last_name); </code></pre><h2>
+      How Do Indexes Work?
+    </h2><p>
+      Behind the scenes, indexes use optimized data structures (like B-Trees) that are sorted and searchable.
+    </p><p>
+      Let’s say you have a products table:
+    </p><pre tabindex="0"><code>CREATE TABLE products (
+  id INT,
+  name VARCHAR(100),
+  price DECIMAL(10,2)
+); </code></pre><p>
+      If users often search by price:
+    </p><pre tabindex="0"><code>SELECT * FROM products WHERE price &lt; 500; </code></pre><p>
+      An index on price helps here:
+    </p><pre tabindex="0"><code>CREATE INDEX idx_price ON products(price); </code></pre><p>
+      Now, instead of comparing each row&#x27;s price, the DB engine searches the idx_price index (sorted by price), finds the range, and jumps directly to relevant rows.
+    </p><h2>
+      Benefits of Using Indexes
+    </h2><p>
+            </p><ul><li><strong>Speed</strong>: Accelerates data retrieval from seconds to milliseconds</li><li><strong>Efficiency</strong>: Reduces CPU and I/O operations</li><li><strong>Sorting</strong>: Helps in fast ORDER BY queries</li><li><strong>JOIN Optimization</strong>: Speeds up joins by indexing foreign keys</li><li><strong>Selective Filtering</strong>: Good for WHERE clauses with high-cardinality columns</li></ul><h2>
+      Analogy:
+    </h2><p>
+      Imagine a flight booking system. Without indexes, finding all flights between Delhi and Mumbai requires checking every flight in the table. With an index on departure and destination, the system retrieves relevant entries instantly.
+    </p><h2>
+      Types of Indexes (with Use-Cases)
+    </h2><h2>
+      Primary Index
+    </h2><p>
+      Automatically created on primary key. Ensures uniqueness and fastest lookup.
+    </p><h2>
+      Clustered Index
+    </h2><p>
+      Sorts the actual table rows. Ideal for range queries like timestamp or price.
+    </p><h2>
+      Non-Clustered Index
+    </h2><p>
+      Stores pointers to the row data. Multiple non-clustered indexes are allowed.
+    </p><h2>
+      Composite Index
+    </h2><p>
+      Combines multiple columns. Used when WHERE clause filters on both.
+    </p><h2>
+      Bitmap Index
+    </h2><p>
+      Best for columns like gender or status in large analytical queries.
+    </p><h2>
+      Hash Index
+    </h2><p>
+      Great for exact match lookups in in-memory key-value databases.
+    </p><h2>
+      Full-Text Index
+    </h2><p>
+      Efficiently searches inside large text fields, like articles or reviews.
+    </p><h2>
+      Spatial Index
+    </h2><p>
+      Used for GIS or maps, indexes latitude and longitude values.
+    </p><h2>
+      Filtered Index
+    </h2><p>
+      Applies only to rows matching a condition, like active users.
+    </p><pre tabindex="0"><code>CREATE INDEX idx_active_users ON users(status) WHERE status = &#x27;active&#x27;; </code></pre><h2>
+      Underlying Data Structures
+    </h2><h2>
+      B-Tree:
+    </h2><p>
+            </p><ul><li>Balanced, self-sorting tree</li><li>Efficient for most general-purpose queries</li><li>Common in MySQL, PostgreSQL</li></ul><h2>
+      B+ Tree:
+    </h2><p>
+            </p><ul><li>All values stored in leaf nodes</li><li>Fast for range scans</li><li>Often used for large tables</li></ul><h2>
+      Hash Table:
+    </h2><p>
+            </p><ul><li>Maps keys to buckets</li><li>Constant time lookup</li><li>Not suitable for range queries</li></ul><h2>
+      Bitmap:
+    </h2><p>
+            </p><ul><li>One bit per row per value</li><li>Excellent for analytical filters</li><li>Example: Gender = Male (1 for male rows)</li></ul><h2>
+      Smart Indexing Strategies
+    </h2><p>
+            </p><ul><li>Index columns that are used in WHERE, JOIN, ORDER BY</li><li>Prioritize high-cardinality fields like user IDs, timestamps</li><li>Use composite indexes for multi-column filters</li><li>Avoid indexing low-cardinality fields like boolean</li><li>Use EXPLAIN to verify index usage</li><li>Limit index count to reduce storage and update overhead</li><li>Periodically rebuild indexes on write-heavy tables</li></ul><h2>
+      Real-World Tip:
+    </h2><p>
+      If your e-commerce app often filters products by price and category:
+    </p><pre tabindex="0"><code>CREATE INDEX idx_price_category ON products(category, price); </code></pre><p>
+      This speeds up queries like:
+    </p><pre tabindex="0"><code>SELECT * FROM products WHERE category = &#x27;Electronics&#x27; AND price &lt; 10000; </code></pre><h2>
+      Final Thoughts
+    </h2><p>
+      Indexes are a foundational optimization technique for any high-performance system. They help convert slow, inefficient queries into lightning-fast operations, making the difference between an average app and an excellent one.
+    </p><p>
+      However, with power comes responsibility. Over-indexing can hurt write performance and bloat storage. So use them wisely.
+    </p><p>
+      Thanks for reading! Let me know what you think and feel free to share how you’ve used indexes in your own projects.
+    </p></div></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

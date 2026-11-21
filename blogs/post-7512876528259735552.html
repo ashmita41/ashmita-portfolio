@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How does Twitter keep its Search system up and stable at massive scale? · Ashmita Pandey</title>
+<meta name="description" content="How does Twitter keep its Search system up and stable at massive scale?">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/post-7512876528259735552.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>How does Twitter keep its Search system up and stable at massive scale?</h1>
+<p>Ashmita Pandey · <time datetime="2026-10-05">Oct 5, 2026</time> · System Design · Search · Kafka</p>
+<div class="original-body"><p>How does Twitter keep its Search system up and stable at massive scale?
+
+Search sounds straightforward
+
+User searches → Elasticsearch → results
+
+But what happens when millions of tweets are created, traffic suddenly spikes, and you also need to ingest hundreds of terabytes of historical data?
+
+I was going through Twitter’s architecture around Elasticsearch, and a few design decisions stood out.
+
+### Why Elasticsearch?
+
+It’s fast, distributed, horizontally scalable, and exposes simple REST APIs.
+
+But there’s a problem.
+
+### What happens when every team talks directly to Elasticsearch?
+
+Who handles authentication?
+Who enforces rate limits?
+Who monitors cluster health?
+What happens when one team sends too much traffic?
+
+Twitter introduced an Elasticsearch proxy:
+
+Client → Proxy → Elasticsearch
+
+The proxy became a centralized layer for authentication, rate limiting, routing, monitoring, logging and cluster protection.
+
+But that still leaves a bigger problem.
+
+### What happens when traffic suddenly spikes?
+
+Imagine a major event starts trending.
+
+Millions of users start tweeting.
+
+If every write goes directly to Elasticsearch, indexing latency shoots up and the cluster can become unstable.
+
+### So what if we don&#x27;t write to Elasticsearch immediately?
+
+Twitter introduced an asynchronous path:
+
+API → Proxy → Kafka → Workers → Elasticsearch
+
+Kafka acts as a buffer.
+
+If Elasticsearch slows down, workers can slow their consumption. If there’s a temporary failure, the events remain queued.
+
+And there’s another advantage.
+
+### What if we have thousands of individual indexing requests?
+
+Workers can consume multiple events and make bulk indexing requests.
+
+Fewer requests.
+Better throughput.
+Less pressure on Elasticsearch.
+
+Now comes an even bigger challenge.
+
+### What about massive backfills?
+
+Real-time tweets are one thing.
+
+But what if you need to ingest hundreds of terabytes of historical data?
+
+You definitely don&#x27;t want a huge MapReduce job directly hammering Elasticsearch.
+
+So the architecture changes again:
+
+MapReduce → HDFS/S3 → Workers → Elasticsearch
+
+The backfill job first writes the data into distributed storage.
+
+Then workers consume that data and gradually index it into Elasticsearch.
+
+And now we can see the bigger pattern.
+
+So what is the key idea?
+
+Reads happen synchronously.
+
+You need an answer to a search query, so the read goes to Elasticsearch.
+
+Writes are deferred.
+
+Instead of forcing Elasticsearch to handle every write immediately, you buffer, queue, batch and process them asynchronously.
+
+And that’s the part I find most interesting about this architecture.
+
+The system doesn’t try to make Elasticsearch handle everything.&#32;
+
+It changes the way work reaches Elasticsearch.
+
+What’s your go-to move when the bottleneck isn’t slow enough, but simply getting too much work?</p></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

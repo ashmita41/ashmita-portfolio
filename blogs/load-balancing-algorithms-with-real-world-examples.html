@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Load Balancing Algorithms with Real-World Examples · Ashmita Pandey</title>
+<meta name="description" content="Load-balancing algorithms explained through real-world examples.">
+<meta name="author" content="Ashmita Pandey">
+<link rel="canonical" href="https://ashmita-dev.onrender.com/blogs/load-balancing-algorithms-with-real-world-examples.html">
+<link rel="icon" href="../favicon.svg?v=creative-blue" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css?v=archive-originals">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell nav-row">
+  <a class="brand" href="../index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  <nav aria-label="Main"><a href="../index.html#home">Home</a><a href="../index.html#speaking">Speaking</a><a href="../blogs.html" aria-current="page">Blogs</a><a href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="shell" id="main" tabindex="-1">
+<article class="archive-head blog-detail">
+<a href="../blogs.html">← All blogs</a>
+<h1>Load Balancing Algorithms with Real-World Examples</h1>
+<p>Ashmita Pandey · <time datetime="2025-07-22">Jul 22, 2025</time> · System Design · Infrastructure</p>
+<div class="original-body"><figure><img src="../assets/blogs/load-balancing-algorithms-with-real-world-examples/cover.png" alt="Clients connected through a load balancer to backend servers." loading="lazy" decoding="async"></figure><div class="source-document"><p>
+      Hi everyone 👋
+    </p><p>
+      When an application grows and serves thousands or even millions of users, managing the traffic effectively becomes crucial. This is where <strong>load balancing</strong> comes in. Load balancing is the process of distributing incoming network traffic evenly across multiple servers. By doing this, no single server gets overloaded, ensuring smooth performance, reduced waiting times, and higher availability even when a server fails.
+    </p><p>
+      In this article, we’ll explore five important load balancing algorithms using clear examples, along with their advantages, disadvantages, and when to use each one.
+    </p><h2>
+      What is Load Balancing?
+    </h2><p>
+      Imagine a restaurant on a busy evening. Customers come in constantly. If all customers are sent to a single waiter, that waiter gets overwhelmed while others stand idle. A good manager distributes customers equally among all waiters. This way, no one is overworked, and service remains smooth.
+    </p><p>
+      Load balancing works similarly in computer systems. Requests from users are treated like customers and servers act like waiters. The load balancer ensures all servers handle requests fairly, based on a strategy called an algorithm.
+    </p><h2>
+      Round Robin
+    </h2><figure><img src="../assets/blogs/load-balancing-algorithms-with-real-world-examples/inline-01.png" alt="Six clients send requests through one load balancer to three backend servers." loading="lazy" decoding="async"></figure><p>
+      <strong>How It Works:</strong> Round Robin is like dealing cards at a poker table. The dealer gives cards to each player one by one in a circular order. Similarly, in Round Robin, requests are sent to servers one after another in order. When the last server is reached, the next request goes to the first server again.
+    </p><p>
+      <strong>When to Use:</strong> Use this when all servers are equally powerful and can handle similar loads.
+    </p><p>
+      <strong>Benefits:</strong> Simple to understand and implement. Requests are distributed evenly.
+    </p><p>
+      <strong>Drawbacks:</strong> It doesn’t consider if a server is already too busy. It simply follows the rotation.
+    </p><p>
+      <strong>Example:</strong> Consider three identical food delivery kitchens. Orders are sent to Kitchen 1, then Kitchen 2, then Kitchen 3, and then back to Kitchen 1, regardless of how many orders are currently being cooked in each kitchen.
+    </p><h2>
+      Weighted Round Robin
+    </h2><figure><img src="../assets/blogs/load-balancing-algorithms-with-real-world-examples/inline-02.png" alt="A load balancer receives requests from six clients and directs them to three servers." loading="lazy" decoding="async"></figure><p>
+      <strong>How It Works:</strong> Weighted Round Robin improves the basic Round Robin by giving preference to more powerful servers. Servers are assigned weights based on their capacity. A server with a higher weight receives more requests.
+    </p><p>
+      <strong>When to Use:</strong> Use this when servers have different capabilities. You want stronger servers to handle more traffic.
+    </p><p>
+      <strong>Benefits:</strong> Better use of server capacity. Stronger servers handle more load.
+    </p><p>
+      <strong>Drawbacks:</strong> Slightly more complex than basic Round Robin. Still doesn’t consider real-time server load.
+    </p><p>
+      <strong>Example:</strong> Three call centers receive support calls. Center A has 100 agents, Center B has 50, and Center C has 25. Using Weighted Round Robin, Center A gets more calls than B or C since it can handle more customers.
+    </p><h2>
+      Least Connections
+    </h2><figure><img src="../assets/blogs/load-balancing-algorithms-with-real-world-examples/inline-03.png" alt="A load balancer routes incoming requests to three servers with different illustrated loads." loading="lazy" decoding="async"></figure><p>
+      <strong>How It Works:</strong> This method looks at how many active connections each server currently has. The next request is sent to the server with the fewest active connections.
+    </p><p>
+      <strong>When to Use:</strong> Ideal when servers may receive tasks of different lengths or workloads. Helps prevent overloading a busy server.
+    </p><p>
+      <strong>Benefits:</strong> Dynamically balances load based on current server activity.
+    </p><p>
+      <strong>Drawbacks:</strong> Servers must track active connections. Less effective if servers differ in processing power.
+    </p><p>
+      <strong>Example:</strong> Imagine valet parking staff. Cars are sent to the valet who currently has the fewest parked cars, ensuring no single valet gets overwhelmed.
+    </p><h2>
+      Least Response Time
+    </h2><p>
+      <strong>How It Works:</strong> This strategy measures how quickly each server is responding. Requests are sent to the server that is currently responding the fastest.
+    </p><p>
+      <strong>When to Use:</strong> Best for systems where server performance varies due to workloads.
+    </p><p>
+      <strong>Benefits:</strong> Reduces delays for users. Helps select the most responsive server.
+    </p><p>
+      <strong>Drawbacks:</strong> Needs accurate response-time monitoring. May ignore current server load.
+    </p><p>
+      <strong>Example:</strong> Think of multiple checkout counters at a supermarket. Customers prefer to go to the counter where people are moving fastest, even if some counters have fewer people.
+    </p><figure><img src="../assets/blogs/load-balancing-algorithms-with-real-world-examples/inline-04.png" alt="Least-response-time routing compares time to first byte and active connections across backend servers." loading="lazy" decoding="async"></figure><h2>
+      IP Hash
+    </h2><p>
+      <strong>How It Works:</strong> The IP Hash method uses the user’s IP address to determine which server will handle their request. This ensures that requests from the same client always go to the same server, maintaining session consistency.
+    </p><p>
+      <strong>When to Use:</strong> Useful when your application needs session persistence, meaning a user’s requests must always go to the same server.
+    </p><p>
+      <strong>Benefits:</strong> Simple. Ensures sticky sessions.
+    </p><p>
+      <strong>Drawbacks:</strong> Can result in uneven distribution if some clients generate more traffic. Needs adjustments if a server fails.
+    </p><p>
+      <strong>Example:</strong> Imagine assigning each regular customer a specific waiter whenever they visit. This way, the waiter remembers their preferences and provides better service.
+    </p><figure><img src="../assets/blogs/load-balancing-algorithms-with-real-world-examples/inline-05.png" alt="Clients route through a load balancer to backend servers labeled by relative CPU load." loading="lazy" decoding="async"></figure><h2>
+      Choosing the Right Algorithm
+    </h2><p>
+      Each algorithm serves a different purpose. If your servers are identical and you want simplicity, Round Robin works well. If your servers have different strengths, Weighted Round Robin is better. When workload varies dynamically, Least Connections or Least Response Time provide smarter distribution. If your system relies on session persistence, IP Hash is the way to go.
+    </p><p>
+      In real-world applications like e-commerce platforms, video streaming, or food delivery apps, selecting the right load balancing strategy can significantly improve both user experience and system efficiency.
+    </p><h2>
+      Conclusion
+    </h2><p>
+      Load balancing is an essential part of building scalable and reliable applications. By understanding how each algorithm works and where it fits best, developers and architects can design systems that handle growing traffic smoothly.
+    </p><p>
+      From simple Round Robin to intelligent Least Response Time, each approach plays a role in modern system design. I hope this detailed guide helps you choose the right strategy for your applications.
+    </p><p>
+      Thank you for reading!
+    </p></div></div>
+</article>
+</main>
+<footer class="shell footer"><p>© Ashmita Pandey</p><a href="mailto:ashmitap.official@gmail.com">ashmitap.official@gmail.com</a><a href="../index.html">Back to home ↑</a></footer>
+</body>
+</html>

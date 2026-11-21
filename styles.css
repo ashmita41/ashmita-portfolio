@@ -171,3 +171,16 @@ nav a:hover,nav a[aria-current=page] { color:var(--accent); text-decoration:unde
 #toolkit .ai-tool-groups strong { color:var(--ink); font-weight:700; }
 #journey .experience-highlights { margin:.5rem 0 0; padding-left:1.2rem; color:var(--muted); display:grid; gap:.3rem; }
 #journey .experience-highlights > li::before { content:none; }
+.blog-detail figure { margin:1.45rem 0; }
+.blog-detail figure img { margin:0; }
+.blog-detail figcaption { margin-top:.48rem; color:var(--muted); font-size:.9rem; }
+.blog-detail .figure-credit { font-size:.85em; }
+.blog-detail .original-body { overflow-wrap:anywhere; }
+.blog-detail .original-body p,.blog-detail .original-body li,.blog-detail blockquote { white-space:pre-wrap; }
+.blog-detail blockquote { margin:1rem 0; padding:.35rem 1rem; border-inline-start:3px solid var(--line); color:var(--muted); }
+.blog-detail .source-document :is(p,li,blockquote) { white-space:normal; }
+.blog-detail .source-document h3 { margin:1.2rem 0 .45rem; font-size:1.23em; }
+.blog-detail .source-document hr { border:0; border-top:1px solid var(--line); margin:1.6rem 0; }
+.blog-detail .source-document :is(pre,blockquote,table) { margin-block:1rem; }
+.blog-detail .source-document table { display:block; max-width:100%; overflow-x:auto; border-collapse:collapse; }
+.blog-detail .source-document :is(th,td) { padding:.35rem .55rem; border:1px solid var(--line); }
