@@ -12,7 +12,7 @@
 <meta property="og:image" content="https://ashmita-dev.onrender.com/assets/og-image.jpg">
 <link rel="canonical" href="https://ashmita-dev.onrender.com/">
 <link rel="icon" href="favicon.svg?v=creative-blue" type="image/svg+xml">
-<link rel="stylesheet" href="styles.css?v=creative-blue-compact">
+<link rel="stylesheet" href="styles.css?v=creative-blue-experience">
 <link rel="stylesheet" href="speaking.css?v=2">
 <script src="speaking.js?v=1" defer></script>
 </head>
@@ -60,7 +60,15 @@
         <div><dt class="tool-label"><span aria-hidden="true">{ }</span> Backend</dt><dd>Python · FastAPI · Node.js · REST APIs · Microservices</dd></div>
         <div><dt class="tool-label"><span aria-hidden="true">⇄</span> Data &amp; messaging</dt><dd>Kafka · PostgreSQL · Redis · Databricks · Apache Spark</dd></div>
         <div><dt class="tool-label"><span aria-hidden="true">▤</span> Infrastructure</dt><dd>AWS · Kubernetes · Docker · Temporal</dd></div>
-        <div><dt class="tool-label"><span aria-hidden="true">✦</span> AI</dt><dd>LLMs · Prompt engineering · RAG · AI agents · Tool calling · MCP · Agent memory · Human-in-the-loop workflows</dd></div>
+        <div>
+          <dt class="tool-label"><span aria-hidden="true">✦</span> AI</dt>
+          <dd class="ai-tool-groups">
+            <span><strong>Foundations:</strong> LLMs · RAG · Agentic AI · MCP</span>
+            <span><strong>Agent frameworks:</strong> LangChain · LangGraph · Pydantic AI · CrewAI · Mastra AI</span>
+            <span><strong>Models &amp; platforms:</strong> Ollama · OpenAI · Anthropic · Gemini · Hugging Face</span>
+            <span><strong>Language &amp; conversational AI:</strong> NLP · Rasa</span>
+          </dd>
+        </div>
       </dl>
     </div>
   </section>
@@ -70,8 +78,26 @@
     <div class="section-split">
       <div><h2 id="journey-title">Experience<span class="accent-dot">.</span></h2></div>
       <ol class="timeline">
-        <li><p class="small-label">Now · Fynd</p><h3>Backend &amp; AI Engineer</h3><p>I build backend workflows for a grocery planning platform, from bringing products in to reviewing assortments and making inventory decisions.</p></li>
-        <li><p class="small-label">Before · PepSales AI</p><h3>Backend Developer</h3><p>I worked on the backend at an early-stage AI startup.</p></li>
+        <li>
+          <p class="small-label">Fynd · Feb 2026–Present</p>
+          <h3>Software Development Engineer</h3>
+          <p>I work on Granary, Reliance Retail’s grocery planning platform for physical stores and JioMart.</p>
+          <ul class="experience-highlights">
+            <li>Build workflows to introduce new products, apply pricing and approval rules, and integrate with SAP.</li>
+            <li>Tune and partition PostgreSQL, cache with Redis, and use parallel processing with locks.</li>
+            <li>Build and maintain production data pipelines across Databricks, BigQuery, and PostgreSQL.</li>
+          </ul>
+        </li>
+        <li>
+          <p class="small-label">PepSales AI · Jan 2025–Jan 2026</p>
+          <h3>Backend Developer</h3>
+          <p>I built backend systems for AI-powered sales workflows.</p>
+          <ul class="experience-highlights">
+            <li>Developed the Discovery and Sales Intelligence microservices.</li>
+            <li>Reduced LLM costs by preventing duplicate requests and rerunning them only when inputs changed.</li>
+            <li>Replaced calendar polling with Google and Outlook webhooks and improved background job processing with Celery and Redis.</li>
+          </ul>
+        </li>
         <li><p class="small-label">Before that</p><h3>Teaching and startup growth</h3><p>I taught students and helped an early-stage startup grow from its first steps to appearing on Shark Tank, before coming back to engineering.</p></li>
       </ol>
     </div>

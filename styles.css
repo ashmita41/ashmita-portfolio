@@ -166,3 +166,8 @@ nav a:hover,nav a[aria-current=page] { color:var(--accent); text-decoration:unde
 .leadership-entry ul { padding-left:1.25rem; margin:.5rem 0 0; color:var(--muted); }
 .certificate { margin:.85rem 0 0; width:min(100%,21rem); }
 .certificate img { border-radius:.52rem; width:100%; aspect-ratio:4/3; object-fit:cover; object-position:50% 52%; }
+
+#toolkit .ai-tool-groups { display:grid; gap:.32rem; }
+#toolkit .ai-tool-groups strong { color:var(--ink); font-weight:700; }
+#journey .experience-highlights { margin:.5rem 0 0; padding-left:1.2rem; color:var(--muted); display:grid; gap:.3rem; }
+#journey .experience-highlights > li::before { content:none; }
