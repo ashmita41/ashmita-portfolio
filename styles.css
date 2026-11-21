@@ -184,3 +184,20 @@ nav a:hover,nav a[aria-current=page] { color:var(--accent); text-decoration:unde
 .blog-detail .source-document :is(pre,blockquote,table) { margin-block:1rem; }
 .blog-detail .source-document table { display:block; max-width:100%; overflow-x:auto; border-collapse:collapse; }
 .blog-detail .source-document :is(th,td) { padding:.35rem .55rem; border:1px solid var(--line); }
+
+/* Homepage contact and Toolkit. The archive shares this stylesheet but not these components. */
+.home-sr-only { position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+#toolkit .tool-list>div { display:grid; grid-template-columns:minmax(0,12.3rem) minmax(0,1fr); align-items:baseline; gap:.48rem .8rem; }
+#toolkit .tool-list dd { margin-left:0; min-width:0; }
+#toolkit .tool-chips { display:flex; flex-wrap:wrap; gap:.35rem; list-style:none; margin:0; padding:0; }
+#toolkit .tool-chips li { padding:.18rem .56rem; border:1px solid var(--line); border-radius:999px; background:var(--pastel); color:var(--ink); font-size:.84rem; overflow-wrap:anywhere; }
+#contact .contact-address { display:flex; flex-wrap:wrap; align-items:center; gap:.25rem .7rem; margin-top:.6rem; color:#dee5fc; font-size:.88rem; overflow-wrap:anywhere; }
+#contact .contact-address strong { user-select:all; }
+#contact .copy-address { min-height:44px; padding:.35rem .52rem; border:1px solid #a6b1ff; border-radius:.45rem; color:#f6f8ff; background:transparent; font:650 .82rem var(--sans); cursor:pointer; }
+#contact .copy-address:focus-visible { outline-color:#a6b1ff; }
+#contact .copy-address:hover { background:#415191; }
+#contact .contact-copy-status { color:#dee5fc; font-size:.88rem; }
+.footer-heart { color:var(--brand); }
+@media (max-width: 620px) {
+  #toolkit .tool-list>div { grid-template-columns:minmax(0,1fr); }
+}
