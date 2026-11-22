@@ -1,0 +1,15 @@
+.portfolio-contact-form[hidden] { display: none; }
+.portfolio-contact-form { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; grid-column: 1 / -1; width: 100%; }
+.portfolio-contact-form label { display: grid; gap: .35rem; font-weight: 600; min-width: 0; }
+.portfolio-contact-form .form-wide { grid-column: 1 / -1; }
+.portfolio-contact-form :is(input, textarea) { width: 100%; min-height: 44px; border: 1px solid currentColor; border-radius: .75rem; padding: .65rem .8rem; background: transparent; color: inherit; font: inherit; font-size: 1rem; }
+.portfolio-contact-form textarea { resize: vertical; }
+.portfolio-contact-form button { justify-self: start; }
+.portfolio-contact-form button:disabled { cursor: wait; opacity: .7; }
+.portfolio-contact-form :is(p, span) { margin: 0; }
+.portfolio-contact-form .form-note { font-size: .88rem; }
+.portfolio-contact-form .form-status { min-height: 1.5em; }
+.portfolio-contact-form .form-trap { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.privacy-controls { display: flex; align-items: center; flex-wrap: wrap; gap: .3rem .85rem; font-size: .84rem; margin-bottom: .75rem; }
+.privacy-controls button { border: 0; padding: 0; background: transparent; color: inherit; font: inherit; min-height: 44px; cursor: pointer; text-underline-offset: .18em; text-decoration: underline; }
+@media (max-width: 540px) { .portfolio-contact-form { grid-template-columns: minmax(0, 1fr); } }

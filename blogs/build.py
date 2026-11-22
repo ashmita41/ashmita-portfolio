@@ -58,6 +58,9 @@ def load():
             render_original(item)
     return sorted(entries,key=lambda item:item["date"],reverse=True)
 
+THEME_TOGGLE = '<button class="theme-toggle" type="button" data-theme-toggle aria-label="Lights out? Dark mode" aria-pressed="false" hidden><svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 15.2A8.9 8.9 0 0 1 8.8 3.5a9 9 0 1 0 11.7 11.7Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5"/></svg><span>Lights out?</span></button>'
+
+
 def shell(title, description, canonical, body, *, prefix="", script="", css_version="creative-blue"):
     return f'''<!doctype html>
 <html lang="en">
@@ -69,13 +72,19 @@ def shell(title, description, canonical, body, *, prefix="", script="", css_vers
 <meta name="author" content="Ashmita Pandey">
 <link rel="canonical" href="{HOST}/{canonical}">
 <link rel="icon" href="{prefix}favicon.svg?v=creative-blue" type="image/svg+xml">
+<script src="{prefix}theme.js?v=1"></script>
 <link rel="stylesheet" href="{prefix}styles.css?v={css_version}-footer-1">
 {script}
+<link rel="stylesheet" href="{prefix}theme.css?v=1">
+<link rel="stylesheet" href="{prefix}site-integrations.css?v=1">
+<script src="{prefix}site-integrations-config.js?v=1" defer></script>
+<script src="{prefix}site-integrations.js?v=1" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header"><div class="shell nav-row">
   <a class="brand" href="{prefix}index.html" aria-label="Ashmita Pandey home"><span class="brand-mark" aria-hidden="true">a<span>.</span></span><span>Ashmita Pandey</span></a>
+  {THEME_TOGGLE}
   <nav aria-label="Main"><a href="{prefix}index.html#home">Home</a><a href="{prefix}index.html#speaking">Speaking</a><a href="{prefix}blogs.html" aria-current="page">Blogs</a><a href="{prefix}index.html#contact">Contact</a></nav>
 </div></header>
 <main class="shell" id="main" tabindex="-1">
