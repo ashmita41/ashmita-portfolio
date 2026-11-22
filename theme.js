@@ -13,7 +13,12 @@
   function apply() {
     const dark = choice ? choice === 'dark' : system.matches;
     root.dataset.theme = dark ? 'dark' : 'light';
-    if (button) button.setAttribute('aria-pressed', String(dark));
+    if (button) {
+      const label = dark ? 'Lights on?' : 'Lights out?';
+      button.querySelector('span').textContent = label;
+      button.setAttribute('aria-label', label + (dark ? ' Switch to light mode' : ' Switch to dark mode'));
+      button.removeAttribute('aria-pressed');
+    }
     return dark;
   }
 
