@@ -377,13 +377,37 @@ def to_index(entries):
     )
 
 
+def home_preview_image(item):
+    cover = item["original"].get("cover")
+    if not cover:
+        return ""
+    # Use lightweight homepage derivatives when they exist. The article
+    # detail page continues to use its untouched original cover.
+    thumb = Path(cover["path"]).with_name("home-thumb.webp")
+    media = {**cover, "path": thumb.as_posix()} if (ROOT / thumb).is_file() else cover
+    image = render_image(media).replace('src="../', 'src="', 1)
+    image = re.sub(r' alt="[^"]*"', ' alt=""', image, count=1)
+    return f'<span class="home-blog-thumb">{image}</span>'
+
+
 def home_previews(entries):
-    output=[]
-    for item in [entry for entry in entries if kind(entry) == "article"][:3]:
-        eid=item["id"]
-        path=f"blogs/{eid}.html" if item.get("original") else f"blogs.html#{eid}"
-        desc=t(item.get("summary") or " · ".join(item["tags"]))
-        output.append(f'      <li><a class="preview-item" href="{path}"><p class="small-label">{t(item["tags"][0])}</p><h3>{t(item["title"])}</h3><p>{desc}</p></a></li>')
+    output = []
+    for item in [entry for entry in entries if kind(entry) == "article" and entry.get("original")][:6]:
+        eid = item["id"]
+        label = f"home-article-{eid}"
+        description = item.get("summary") or ""
+        excerpt = f'<p class="home-blog-excerpt">{t(description)}</p>' if description else ""
+        output.append(f'''      <li class="home-blog-slide">
+        <a class="home-blog-card" href="blogs/{eid}.html" aria-labelledby="{label}">
+          {home_preview_image(item)}
+          <div class="home-blog-copy">
+            <p class="home-blog-meta"><span>{t(item["tags"][0])}</span>{date_label(item)}</p>
+            <h3 id="{label}">{t(item["title"])}</h3>
+            {excerpt}
+            <p class="home-blog-link" aria-hidden="true">Read article <span>→</span></p>
+          </div>
+        </a>
+      </li>''')
     return "\n".join(output)
 
 if __name__=="__main__":
