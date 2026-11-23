@@ -18,6 +18,8 @@
 <script src="speaking.js?v=1" defer></script>
 <script src="contact.js?v=1" defer></script>
 <link rel="stylesheet" href="theme.css?v=2">
+<link rel="stylesheet" href="snakes.css?v=1">
+<script src="snakes.js?v=1" defer></script>
 <link rel="stylesheet" href="site-integrations.css?v=1">
 <script src="site-integrations-config.js?v=1" defer></script>
 <script src="site-integrations.js?v=1" defer></script>
@@ -39,12 +41,40 @@
       <p class="hero-lead">I build backend and AI systems. I write and teach about how they work.</p>
       <div class="actions"><a class="button accent" href="blogs.html">Read my blogs</a><a class="button soft hero-email" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=ashmitap.official%40gmail.com" target="_blank" rel="noopener noreferrer" aria-describedby="gmail-link-help">ashmitap.official@gmail.com</a></div>
     </div>
-    <div class="hero-board">
+    <div class="hero-board" data-snakes-card>
       <div class="board-top"><span class="board-file" aria-hidden="true"><span class="window-dots"><i></i><i></i><i></i></span><span>profile.ts</span></span><button class="theme-toggle" type="button" data-theme-toggle aria-label="Lights out? Switch to dark mode" hidden><svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 15.2A8.9 8.9 0 0 1 8.8 3.5a9 9 0 1 0 11.7 11.7Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5"/></svg><span>Lights out?</span></button></div>
       <picture><source srcset="assets/headshot.webp" type="image/webp"><img src="assets/headshot.jpg" width="500" height="500" fetchpriority="high" alt="Ashmita Pandey"></picture>
       <div class="board-bottom" aria-hidden="true"><code><b>const</b> loop = [<em>'build'</em>, <em>'learn'</em>, <em>'share'</em>];</code><span class="spark">✦</span></div>
+      <div class="snake-game-invite" hidden>
+        <button type="button" class="snake-game-open" aria-haspopup="dialog" aria-controls="snake-game">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8.5 8.5h.01m7 0h.01M12 12h.01m-3.51 3.5h.01m7 0h.01" stroke-width="2.5"/></svg>
+          Roll the dice?
+        </button>
+      </div>
     </div>
   </section>
+
+  <dialog class="snake-game" id="snake-game" aria-labelledby="snake-game-title" aria-describedby="snake-game-rules">
+    <div class="snake-game-head">
+      <div>
+        <p class="snake-game-kicker">a portfolio easter egg</p>
+        <h2 id="snake-game-title">Snakes &amp; Ladders</h2>
+      </div>
+      <button type="button" class="snake-game-close" aria-label="Close game" data-snakes-close>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <p class="snake-game-rules" id="snake-game-rules">Climb the ladders, dodge the snakes, and roll the exact number to land on 25.</p>
+    <div class="snake-game-board" aria-hidden="true" data-snakes-board></div>
+    <div class="snake-game-status" role="status" aria-atomic="true">
+      <p class="snake-game-position" data-snakes-position>Square 1 of 25</p>
+      <p class="snake-game-note" data-snakes-note>Ready when you are.</p>
+    </div>
+    <div class="snake-game-actions">
+      <button type="button" class="snake-game-roll" data-snakes-roll autofocus>Roll dice</button>
+      <button type="button" class="snake-game-reset" data-snakes-reset>Restart</button>
+    </div>
+  </dialog>
 
   <section class="section shell about-section" id="about" aria-labelledby="about-title">
     <div class="section-tag"><span class="ordinal">01</span> About</div>
